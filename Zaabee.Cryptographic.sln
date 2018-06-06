@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaabee.CryptographicUtility", "Zaabee.CryptographicUtility\Zaabee.CryptographicUtility.csproj", "{25849B07-9D25-4192-B054-8744BB1D15CD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaabee.Cryptographic", "Zaabee.Cryptographic\Zaabee.Cryptographic.csproj", "{25849B07-9D25-4192-B054-8744BB1D15CD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "UnitTest\UnitTest.csproj", "{6F905411-AA59-4B99-9535-B9CC66F781AB}"
 EndProject

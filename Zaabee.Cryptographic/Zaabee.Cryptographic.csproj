@@ -2,11 +2,11 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageVersion>1.1.1</PackageVersion>
+    <PackageVersion>1.0.0</PackageVersion>
     <Authors>Mutuduxf</Authors>
     <Company>Mutuduxf</Company>
-    <PackageProjectUrl>https://github.com/Mutuduxf/Zaabee.CryptographicUtility</PackageProjectUrl>
-    <PackagelicenseUrl>https://raw.githubusercontent.com/Mutuduxf/Zaabee.CryptographicUtility/master/LICENSE</PackagelicenseUrl>
+    <PackageProjectUrl>https://github.com/Mutuduxf/Zaabee.Cryptographic</PackageProjectUrl>
+    <PackagelicenseUrl>https://raw.githubusercontent.com/Mutuduxf/Zaabee.Cryptographic/master/LICENSE</PackagelicenseUrl>
     <Description>The wrappers and extension methods of AES/MD5/SHA.</Description>
     <PackageTags>Zaabee Cryptographic AES MD5 SHA</PackageTags>
   </PropertyGroup>

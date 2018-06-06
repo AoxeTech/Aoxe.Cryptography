@@ -2,7 +2,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Zaabee.CryptographicUtility
+namespace Zaabee.Cryptographic
 {
     public static class Md5Helper
     {
