@@ -8,7 +8,7 @@ namespace Zaabee.Cryptographic
     {
         #region MD5
 
-        public static byte[] ToMd5(this byte[] bytes)
+        public static byte[] Md5(this byte[] bytes)
         {
             if (bytes == null) throw new ArgumentNullException(nameof(bytes));
             using (var provider = MD5.Create())
@@ -31,21 +31,7 @@ namespace Zaabee.Cryptographic
             Encoding encoding = null)
         {
             encoding = encoding ?? Encoding.UTF8;
-            return Get32Md5(encoding.GetBytes(str), isUpper, isIncludeHyphen);
-        }
-
-        /// <summary>
-        /// 32bit MD5 hash
-        /// </summary>
-        /// <param name="bytes"></param>
-        /// <param name="isUpper"></param>
-        /// <param name="isIncludeHyphen"></param>
-        /// <param name="encoding"></param>
-        /// <returns></returns>
-        public static string To32Md5(this byte[] bytes, bool isUpper = true, bool isIncludeHyphen = false,
-            Encoding encoding = null)
-        {
-            return Get32Md5(bytes, isUpper, isIncludeHyphen);
+            return To32Md5(encoding.GetBytes(str), isUpper, isIncludeHyphen);
         }
 
         /// <summary>
@@ -55,9 +41,9 @@ namespace Zaabee.Cryptographic
         /// <param name="isUpper"></param>
         /// <param name="isIncludeHyphen"></param>
         /// <returns></returns>
-        public static string Get32Md5(byte[] bytes, bool isUpper = true, bool isIncludeHyphen = false)
+        public static string To32Md5(this byte[] bytes, bool isUpper = true, bool isIncludeHyphen = false)
         {
-            var hashBytes = bytes.ToMd5();
+            var hashBytes = bytes.Md5();
             var str = BitConverter.ToString(hashBytes);
             str = isUpper ? str.ToUpper() : str.ToLower();
             str = isIncludeHyphen ? str : str.Replace("-", "");
@@ -80,7 +66,7 @@ namespace Zaabee.Cryptographic
             Encoding encoding = null)
         {
             encoding = encoding ?? Encoding.UTF8;
-            return Get16Md5(encoding.GetBytes(str), isUpper, isIncludeHyphen);
+            return To16Md5(encoding.GetBytes(str), isUpper, isIncludeHyphen);
         }
 
         /// <summary>
@@ -92,19 +78,7 @@ namespace Zaabee.Cryptographic
         /// <returns></returns>
         public static string To16Md5(this byte[] bytes, bool isUpper = true, bool isIncludeHyphen = false)
         {
-            return Get16Md5(bytes, isUpper, isIncludeHyphen);
-        }
-
-        /// <summary>
-        /// 16bit MD5 hash
-        /// </summary>
-        /// <param name="bytes"></param>
-        /// <param name="isUpper"></param>
-        /// <param name="isIncludeHyphen"></param>
-        /// <returns></returns>
-        public static string Get16Md5(byte[] bytes, bool isUpper = true, bool isIncludeHyphen = false)
-        {
-            var hashBytes = bytes.ToMd5();
+            var hashBytes = bytes.Md5();
             var str = BitConverter.ToString(hashBytes, 4, 8);
             str = isUpper ? str.ToUpper() : str.ToLower();
             str = isIncludeHyphen ? str : str.Replace("-", "");
