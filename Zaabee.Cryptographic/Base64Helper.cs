@@ -21,5 +21,11 @@ namespace Zaabee.Cryptographic
         {
             return Convert.ToBase64String(bytes);
         }
+
+        public static string FromBase64(this byte[] bytes, Encoding encoding = null)
+        {
+            encoding = encoding ?? Encoding.UTF8;
+            return encoding.GetString(bytes);
+        }
     }
 }
