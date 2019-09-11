@@ -7,17 +7,6 @@ namespace UnitTest
 {
     public class CryptographicUnitTest
     {
-        [Fact]
-        public void CaiNiaoTest()
-        {
-            var key = "key123";
-            var content = "hello1234" + key;
-            var bytes = Encoding.UTF8.GetBytes(content);
-            var result = bytes.Md5().ToBase64();
-
-            Assert.Equal("ufYU7rvXhHY3IDyZgyt6SA==", result);
-        }
-
         [Theory]
         [InlineData("apple", false, false, "274f6c49b3e31a0c")]
         [InlineData("apple", false, true, "27-4f-6c-49-b3-e3-1a-0c")]
