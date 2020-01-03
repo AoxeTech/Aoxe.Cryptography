@@ -9,6 +9,6 @@
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Zaabee.Cryptographic\Zaabee.Cryptographic.csproj" />
+    <ProjectReference Include="..\..\src\Zaabee.Cryptographic\Zaabee.Cryptographic.csproj" />
   </ItemGroup>
 </Project>

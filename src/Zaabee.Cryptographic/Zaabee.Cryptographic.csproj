@@ -7,7 +7,7 @@
     <Authors>Mutuduxf</Authors>
     <Company>Mutuduxf</Company>
     <PackageProjectUrl>https://github.com/Mutuduxf/Zaabee.Cryptographic</PackageProjectUrl>
-    <PackagelicenseUrl>https://raw.githubusercontent.com/Mutuduxf/Zaabee.Cryptographic/master/LICENSE</PackagelicenseUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Description>The wrappers and extension methods of AES/MD5/SHA.</Description>
     <PackageTags>Zaabee Cryptographic AES MD5 SHA</PackageTags>
   </PropertyGroup>
