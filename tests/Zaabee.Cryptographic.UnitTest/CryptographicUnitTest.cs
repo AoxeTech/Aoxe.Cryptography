@@ -3,7 +3,7 @@ using System.Text;
 using Xunit;
 using Zaabee.Cryptographic;
 
-namespace UnitTest
+namespace Zaabee.Cryptographic.UnitTest
 {
     public class CryptographicUnitTest
     {
