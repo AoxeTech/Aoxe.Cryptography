@@ -1,5 +1,4 @@
 using System;
-using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using Xunit;
@@ -8,6 +7,13 @@ namespace Zaabee.Cryptographic.UnitTest
 {
     public class AesTest
     {
+        [Fact]
+        public void Test()
+        {
+            AesHelper.Encoding = Encoding.UTF8;
+            Assert.Equal(AesHelper.Encoding, Encoding.UTF8);
+        }
+
         [Theory]
         [InlineData("Here is some data to encrypt!", "Here is the aes key.", "Here is the aes vector.")]
         [InlineData("Here is some data to encrypt!", "", "Here is the aes vector.")]

@@ -10,6 +10,8 @@ namespace Zaabee.Cryptographic
     /// </summary>
     public static class AesHelper
     {
+        public static Encoding Encoding { get; set; } = Encoding.UTF8;
+
         /// <summary>
         /// AES Encrypt
         /// </summary>
@@ -27,9 +29,9 @@ namespace Zaabee.Cryptographic
         {
             if (original is null) throw new ArgumentNullException(nameof(original));
             if (key is null) throw new ArgumentNullException(nameof(key));
-            var bKey = encoding is null ? Encoding.UTF8.GetBytes(key) : encoding.GetBytes(key);
-            var bVector = vector is null ? null :
-                encoding is null ? Encoding.UTF8.GetBytes(vector) : encoding.GetBytes(vector);
+            encoding ??= Encoding;
+            var bKey = encoding.GetBytes(key);
+            var bVector = vector is null ? null : encoding.GetBytes(vector);
             return Encrypt(original, bKey, bVector, cipherMode, paddingMode);
         }
 
@@ -85,9 +87,9 @@ namespace Zaabee.Cryptographic
         {
             if (encrypted is null) throw new ArgumentNullException(nameof(encrypted));
             if (key is null) throw new ArgumentNullException(nameof(key));
-            var bKey = encoding is null ? Encoding.UTF8.GetBytes(key) : encoding.GetBytes(key);
-            var bVector = vector is null ? null :
-                encoding is null ? Encoding.UTF8.GetBytes(vector) : encoding.GetBytes(vector);
+            encoding ??= Encoding;
+            var bKey = encoding.GetBytes(key);
+            var bVector = vector is null ? null : encoding.GetBytes(vector);
             return Decrypt(encrypted, bKey, bVector, cipherMode, paddingMode);
         }
 

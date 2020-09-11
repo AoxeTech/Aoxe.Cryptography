@@ -1,10 +1,18 @@
 using System;
+using System.Text;
 using Xunit;
 
 namespace Zaabee.Cryptographic.UnitTest
 {
     public class Md5Test
     {
+        [Fact]
+        public void Test()
+        {
+            Md5Helper.Encoding = Encoding.UTF8;
+            Assert.Equal(Md5Helper.Encoding, Encoding.UTF8);
+        }
+
         [Theory]
         [InlineData("apple", false, false, "274f6c49b3e31a0c")]
         [InlineData("apple", false, true, "27-4f-6c-49-b3-e3-1a-0c")]
