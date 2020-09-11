@@ -8,93 +8,61 @@ namespace Zaabee.Cryptographic
     /// <summary>
     /// AES helper
     /// </summary>
-    public class AesHelper
+    public static class AesHelper
     {
         /// <summary>
         /// AES Encrypt
         /// </summary>
-        /// <param name="str">字符串</param>
-        /// <param name="key">密钥（只截取/补全32个字节）</param>
-        /// <param name="vector">向量（只截取/补全16个字节）</param>
-        /// <param name="encoding">字符编码</param>
+        /// <param name="original"></param>
+        /// <param name="key"></param>
+        /// <param name="vector"></param>
+        /// <param name="cipherMode"></param>
+        /// <param name="paddingMode"></param>
+        /// <param name="encoding"></param>
         /// <returns></returns>
-        public byte[] Encrypt(string str, string key, string vector, Encoding encoding)
+        /// <exception cref="ArgumentNullException"></exception>
+        public static byte[] Encrypt(string original, string key, string vector = null,
+            CipherMode cipherMode = CipherMode.CBC, PaddingMode paddingMode = PaddingMode.PKCS7,
+            Encoding encoding = null)
         {
-            if (str == null) throw new ArgumentNullException(nameof(str));
-            if (key == null) throw new ArgumentNullException(nameof(key));
-            if (vector == null) throw new ArgumentNullException(nameof(vector));
-            if (encoding == null) throw new ArgumentNullException(nameof(encoding));
-            var bKey = new byte[32];
-            Array.Copy(encoding.GetBytes(key.PadRight(bKey.Length)), bKey, bKey.Length);
-            var bVector = new byte[16];
-            Array.Copy(encoding.GetBytes(vector.PadRight(bVector.Length)), bVector, bVector.Length);
-            return Encrypt(str, bKey, bVector);
-        }
-
-        /// <summary>
-        /// AES Encrypt（注意，不带向量的AES加密的块密码模式要使用CipherMode.ECB，存在安全隐患）
-        /// </summary>
-        /// <param name="str">字符串</param>
-        /// <param name="key">密钥（只截取/补全32个字节）</param>
-        /// <param name="encoding">字符编码</param>
-        /// <returns></returns>
-        public byte[] Encrypt(string str, string key, Encoding encoding)
-        {
-            if (str == null) throw new ArgumentNullException(nameof(str));
-            if (key == null) throw new ArgumentNullException(nameof(key));
-            if (encoding == null) throw new ArgumentNullException(nameof(encoding));
-            var bKey = new byte[32];
-            Array.Copy(encoding.GetBytes(key.PadRight(bKey.Length)), bKey, bKey.Length);
-            return Encrypt(str, bKey);
+            if (original is null) throw new ArgumentNullException(nameof(original));
+            if (key is null) throw new ArgumentNullException(nameof(key));
+            var bKey = encoding is null ? Encoding.UTF8.GetBytes(key) : encoding.GetBytes(key);
+            var bVector = vector is null ? null :
+                encoding is null ? Encoding.UTF8.GetBytes(vector) : encoding.GetBytes(vector);
+            return Encrypt(original, bKey, bVector, cipherMode, paddingMode);
         }
 
         /// <summary>
         /// AES Encrypt
         /// </summary>
-        /// <param name="str">字符串</param>
-        /// <param name="key">密钥（只截取/补全32个字节）</param>
-        /// <param name="vector">向量（只截取/补全16个字节）</param>
+        /// <param name="original"></param>
+        /// <param name="key"></param>
+        /// <param name="vector"></param>
+        /// <param name="cipherMode"></param>
+        /// <param name="paddingMode"></param>
         /// <returns></returns>
-        public byte[] Encrypt(string str, byte[] key, byte[] vector)
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="NotSupportedException"></exception>
+        public static byte[] Encrypt(string original, byte[] key, byte[] vector = null,
+            CipherMode cipherMode = CipherMode.CBC, PaddingMode paddingMode = PaddingMode.PKCS7)
         {
-            if (str == null) throw new ArgumentNullException(nameof(str));
-            if (key == null) throw new ArgumentNullException(nameof(key));
-            if (vector == null) throw new ArgumentNullException(nameof(vector));
-            using (var aesAlg = new AesCryptoServiceProvider())
+            if (original is null) throw new ArgumentNullException(nameof(original));
+            if (key is null) throw new ArgumentNullException(nameof(key));
+            Array.Resize(ref key, 32);
+            if (vector != null)
+                Array.Resize(ref vector, 16);
+            using (var aes = Aes.Create())
             {
-                aesAlg.Key = key;
-                aesAlg.IV = vector;
-                var encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
+                if (aes is null) throw new NotSupportedException(nameof(aes));
+                aes.Mode = cipherMode;
+                aes.Padding = paddingMode;
+                using (var encryptor = aes.CreateEncryptor(key, vector ?? aes.IV))
                 using (var msEncrypt = new MemoryStream())
                 using (var csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
                 {
                     using (var swEncrypt = new StreamWriter(csEncrypt))
-                        swEncrypt.Write(str);
-                    return msEncrypt.ToArray();
-                }
-            }
-        }
-
-        /// <summary>
-        /// AES Encrypt（注意，不带向量的AES加密的块密码模式要使用CipherMode.ECB，存在安全隐患）
-        /// </summary>
-        /// <param name="str">字符串</param>
-        /// <param name="key">密钥（只截取/补全32个字节）</param>
-        /// <returns></returns>
-        public byte[] Encrypt(string str, byte[] key)
-        {
-            if (str == null) throw new ArgumentNullException(nameof(str));
-            if (key == null) throw new ArgumentNullException(nameof(key));
-            using (var aesAlg = new AesCryptoServiceProvider())
-            {
-                aesAlg.Key = key;
-                aesAlg.Mode = CipherMode.ECB;
-                var encryptor = aesAlg.CreateEncryptor();
-                using (var msEncrypt = new MemoryStream())
-                using (var csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
-                {
-                    using (var swEncrypt = new StreamWriter(csEncrypt))
-                        swEncrypt.Write(str);
+                        swEncrypt.Write(original);
                     return msEncrypt.ToArray();
                 }
             }
@@ -103,81 +71,52 @@ namespace Zaabee.Cryptographic
         /// <summary>
         /// AES Decrypt
         /// </summary>
-        /// <param name="ciphertext">密文</param>
-        /// <param name="key">密钥（只截取/补全32个字节）</param>
-        /// <param name="vector">向量（只截取/补全16个字节）</param>
-        /// <param name="encoding">字符编码</param>
+        /// <param name="encrypted"></param>
+        /// <param name="key"></param>
+        /// <param name="vector"></param>
+        /// <param name="cipherMode"></param>
+        /// <param name="paddingMode"></param>
+        /// <param name="encoding"></param>
         /// <returns></returns>
-        public string Decrypt(byte[] ciphertext, string key, string vector, Encoding encoding)
+        /// <exception cref="ArgumentNullException"></exception>
+        public static string Decrypt(byte[] encrypted, string key, string vector = null,
+            CipherMode cipherMode = CipherMode.CBC, PaddingMode paddingMode = PaddingMode.PKCS7,
+            Encoding encoding = null)
         {
-            if (ciphertext == null) throw new ArgumentNullException(nameof(ciphertext));
-            if (key == null) throw new ArgumentNullException(nameof(key));
-            if (vector == null) throw new ArgumentNullException(nameof(vector));
-            if (encoding == null) throw new ArgumentNullException(nameof(encoding));
-            var bKey = new byte[32];
-            Array.Copy(encoding.GetBytes(key.PadRight(bKey.Length)), bKey, bKey.Length);
-            var bVector = new byte[16];
-            Array.Copy(encoding.GetBytes(vector.PadRight(bVector.Length)), bVector, bVector.Length);
-            return Decrypt(ciphertext, bKey, bVector);
-        }
-
-        /// <summary>
-        /// AES Decrypt（注意，不带向量的AES加密的块密码模式要使用CipherMode.ECB，存在安全隐患）
-        /// </summary>
-        /// <param name="ciphertext">密文</param>
-        /// <param name="key">密钥（只截取/补全32个字节）</param>
-        /// <param name="encoding">字符编码</param>
-        /// <returns></returns>
-        public string Decrypt(byte[] ciphertext, string key, Encoding encoding)
-        {
-            if (ciphertext == null) throw new ArgumentNullException(nameof(ciphertext));
-            if (key == null) throw new ArgumentNullException(nameof(key));
-            if (encoding == null) throw new ArgumentNullException(nameof(encoding));
-            var bKey = new byte[32];
-            Array.Copy(encoding.GetBytes(key.PadRight(bKey.Length)), bKey, bKey.Length);
-            return Decrypt(ciphertext, bKey);
+            if (encrypted is null) throw new ArgumentNullException(nameof(encrypted));
+            if (key is null) throw new ArgumentNullException(nameof(key));
+            var bKey = encoding is null ? Encoding.UTF8.GetBytes(key) : encoding.GetBytes(key);
+            var bVector = vector is null ? null :
+                encoding is null ? Encoding.UTF8.GetBytes(vector) : encoding.GetBytes(vector);
+            return Decrypt(encrypted, bKey, bVector, cipherMode, paddingMode);
         }
 
         /// <summary>
         /// AES Decrypt
         /// </summary>
-        /// <param name="ciphertext">密文</param>
-        /// <param name="key">密钥（只截取/补全32个字节）</param>
-        /// <param name="vector">向量（只截取/补全16个字节）</param>
+        /// <param name="encrypted"></param>
+        /// <param name="key"></param>
+        /// <param name="vector"></param>
+        /// <param name="cipherMode"></param>
+        /// <param name="paddingMode"></param>
         /// <returns></returns>
-        public string Decrypt(byte[] ciphertext, byte[] key, byte[] vector)
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="NotSupportedException"></exception>
+        public static string Decrypt(byte[] encrypted, byte[] key, byte[] vector = null,
+            CipherMode cipherMode = CipherMode.CBC, PaddingMode paddingMode = PaddingMode.PKCS7)
         {
-            if (ciphertext == null) throw new ArgumentNullException(nameof(ciphertext));
-            if (key == null) throw new ArgumentNullException(nameof(key));
-            if (vector == null) throw new ArgumentNullException(nameof(vector));
-            using (var aesAlg = new AesCryptoServiceProvider())
+            if (encrypted is null) throw new ArgumentNullException(nameof(encrypted));
+            if (key is null) throw new ArgumentNullException(nameof(key));
+            Array.Resize(ref key, 32);
+            if (vector != null)
+                Array.Resize(ref vector, 16);
+            using (var aes = Aes.Create())
             {
-                aesAlg.Key = key;
-                aesAlg.IV = vector;
-                var decryptor = aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV);
-                using (var msDecrypt = new MemoryStream(ciphertext))
-                using (var csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
-                using (var srDecrypt = new StreamReader(csDecrypt))
-                    return srDecrypt.ReadToEnd();
-            }
-        }
-
-        /// <summary>
-        /// AES Decrypt（注意，不带向量的AES加密的块密码模式要使用CipherMode.ECB，存在安全隐患）
-        /// </summary>
-        /// <param name="ciphertext">密文</param>
-        /// <param name="key">密钥（只截取/补全32个字节）</param>
-        /// <returns></returns>
-        public string Decrypt(byte[] ciphertext, byte[] key)
-        {
-            if (ciphertext == null) throw new ArgumentNullException(nameof(ciphertext));
-            if (key == null) throw new ArgumentNullException(nameof(key));
-            using (var aesAlg = new AesCryptoServiceProvider())
-            {
-                aesAlg.Key = key;
-                aesAlg.Mode = CipherMode.ECB;
-                var decryptor = aesAlg.CreateDecryptor();
-                using (var msDecrypt = new MemoryStream(ciphertext))
+                if (aes is null) throw new NotSupportedException(nameof(aes));
+                aes.Mode = cipherMode;
+                aes.Padding = paddingMode;
+                using (var decryptor = aes.CreateDecryptor(key, vector ?? aes.IV))
+                using (var msDecrypt = new MemoryStream(encrypted))
                 using (var csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
                 using (var srDecrypt = new StreamReader(csDecrypt))
                     return srDecrypt.ReadToEnd();

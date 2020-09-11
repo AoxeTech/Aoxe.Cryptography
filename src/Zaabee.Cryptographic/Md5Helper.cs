@@ -10,7 +10,7 @@ namespace Zaabee.Cryptographic
 
         public static byte[] Md5(this byte[] bytes)
         {
-            if (bytes == null) throw new ArgumentNullException(nameof(bytes));
+            if (bytes is null) throw new ArgumentNullException(nameof(bytes));
             using (var provider = MD5.Create())
                 return provider.ComputeHash(bytes);
         }
@@ -30,7 +30,7 @@ namespace Zaabee.Cryptographic
         public static string To32Md5(this string str, bool isUpper = true, bool isIncludeHyphen = false,
             Encoding encoding = null)
         {
-            encoding = encoding ?? Encoding.UTF8;
+            encoding ??= Encoding.UTF8;
             return To32Md5(encoding.GetBytes(str), isUpper, isIncludeHyphen);
         }
 
@@ -65,7 +65,7 @@ namespace Zaabee.Cryptographic
         public static string To16Md5(this string str, bool isUpper = true, bool isIncludeHyphen = false,
             Encoding encoding = null)
         {
-            encoding = encoding ?? Encoding.UTF8;
+            encoding ??= Encoding.UTF8;
             return To16Md5(encoding.GetBytes(str), isUpper, isIncludeHyphen);
         }
 

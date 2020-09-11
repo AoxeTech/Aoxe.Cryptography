@@ -1,39 +1,10 @@
 using System;
-using System.Text;
 using Xunit;
-using Zaabee.Cryptographic;
 
 namespace Zaabee.Cryptographic.UnitTest
 {
-    public class CryptographicUnitTest
+    public class ShaTest
     {
-        [Theory]
-        [InlineData("apple", false, false, "274f6c49b3e31a0c")]
-        [InlineData("apple", false, true, "27-4f-6c-49-b3-e3-1a-0c")]
-        [InlineData("apple", true, false, "274F6C49B3E31A0C")]
-        [InlineData("apple", true, true, "27-4F-6C-49-B3-E3-1A-0C")]
-        public void To16Md5Test(string str, bool isUpper, bool isIncludeHyphen, string result)
-        {
-            Assert.Equal(str.To16Md5(isUpper, isIncludeHyphen), result);
-        }
-
-        [Theory]
-        [InlineData("apple", false, false, "1f3870be274f6c49b3e31a0c6728957f")]
-        [InlineData("apple", false, true, "1f-38-70-be-27-4f-6c-49-b3-e3-1a-0c-67-28-95-7f")]
-        [InlineData("apple", true, false, "1F3870BE274F6C49B3E31A0C6728957F")]
-        [InlineData("apple", true, true, "1F-38-70-BE-27-4F-6C-49-B3-E3-1A-0C-67-28-95-7F")]
-        public void To32Md5Test(string str, bool isUpper, bool isIncludeHyphen, string result)
-        {
-            Assert.Equal(str.To32Md5(isUpper, isIncludeHyphen), result);
-        }
-
-        [Theory]
-        [InlineData(null)]
-        public void To32Md5TestForNull(string str)
-        {
-            Assert.Throws<ArgumentNullException>(() => str.To32Md5(false));
-        }
-
         [Theory]
         [InlineData("apple", false, false, "d0be2dc421be4fcd0172e5afceea3970e2f3d940")]
         [InlineData("apple", false, true, "d0-be-2d-c4-21-be-4f-cd-01-72-e5-af-ce-ea-39-70-e2-f3-d9-40")]
@@ -87,16 +58,18 @@ namespace Zaabee.Cryptographic.UnitTest
         }
 
         [Fact]
-        public void AesTest()
+        public void ShaNullTest()
         {
-            const string str = "apple";
-            const string key = "sdkfj;lksadjf;aksjdfkjsad";
-            const string vector = "01234567890123456789";
-            const string vector2 = "01234567890123456";
-            var aesHelper = new AesHelper();
-            var encrypt = aesHelper.Encrypt(str, key, vector, Encoding.UTF8);
-            var decrypt = aesHelper.Decrypt(encrypt, key, vector2, Encoding.UTF8);
-            Assert.Equal(str, decrypt);
+            string str = null;
+            byte[] bytes = null;
+            Assert.Throws<ArgumentNullException>(() => str.ToSha1());
+            Assert.Throws<ArgumentNullException>(() => bytes.ToSha1());
+            Assert.Throws<ArgumentNullException>(() => str.ToSha256());
+            Assert.Throws<ArgumentNullException>(() => bytes.ToSha256());
+            Assert.Throws<ArgumentNullException>(() => str.ToSha384());
+            Assert.Throws<ArgumentNullException>(() => bytes.ToSha384());
+            Assert.Throws<ArgumentNullException>(() => str.ToSha512());
+            Assert.Throws<ArgumentNullException>(() => bytes.ToSha512());
         }
     }
 }

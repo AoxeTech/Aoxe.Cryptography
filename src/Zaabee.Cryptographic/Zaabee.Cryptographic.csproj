@@ -1,14 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageVersion>1.2.1</PackageVersion>
-    <Version>1.2.1</Version>
-    <Authors>Mutuduxf</Authors>
-    <Company>Mutuduxf</Company>
-    <PackageProjectUrl>https://github.com/Mutuduxf/Zaabee.Cryptographic</PackageProjectUrl>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Description>The wrappers and extension methods of AES/MD5/SHA.</Description>
-    <PackageTags>Zaabee Cryptographic AES MD5 SHA</PackageTags>
-  </PropertyGroup>
+  
+    <PropertyGroup>
+        <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageVersion>2020.1.0</PackageVersion>
+        <Version>2020.1.0</Version>
+        <Authors>Mutuduxf</Authors>
+        <Company>Mutuduxf</Company>
+        <PackageProjectUrl>https://github.com/Mutuduxf/Zaabee.Cryptographic</PackageProjectUrl>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <Description>The wrappers and extension methods of AES/MD5/SHA.</Description>
+        <PackageTags>Zaabee Cryptographic AES MD5 SHA</PackageTags>
+        <LangVersion>Latest</LangVersion>
+    </PropertyGroup>
+  
 </Project>

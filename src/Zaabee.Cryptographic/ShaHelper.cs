@@ -13,7 +13,7 @@ namespace Zaabee.Cryptographic
 
         public static byte[] Sha1(this byte[] bytes)
         {
-            if (bytes == null) throw new ArgumentNullException(nameof(bytes));
+            if (bytes is null) throw new ArgumentNullException(nameof(bytes));
             using (var provider = SHA1.Create())
                 return provider.ComputeHash(bytes);
         }
@@ -29,7 +29,7 @@ namespace Zaabee.Cryptographic
         public static string ToSha1(this string str, bool isUpper = true, bool isIncludeHyphen = false,
             Encoding encoding = null)
         {
-            encoding = encoding ?? Encoding.UTF8;
+            encoding ??= Encoding.UTF8;
             return ToSha1(encoding.GetBytes(str), isUpper, isIncludeHyphen);
         }
 
@@ -55,7 +55,7 @@ namespace Zaabee.Cryptographic
 
         public static byte[] Sha256(this byte[] bytes)
         {
-            if (bytes == null) throw new ArgumentNullException(nameof(bytes));
+            if (bytes is null) throw new ArgumentNullException(nameof(bytes));
             using (var provider = SHA256.Create())
                 return provider.ComputeHash(bytes);
         }
@@ -71,7 +71,7 @@ namespace Zaabee.Cryptographic
         public static string ToSha256(this string str, bool isUpper = true, bool isIncludeHyphen = false,
             Encoding encoding = null)
         {
-            encoding = encoding ?? Encoding.UTF8;
+            encoding ??= Encoding.UTF8;
             return ToSha256(encoding.GetBytes(str), isUpper, isIncludeHyphen);
         }
 
@@ -97,7 +97,7 @@ namespace Zaabee.Cryptographic
 
         public static byte[] Sha384(this byte[] bytes)
         {
-            if (bytes == null) throw new ArgumentNullException(nameof(bytes));
+            if (bytes is null) throw new ArgumentNullException(nameof(bytes));
             using (var provider = SHA384.Create())
                 return provider.ComputeHash(bytes);
         }
@@ -113,7 +113,7 @@ namespace Zaabee.Cryptographic
         public static string ToSha384(this string str, bool isUpper = true, bool isIncludeHyphen = false,
             Encoding encoding = null)
         {
-            encoding = encoding ?? Encoding.UTF8;
+            encoding ??= Encoding.UTF8;
             return ToSha384(encoding.GetBytes(str), isUpper, isIncludeHyphen);
         }
 
@@ -139,7 +139,7 @@ namespace Zaabee.Cryptographic
 
         public static byte[] Sha512(this byte[] bytes)
         {
-            if (bytes == null) throw new ArgumentNullException(nameof(bytes));
+            if (bytes is null) throw new ArgumentNullException(nameof(bytes));
             using (var provider = SHA512.Create())
                 return provider.ComputeHash(bytes);
         }
@@ -155,7 +155,7 @@ namespace Zaabee.Cryptographic
         public static string ToSha512(this string str, bool isUpper = true, bool isIncludeHyphen = false,
             Encoding encoding = null)
         {
-            encoding = encoding ?? Encoding.UTF8;
+            encoding ??= Encoding.UTF8;
             return ToSha512(encoding.GetBytes(str), isUpper, isIncludeHyphen);
         }
 
