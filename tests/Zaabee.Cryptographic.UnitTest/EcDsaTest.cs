@@ -26,7 +26,7 @@ namespace Zaabee.Cryptographic.UnitTest
         {
             var hashAlgorithm = GetHashAlgorithmName(hashAlgorithmName);
             var (privateKey, publicKey) = EcdsaHelper.GenerateParameters();
-            var originalBytes = Encoding.UTF8.GetBytes(original);
+            var originalBytes = EcdsaHelper.Encoding.GetBytes(original);
             var signBytes = EcdsaHelper.SignData(originalBytes, privateKey, hashAlgorithm);
             Assert.True(EcdsaHelper.VerifyData(originalBytes, signBytes, publicKey, hashAlgorithm));
         }
@@ -50,7 +50,7 @@ namespace Zaabee.Cryptographic.UnitTest
         public void BytesHashTest(string original)
         {
             var (privateKey, publicKey) = EcdsaHelper.GenerateParameters();
-            var originalBytes = Encoding.UTF8.GetBytes(original);
+            var originalBytes = EcdsaHelper.Encoding.GetBytes(original);
             var signBytes = EcdsaHelper.SignHash(originalBytes, privateKey);
             Assert.True(EcdsaHelper.VerifyHash(originalBytes, signBytes, publicKey));
         }

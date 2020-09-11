@@ -15,57 +15,24 @@ namespace Zaabee.Cryptographic.UnitTest
         }
 
         [Theory]
-        [InlineData("Here is some data to encrypt!", "Here is the aes key.", "Here is the aes vector.")]
-        [InlineData("Here is some data to encrypt!", "", "Here is the aes vector.")]
-        [InlineData("Here is some data to encrypt!", "Here is the aes key which length more than 32.",
-            "Here is the aes vector.")]
-        [InlineData("Here is some data to encrypt!", "Here is the aes key.", "")]
-        [InlineData("Here is some data to encrypt!", "Here is the aes key.",
-            "Here is the aes vector which length more than 16.")]
-        public void AesStringTest(string original, string key, string vector)
+        [InlineData("Here is some data to encrypt!", "Here is the aes key.", "Here is the aes vector.", CipherMode.CBC)]
+        [InlineData("Here is some data to encrypt!", "Here is the aes key.", "Here is the aes vector.", CipherMode.ECB)]
+        public void AesStringTest(string original, string key, string vector, CipherMode cipherMode)
         {
-            var encrypt = AesHelper.Encrypt(original, key, vector);
-            var decrypt = AesHelper.Decrypt(encrypt, key, vector);
+            var encrypt = AesHelper.Encrypt(original, key, vector, cipherMode);
+            var decrypt = AesHelper.Decrypt(encrypt, key, vector, cipherMode);
             Assert.Equal(original, decrypt);
         }
 
         [Theory]
-        [InlineData("Here is some data to encrypt!", "Here is the aes key.")]
-        [InlineData("Here is some data to encrypt!", "")]
-        [InlineData("Here is some data to encrypt!", "Here is the aes key which length more than 32.")]
-        public void AesEcbStringTest(string original, string key)
+        [InlineData("Here is some data to encrypt!", "Here is the aes key.", "Here is the aes vector.", CipherMode.CBC)]
+        [InlineData("Here is some data to encrypt!", "Here is the aes key.", "Here is the aes vector.", CipherMode.ECB)]
+        public void AesBytesTest(string original, string key, string vector, CipherMode cipherMode)
         {
-            var encrypt = AesHelper.Encrypt(original, key, null, CipherMode.ECB);
-            var decrypt = AesHelper.Decrypt(encrypt, key, null, CipherMode.ECB);
-            Assert.Equal(original, decrypt);
-        }
-
-        [Theory]
-        [InlineData("Here is some data to encrypt!", "Here is the aes key.", "Here is the aes vector.")]
-        [InlineData("Here is some data to encrypt!", "", "Here is the aes vector.")]
-        [InlineData("Here is some data to encrypt!", "Here is the aes key which length more than 32.",
-            "Here is the aes vector.")]
-        [InlineData("Here is some data to encrypt!", "Here is the aes key.", "")]
-        [InlineData("Here is some data to encrypt!", "Here is the aes key.",
-            "Here is the aes vector which length more than 16.")]
-        public void AesBytesTest(string original, string key, string vector)
-        {
-            var bKey = Encoding.UTF8.GetBytes(key);
-            var bVector = Encoding.UTF8.GetBytes(vector);
-            var encrypt = AesHelper.Encrypt(original, bKey, bVector);
-            var decrypt = AesHelper.Decrypt(encrypt, bKey, bVector);
-            Assert.Equal(original, decrypt);
-        }
-
-        [Theory]
-        [InlineData("Here is some data to encrypt!", "Here is the aes key.")]
-        [InlineData("Here is some data to encrypt!", "")]
-        [InlineData("Here is some data to encrypt!", "Here is the aes key which length more than 32.")]
-        public void AesEcbBytesTest(string original, string key)
-        {
-            var bKey = Encoding.UTF8.GetBytes(key);
-            var encrypt = AesHelper.Encrypt(original, bKey, null, CipherMode.ECB);
-            var decrypt = AesHelper.Decrypt(encrypt, bKey, null, CipherMode.ECB);
+            var bKey = AesHelper.Encoding.GetBytes(key);
+            var bVector = AesHelper.Encoding.GetBytes(vector);
+            var encrypt = AesHelper.Encrypt(original, bKey, bVector, cipherMode);
+            var decrypt = AesHelper.Decrypt(encrypt, bKey, bVector, cipherMode);
             Assert.Equal(original, decrypt);
         }
 

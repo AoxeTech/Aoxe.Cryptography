@@ -17,7 +17,7 @@ namespace Zaabee.Cryptographic.UnitTest
         public void BytesTest(string original)
         {
             var (privateKey, publicKey) = DsaHelper.GenerateParameters();
-            var originalBytes = Encoding.UTF8.GetBytes(original);
+            var originalBytes = DsaHelper.Encoding.GetBytes(original);
             var signature = DsaHelper.CreateSignature(originalBytes, privateKey);
             Assert.True(DsaHelper.VerifySignature(originalBytes, signature, publicKey));
         }

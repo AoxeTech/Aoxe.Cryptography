@@ -47,13 +47,6 @@ namespace Zaabee.Cryptographic
 
         #region Hash
 
-        public static bool VerifyHash(string original, byte[] signature, ECParameters publicKey,
-            Encoding encoding = null)
-        {
-            encoding ??= Encoding;
-            return VerifyHash(encoding.GetBytes(original), signature, publicKey);
-        }
-
         public static byte[] SignHash(string original, ECParameters privateKey, Encoding encoding = null)
         {
             encoding ??= Encoding;
@@ -66,6 +59,13 @@ namespace Zaabee.Cryptographic
             if (ecDsa is null) throw new NotSupportedException(nameof(ecDsa));
             ecDsa.ImportParameters(privateKey);
             return ecDsa.SignHash(original);
+        }
+
+        public static bool VerifyHash(string original, byte[] signature, ECParameters publicKey,
+            Encoding encoding = null)
+        {
+            encoding ??= Encoding;
+            return VerifyHash(encoding.GetBytes(original), signature, publicKey);
         }
 
         public static bool VerifyHash(byte[] original, byte[] signature, ECParameters publicKey)

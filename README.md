@@ -2,84 +2,100 @@
 
 The wraps and extension methods of AES/MD5/SHA/RSA/DSA/ECDSA
 
+## MD5
+
 ```CSharp
-[Theory]
-[InlineData("apple", "274f6c49b3e31a0c")]
-[InlineData("banana", "297a228a75730123")]
-[InlineData("pear", "b1b2534bab7b0372")]
-public void To16Md5Test(string str, string result)
-{
-    Assert.Equal(str.To16Md5(false), result);
-}
+var apple = "apple";
+//1F3870BE274F6C49B3E31A0C6728957F
+var result0 = apple.To32Md5();
+//1F-38-70-BE-27-4F-6C-49-B3-E3-1A-0C-67-28-95-7F
+var result1 = apple.To32Md5(isUpper:true, isIncludeHyphen:true);
+//274F6C49B3E31A0C
+var result0 = apple.To16Md5();
+//27-4f-6c-49-b3-e3-1a-0c
+var result1 = apple.To16Md5(isUpper:false, isIncludeHyphen:true);
+```
 
-[Theory]
-[InlineData("apple", "1f3870be274f6c49b3e31a0c6728957f")]
-[InlineData("banana", "72b302bf297a228a75730123efef7c41")]
-[InlineData("pear", "8893dc16b1b2534bab7b03727145a2bb")]
-public void To32Md5Test(string str, string result)
-{
-    Assert.Equal(str.To32Md5(false), result);
-}
+## SHA
 
-[Theory]
-[InlineData(null)]
-public void To32Md5TestForNull(string str)
-{
-    Assert.Throws<ArgumentNullException>(() => str.To32Md5(false));
-}
+Also the extension methods have params which named "isUpper" and "isIncludeHyphen" like the Md5 extension methods.
 
-[Theory]
-[InlineData("apple", "d0be2dc421be4fcd0172e5afceea3970e2f3d940")]
-[InlineData("banana", "250e77f12a5ab6972a0895d290c4792f0a326ea8")]
-[InlineData("pear", "3e2bf5faa2c3fec1f84068a073b7e51d7ad44a35")]
-public void Sha1Test(string str, string result)
-{
-    Assert.Equal(str.ToSha1(), result.ToUpper());
-}
-
-[Theory]
-[InlineData("apple", "3a7bd3e2360a3d29eea436fcfb7e44c735d117c42d1c1835420b6b9942dd4f1b")]
-[InlineData("banana", "b493d48364afe44d11c0165cf470a4164d1e2609911ef998be868d46ade3de4e")]
-[InlineData("pear", "97cfbe87531abe0c6bac7b21d616cb422faaa158a9f2ae7e8685c79eb85fc65e")]
-public void Sha256Test(string str, string result)
-{
-    Assert.Equal(str.ToSha256(), result.ToUpper());
-}
-
-[Theory]
-[InlineData("apple",
-    "3d8786fcb588c93348756c6429717dc6c374a14f7029362281a3b21dc10250ddf0d0578052749822eb08bc0dc1e68b0f")]
-[InlineData("banana",
-    "92f7818b31b9936b90a5178e811979ef3ba68a14b57e8362424d54446f31ad2a249e4306628ad33ccb28b3e9dc5e043e")]
-[InlineData("pear",
-    "ae997e7b27014c4777949e9ad50ebc75f8a79d499fefbbf8a9aa1d0606a36ca228ef5b8cc8085b54faf9655b6f1ab57b")]
-public void Sha384Test(string str, string result)
-{
-    Assert.Equal(str.ToSha384(), result.ToUpper());
-}
-
-[Theory]
-[InlineData("apple",
-    "844d8779103b94c18f4aa4cc0c3b4474058580a991fba85d3ca698a0bc9e52c5940feb7a65a3a290e17e6b23ee943ecc4f73e7490327245b4fe5d5efb590feb2")]
-[InlineData("banana",
-    "f8e3183d38e6c51889582cb260ab825252f395b4ac8fb0e6b13e9a71f7c10a80d5301e4a949f2783cb0c20205f1d850f87045f4420ad2271c8fd5f0cd8944be3")]
-[InlineData("pear",
-    "0feb729ea2a1d6c7eb415e3fa9a297a0e26723daf463e06d6872eae45629e79f1fdd277741f92f5acb3e55611875453e747f9770176d4284eaffe588e31bad3a")]
-public void Sha512Test(string str, string result)
-{
-    Assert.Equal(str.ToSha512(), result.ToUpper());
-}
-
-[Fact]
-public void AesTest()
-{
-    const string str = "apple";
-    const string key = "sdkfj;lksadjf;aksjdfkjsad";
-    const string vector = "01234567890123456789";
-    const string vector2 = "01234567890123456";
-    var aesHelper = new AesHelper();
-    var encrypt = aesHelper.Encrypt(str, key, vector, Encoding.UTF8);
-    var decrypt = aesHelper.Decrypt(encrypt, key, vector2, Encoding.UTF8);
-    Assert.Equal(str,decrypt);
-}
 ```CSharp
+var apple = "apple";
+//D0BE2DC421BE4FCD0172E5AFCEEA3970E2F3D940
+var sha1 = apple.ToSha1();
+//3A7BD3E2360A3D29EEA436FCFB7E44C735D117C42D1C1835420B6B9942DD4F1B
+var sha256 = apple.ToSha256();
+//3D8786FCB588C93348756C6429717DC6C374A14F7029362281A3B21DC10250DDF0D0578052749822EB08BC0DC1E68B0F
+var sha384 = apple.ToSha384();
+//844D8779103B94C18F4AA4CC0C3B4474058580A991FBA85D3CA698A0BC9E52C5940FEB7A65A3A290E17E6B23EE943ECC4F73E7490327245B4FE5D5EFB590FEB2
+var sha512 = apple.ToSha512();
+```
+
+## AES
+
+```CSharp
+var original = "Here is some data to encrypt!";
+//The key will be resized to 32 size when encrypting or decrypting.
+var key = "0123456789";
+//The vector will be resized to 16 size when encrypting or decrypting.
+var vector = "abcdefg";
+//Default cipher mode is CBC
+var encrypt = AesHelper.Encrypt(original, key, vector);
+var decrypt = AesHelper.Decrypt(encrypt, key, vector);
+//Or you can use ECB
+var ecbEncrypt = AesHelper.Encrypt(original, key, cipherMode: CipherMode.ECB);
+var ecbDecrypt = AesHelper.Decrypt(encrypt, key, cipherMode: CipherMode.ECB);
+```
+
+## RSA
+
+The default padding is OaepSHA256 and the default encoding is utf8.
+
+```CSharp
+var original = "Here is some data to encrypt!";
+var (privateKey, publicKey) = RsaHelper.GenerateParameters();
+var encryptBytes = RsaHelper.Encrypt(original, publicKey);
+var decryptBytes = RsaHelper.Decrypt(encryptBytes, privateKey);
+var decrypt = RsaHelper.Encoding.GetString(decryptBytes);
+//True
+var result = original == decrypt;
+```
+
+## ECDsa
+
+The default encoding is utf8.
+
+```CSharp
+var original = "Here is some data to encrypt!";
+```
+
+```CSharp
+//SignData
+var (privateKey, publicKey) = EcdsaHelper.GenerateParameters();
+var originalBytes = EcdsaHelper.Encoding.GetBytes(original);
+var signBytes = EcdsaHelper.SignData(originalBytes, privateKey, hashAlgorithm);
+//True
+var result = EcdsaHelper.VerifyData(originalBytes, signBytes, publicKey, hashAlgorithm);
+```
+
+```CSharp
+//SignHash
+var (privateKey, publicKey) = EcdsaHelper.GenerateParameters();
+var originalBytes = EcdsaHelper.Encoding.GetBytes(original);
+var signBytes = EcdsaHelper.SignHash(originalBytes, privateKey);
+//True
+var result = EcdsaHelper.VerifyHash(originalBytes, signBytes, publicKey);
+```
+
+## DSA
+
+The default encoding is utf8.
+
+```CSharp
+var (privateKey, publicKey) = DsaHelper.GenerateParameters();
+var originalBytes = DsaHelper.Encoding.GetBytes(original);
+var signature = DsaHelper.CreateSignature(originalBytes, privateKey);
+//True
+var result = DsaHelper.VerifySignature(originalBytes, signature, publicKey);
+```

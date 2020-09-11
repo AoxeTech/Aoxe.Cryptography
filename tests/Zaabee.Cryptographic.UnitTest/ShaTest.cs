@@ -1,10 +1,18 @@
 using System;
+using System.Text;
 using Xunit;
 
 namespace Zaabee.Cryptographic.UnitTest
 {
     public class ShaTest
     {
+        [Fact]
+        public void Test()
+        {
+            ShaHelper.Encoding = Encoding.UTF8;
+            Assert.Equal(ShaHelper.Encoding, Encoding.UTF8);
+        }
+
         [Theory]
         [InlineData("apple", false, false, "d0be2dc421be4fcd0172e5afceea3970e2f3d940")]
         [InlineData("apple", false, true, "d0-be-2d-c4-21-be-4f-cd-01-72-e5-af-ce-ea-39-70-e2-f3-d9-40")]

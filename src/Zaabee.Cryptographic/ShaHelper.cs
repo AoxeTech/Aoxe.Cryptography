@@ -9,6 +9,8 @@ namespace Zaabee.Cryptographic
     /// </summary>
     public static class ShaHelper
     {
+        public static Encoding Encoding { get; set; } = Encoding.UTF8;
+
         #region SHA1
 
         public static byte[] Sha1(this byte[] bytes)
@@ -29,7 +31,7 @@ namespace Zaabee.Cryptographic
         public static string ToSha1(this string str, bool isUpper = true, bool isIncludeHyphen = false,
             Encoding encoding = null)
         {
-            encoding ??= Encoding.UTF8;
+            encoding ??= Encoding;
             return ToSha1(encoding.GetBytes(str), isUpper, isIncludeHyphen);
         }
 
@@ -71,7 +73,7 @@ namespace Zaabee.Cryptographic
         public static string ToSha256(this string str, bool isUpper = true, bool isIncludeHyphen = false,
             Encoding encoding = null)
         {
-            encoding ??= Encoding.UTF8;
+            encoding ??= Encoding;
             return ToSha256(encoding.GetBytes(str), isUpper, isIncludeHyphen);
         }
 
@@ -113,7 +115,7 @@ namespace Zaabee.Cryptographic
         public static string ToSha384(this string str, bool isUpper = true, bool isIncludeHyphen = false,
             Encoding encoding = null)
         {
-            encoding ??= Encoding.UTF8;
+            encoding ??= Encoding;
             return ToSha384(encoding.GetBytes(str), isUpper, isIncludeHyphen);
         }
 
@@ -155,7 +157,7 @@ namespace Zaabee.Cryptographic
         public static string ToSha512(this string str, bool isUpper = true, bool isIncludeHyphen = false,
             Encoding encoding = null)
         {
-            encoding ??= Encoding.UTF8;
+            encoding ??= Encoding;
             return ToSha512(encoding.GetBytes(str), isUpper, isIncludeHyphen);
         }
 
