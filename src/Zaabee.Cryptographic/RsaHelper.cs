@@ -9,9 +9,11 @@ namespace Zaabee.Cryptographic
         public static RSAEncryptionPadding Padding { get; set; } = RSAEncryptionPadding.OaepSHA256;
 
         public static byte[] Encrypt(string original, RSAParameters publicKey,
-            RSAEncryptionPadding rsaEncryptionPadding = null, Encoding encoding = null) =>
-            Encrypt(encoding is null ? Encoding.GetBytes(original) : encoding.GetBytes(original), publicKey,
-                rsaEncryptionPadding);
+            RSAEncryptionPadding rsaEncryptionPadding = null, Encoding encoding = null)
+        {
+            encoding ??= Encoding;
+            return Encrypt(encoding.GetBytes(original), publicKey, rsaEncryptionPadding);
+        }
 
         public static byte[] Encrypt(byte[] original, RSAParameters publicKey,
             RSAEncryptionPadding rsaEncryptionPadding = null)

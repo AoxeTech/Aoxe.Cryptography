@@ -1,6 +1,6 @@
 # Zaabee.Cryptographic
 
-The wraps and extension methods of AES/MD5/SHA
+The wraps and extension methods of AES/MD5/SHA/RSA/DSA/ECDSA
 
 ```CSharp
 [Theory]
@@ -13,7 +13,6 @@ public void To16Md5Test(string str, string result)
 }
 
 [Theory]
-[InlineData("duxiaofei", "e719bdf143ebeda07d268b2fe6848676")]
 [InlineData("apple", "1f3870be274f6c49b3e31a0c6728957f")]
 [InlineData("banana", "72b302bf297a228a75730123efef7c41")]
 [InlineData("pear", "8893dc16b1b2534bab7b03727145a2bb")]

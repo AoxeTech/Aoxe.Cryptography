@@ -7,8 +7,11 @@ namespace Zaabee.Cryptographic
     {
         public static Encoding Encoding { get; set; } = Encoding.UTF8;
 
-        public static byte[] CreateSignature(string original, DSAParameters privateKey, Encoding encoding = null) =>
-            CreateSignature(encoding is null ? Encoding.GetBytes(original) : encoding.GetBytes(original), privateKey);
+        public static byte[] CreateSignature(string original, DSAParameters privateKey, Encoding encoding = null)
+        {
+            encoding ??= Encoding;
+            return CreateSignature(encoding.GetBytes(original), privateKey);
+        }
 
         public static byte[] CreateSignature(byte[] original, DSAParameters privateKey)
         {
@@ -18,9 +21,11 @@ namespace Zaabee.Cryptographic
         }
 
         public static bool VerifySignature(string original, byte[] signature, DSAParameters publicKey,
-            Encoding encoding = null) =>
-            VerifySignature(encoding is null ? Encoding.GetBytes(original) : encoding.GetBytes(original), signature,
-                publicKey);
+            Encoding encoding = null)
+        {
+            encoding ??= Encoding;
+            return VerifySignature(encoding.GetBytes(original), signature, publicKey);
+        }
 
         public static bool VerifySignature(byte[] original, byte[] signature, DSAParameters publicKey)
         {

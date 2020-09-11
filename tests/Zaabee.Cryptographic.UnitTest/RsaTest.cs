@@ -12,6 +12,8 @@ namespace Zaabee.Cryptographic.UnitTest
         {
             RsaHelper.Encoding = Encoding.UTF8;
             RsaHelper.Padding = RSAEncryptionPadding.OaepSHA256;
+            Assert.Equal(RsaHelper.Encoding, Encoding.UTF8);
+            Assert.Equal(RsaHelper.Padding, RSAEncryptionPadding.OaepSHA256);
         }
 
         [Theory]

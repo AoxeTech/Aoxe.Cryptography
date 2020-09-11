@@ -7,6 +7,15 @@ namespace Zaabee.Cryptographic.UnitTest
 {
     public class EcDsaTest
     {
+        [Fact]
+        public void Test()
+        {
+            EcdsaHelper.Encoding = Encoding.UTF8;
+            EcdsaHelper.HashAlgorithmName = HashAlgorithmName.SHA256;
+            Assert.Equal(EcdsaHelper.Encoding, Encoding.UTF8);
+            Assert.Equal(EcdsaHelper.HashAlgorithmName, HashAlgorithmName.SHA256);
+        }
+
         [Theory]
         [InlineData("Here is some data to encrypt!", "MD5")]
         [InlineData("Here is some data to encrypt!", "SHA1")]

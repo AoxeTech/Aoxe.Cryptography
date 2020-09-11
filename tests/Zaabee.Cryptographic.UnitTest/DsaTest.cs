@@ -5,6 +5,13 @@ namespace Zaabee.Cryptographic.UnitTest
 {
     public class DsaTest
     {
+        [Fact]
+        public void Test()
+        {
+            DsaHelper.Encoding = Encoding.UTF8;
+            Assert.Equal(DsaHelper.Encoding, Encoding.UTF8);
+        }
+        
         [Theory]
         [InlineData("Here is some data to encrypt!")]
         public void BytesTest(string original)
