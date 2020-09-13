@@ -62,7 +62,7 @@ var decrypt = RsaHelper.Encoding.GetString(decryptBytes);
 var result = original == decrypt;
 ```
 
-## ECDsa
+## ECDSA
 
 The default encoding is utf8.
 
