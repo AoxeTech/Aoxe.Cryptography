@@ -6,6 +6,8 @@ The wraps and extension methods of AES/MD5/SHA/RSA/DSA/ECDSA/DES/TripleDES
 
 ### MD5
 
+The result length must be an even number and greater than 0 and less than or equal to 32.
+
 ```CSharp
 var apple = "apple";
 //1F3870BE274F6C49B3E31A0C6728957F
