@@ -13,13 +13,6 @@ namespace Zaabee.Cryptographic
 
         #region SHA1
 
-        public static byte[] Sha1(this byte[] bytes)
-        {
-            if (bytes is null) throw new ArgumentNullException(nameof(bytes));
-            using var provider = SHA1.Create();
-            return provider.ComputeHash(bytes);
-        }
-
         /// <summary>
         /// Get SHA1 hash string
         /// </summary>
@@ -28,11 +21,11 @@ namespace Zaabee.Cryptographic
         /// <param name="isIncludeHyphen"></param>
         /// <param name="encoding"></param>
         /// <returns></returns>
-        public static string ToSha1(this string str, bool isUpper = true, bool isIncludeHyphen = false,
+        public static string ComputeSha1(string str, bool isUpper = true, bool isIncludeHyphen = false,
             Encoding encoding = null)
         {
             encoding ??= Encoding;
-            return ToSha1(encoding.GetBytes(str), isUpper, isIncludeHyphen);
+            return ComputeSha1(encoding.GetBytes(str), isUpper, isIncludeHyphen);
         }
 
         /// <summary>
@@ -42,9 +35,11 @@ namespace Zaabee.Cryptographic
         /// <param name="isUpper"></param>
         /// <param name="isIncludeHyphen"></param>
         /// <returns></returns>
-        public static string ToSha1(this byte[] bytes, bool isUpper = true, bool isIncludeHyphen = false)
+        public static string ComputeSha1(byte[] bytes, bool isUpper = true, bool isIncludeHyphen = false)
         {
-            var hashBytes = bytes.Sha1();
+            using var sha1 = SHA1.Create();
+            if (sha1 is null) throw new NotSupportedException(nameof(sha1));
+            var hashBytes = sha1.ComputeHash(bytes);
             var str = BitConverter.ToString(hashBytes);
             str = isUpper ? str.ToUpper() : str.ToLower();
             str = isIncludeHyphen ? str : str.Replace("-", "");
@@ -55,13 +50,6 @@ namespace Zaabee.Cryptographic
 
         #region SHA256
 
-        public static byte[] Sha256(this byte[] bytes)
-        {
-            if (bytes is null) throw new ArgumentNullException(nameof(bytes));
-            using var provider = SHA256.Create();
-            return provider.ComputeHash(bytes);
-        }
-
         /// <summary>
         /// Get SHA1 hash string
         /// </summary>
@@ -70,11 +58,11 @@ namespace Zaabee.Cryptographic
         /// <param name="isIncludeHyphen"></param>
         /// <param name="encoding"></param>
         /// <returns></returns>
-        public static string ToSha256(this string str, bool isUpper = true, bool isIncludeHyphen = false,
+        public static string ComputeSha256(string str, bool isUpper = true, bool isIncludeHyphen = false,
             Encoding encoding = null)
         {
             encoding ??= Encoding;
-            return ToSha256(encoding.GetBytes(str), isUpper, isIncludeHyphen);
+            return ComputeSha256(encoding.GetBytes(str), isUpper, isIncludeHyphen);
         }
 
         /// <summary>
@@ -84,9 +72,11 @@ namespace Zaabee.Cryptographic
         /// <param name="isUpper"></param>
         /// <param name="isIncludeHyphen"></param>
         /// <returns></returns>
-        public static string ToSha256(this byte[] bytes, bool isUpper = true, bool isIncludeHyphen = false)
+        public static string ComputeSha256(byte[] bytes, bool isUpper = true, bool isIncludeHyphen = false)
         {
-            var hashBytes = bytes.Sha256();
+            using var sha256 = SHA256.Create();
+            if (sha256 is null) throw new NotSupportedException(nameof(sha256));
+            var hashBytes = sha256.ComputeHash(bytes);
             var str = BitConverter.ToString(hashBytes);
             str = isUpper ? str.ToUpper() : str.ToLower();
             str = isIncludeHyphen ? str : str.Replace("-", "");
@@ -97,13 +87,6 @@ namespace Zaabee.Cryptographic
 
         #region SHA384
 
-        public static byte[] Sha384(this byte[] bytes)
-        {
-            if (bytes is null) throw new ArgumentNullException(nameof(bytes));
-            using var provider = SHA384.Create();
-            return provider.ComputeHash(bytes);
-        }
-
         /// <summary>
         /// Get SHA1 hash string
         /// </summary>
@@ -112,11 +95,11 @@ namespace Zaabee.Cryptographic
         /// <param name="isIncludeHyphen"></param>
         /// <param name="encoding"></param>
         /// <returns></returns>
-        public static string ToSha384(this string str, bool isUpper = true, bool isIncludeHyphen = false,
+        public static string ComputeSha384(string str, bool isUpper = true, bool isIncludeHyphen = false,
             Encoding encoding = null)
         {
             encoding ??= Encoding;
-            return ToSha384(encoding.GetBytes(str), isUpper, isIncludeHyphen);
+            return ComputeSha384(encoding.GetBytes(str), isUpper, isIncludeHyphen);
         }
 
         /// <summary>
@@ -126,9 +109,11 @@ namespace Zaabee.Cryptographic
         /// <param name="isUpper"></param>
         /// <param name="isIncludeHyphen"></param>
         /// <returns></returns>
-        public static string ToSha384(this byte[] bytes, bool isUpper = true, bool isIncludeHyphen = false)
+        public static string ComputeSha384(byte[] bytes, bool isUpper = true, bool isIncludeHyphen = false)
         {
-            var hashBytes = bytes.Sha384();
+            using var sha384 = SHA384.Create();
+            if (sha384 is null) throw new NotSupportedException(nameof(sha384));
+            var hashBytes = sha384.ComputeHash(bytes);
             var str = BitConverter.ToString(hashBytes);
             str = isUpper ? str.ToUpper() : str.ToLower();
             str = isIncludeHyphen ? str : str.Replace("-", "");
@@ -139,13 +124,6 @@ namespace Zaabee.Cryptographic
 
         #region SHA512
 
-        public static byte[] Sha512(this byte[] bytes)
-        {
-            if (bytes is null) throw new ArgumentNullException(nameof(bytes));
-            using var provider = SHA512.Create();
-            return provider.ComputeHash(bytes);
-        }
-
         /// <summary>
         /// Get SHA1 hash string
         /// </summary>
@@ -154,11 +132,11 @@ namespace Zaabee.Cryptographic
         /// <param name="isIncludeHyphen"></param>
         /// <param name="encoding"></param>
         /// <returns></returns>
-        public static string ToSha512(this string str, bool isUpper = true, bool isIncludeHyphen = false,
+        public static string ComputeSha512(string str, bool isUpper = true, bool isIncludeHyphen = false,
             Encoding encoding = null)
         {
             encoding ??= Encoding;
-            return ToSha512(encoding.GetBytes(str), isUpper, isIncludeHyphen);
+            return ComputeSha512(encoding.GetBytes(str), isUpper, isIncludeHyphen);
         }
 
         /// <summary>
@@ -168,9 +146,11 @@ namespace Zaabee.Cryptographic
         /// <param name="isUpper"></param>
         /// <param name="isIncludeHyphen"></param>
         /// <returns></returns>
-        public static string ToSha512(this byte[] bytes, bool isUpper = true, bool isIncludeHyphen = false)
+        public static string ComputeSha512(byte[] bytes, bool isUpper = true, bool isIncludeHyphen = false)
         {
-            var hashBytes = bytes.Sha512();
+            using var sha512 = SHA512.Create();
+            if (sha512 is null) throw new NotSupportedException(nameof(sha512));
+            var hashBytes = sha512.ComputeHash(bytes);
             var str = BitConverter.ToString(hashBytes);
             str = isUpper ? str.ToUpper() : str.ToLower();
             str = isIncludeHyphen ? str : str.Replace("-", "");

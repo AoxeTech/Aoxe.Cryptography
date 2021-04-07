@@ -1,3 +1,4 @@
+using System;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -19,21 +20,28 @@ namespace Zaabee.Cryptographic
             RSAEncryptionPadding rsaEncryptionPadding = null)
         {
             using var rsa = RSA.Create();
+            if (rsa is null) throw new NotSupportedException(nameof(rsa));
             rsa.ImportParameters(publicKey);
             return rsa.Encrypt(original, rsaEncryptionPadding ?? Padding);
         }
 
-        public static byte[] Decrypt(byte[] original, RSAParameters privateKey,
+        public static string DecryptToString(byte[] encryptBytes, RSAParameters privateKey,
+            RSAEncryptionPadding rsaEncryptionPadding = null) =>
+            Encoding.GetString(Decrypt(encryptBytes, privateKey, rsaEncryptionPadding));
+
+        public static byte[] Decrypt(byte[] encryptBytes, RSAParameters privateKey,
             RSAEncryptionPadding rsaEncryptionPadding = null)
         {
             using var rsa = RSA.Create();
+            if (rsa is null) throw new NotSupportedException(nameof(rsa));
             rsa.ImportParameters(privateKey);
-            return rsa.Decrypt(original, rsaEncryptionPadding ?? Padding);
+            return rsa.Decrypt(encryptBytes, rsaEncryptionPadding ?? Padding);
         }
 
         public static (RSAParameters privateKey, RSAParameters publicKey) GenerateParameters()
         {
             using var rsa = RSA.Create();
+            if (rsa is null) throw new NotSupportedException(nameof(rsa));
             var privateKey = rsa.ExportParameters(true);
             var publicKey = rsa.ExportParameters(false);
             return (privateKey, publicKey);

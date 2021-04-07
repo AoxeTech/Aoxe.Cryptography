@@ -27,8 +27,8 @@ namespace Zaabee.Cryptographic.UnitTest
             var hashAlgorithm = GetHashAlgorithmName(hashAlgorithmName);
             var (privateKey, publicKey) = EcdsaHelper.GenerateParameters();
             var originalBytes = EcdsaHelper.Encoding.GetBytes(original);
-            var signBytes = EcdsaHelper.SignData(originalBytes, privateKey, hashAlgorithm);
-            Assert.True(EcdsaHelper.VerifyData(originalBytes, signBytes, publicKey, hashAlgorithm));
+            var signBytes = originalBytes.SignDataByEcdsa(privateKey, hashAlgorithm);
+            Assert.True(originalBytes.VerifyDataByEcdsa(signBytes, publicKey, hashAlgorithm));
         }
 
         [Theory]
@@ -41,8 +41,8 @@ namespace Zaabee.Cryptographic.UnitTest
         {
             var hashAlgorithm = GetHashAlgorithmName(hashAlgorithmName);
             var (privateKey, publicKey) = EcdsaHelper.GenerateParameters();
-            var signBytes = EcdsaHelper.SignData(original, privateKey, hashAlgorithm);
-            Assert.True(EcdsaHelper.VerifyData(original, signBytes, publicKey, hashAlgorithm));
+            var signBytes = original.SignDataByEcdsa(privateKey, hashAlgorithm);
+            Assert.True(original.VerifyDataByEcdsa(signBytes, publicKey, hashAlgorithm));
         }
 
         [Theory]
@@ -51,8 +51,8 @@ namespace Zaabee.Cryptographic.UnitTest
         {
             var (privateKey, publicKey) = EcdsaHelper.GenerateParameters();
             var originalBytes = EcdsaHelper.Encoding.GetBytes(original);
-            var signBytes = EcdsaHelper.SignHash(originalBytes, privateKey);
-            Assert.True(EcdsaHelper.VerifyHash(originalBytes, signBytes, publicKey));
+            var signBytes = originalBytes.SignHashByEcdsa(privateKey);
+            Assert.True(originalBytes.VerifyHashByEcdsa(signBytes, publicKey));
         }
 
         [Theory]
@@ -60,21 +60,19 @@ namespace Zaabee.Cryptographic.UnitTest
         public void StringHashTest(string original)
         {
             var (privateKey, publicKey) = EcdsaHelper.GenerateParameters();
-            var signBytes = EcdsaHelper.SignHash(original, privateKey);
-            Assert.True(EcdsaHelper.VerifyHash(original, signBytes, publicKey));
+            var signBytes = original.SignHashByEcdsa(privateKey);
+            Assert.True(original.VerifyHashByEcdsa(signBytes, publicKey));
         }
 
-        private HashAlgorithmName GetHashAlgorithmName(string name)
-        {
-            switch (name)
+        private static HashAlgorithmName GetHashAlgorithmName(string name) =>
+            name switch
             {
-                case "MD5": return HashAlgorithmName.MD5;
-                case "SHA1": return HashAlgorithmName.SHA1;
-                case "SHA256": return HashAlgorithmName.SHA256;
-                case "SHA384": return HashAlgorithmName.SHA384;
-                case "SHA512": return HashAlgorithmName.SHA512;
-                default: throw new ArgumentOutOfRangeException();
-            }
-        }
+                "MD5" => HashAlgorithmName.MD5,
+                "SHA1" => HashAlgorithmName.SHA1,
+                "SHA256" => HashAlgorithmName.SHA256,
+                "SHA384" => HashAlgorithmName.SHA384,
+                "SHA512" => HashAlgorithmName.SHA512,
+                _ => throw new ArgumentOutOfRangeException()
+            };
     }
 }

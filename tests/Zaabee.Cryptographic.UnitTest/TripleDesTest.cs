@@ -21,8 +21,8 @@ namespace Zaabee.Cryptographic.UnitTest
             CipherMode.ECB)]
         public void TripleDesStringTest(string original, string key, string vector, CipherMode cipherMode)
         {
-            var encrypt = TripleDesHelper.Encrypt(original, key, vector, cipherMode);
-            var decrypt = TripleDesHelper.Decrypt(encrypt, key, vector, cipherMode);
+            var encrypt = original.EncryptByTripleDes(key, vector, cipherMode);
+            var decrypt = encrypt.DecryptByTripleDes(key, vector, cipherMode);
             Assert.Equal(original, decrypt);
         }
 
@@ -35,8 +35,8 @@ namespace Zaabee.Cryptographic.UnitTest
         {
             var bKey = TripleDesHelper.Encoding.GetBytes(key);
             var bVector = TripleDesHelper.Encoding.GetBytes(vector);
-            var encrypt = TripleDesHelper.Encrypt(original, bKey, bVector, cipherMode);
-            var decrypt = TripleDesHelper.Decrypt(encrypt, bKey, bVector, cipherMode);
+            var encrypt = original.EncryptByTripleDes(bKey, bVector, cipherMode);
+            var decrypt = encrypt.DecryptByTripleDes(bKey, bVector, cipherMode);
             Assert.Equal(original, decrypt);
         }
 

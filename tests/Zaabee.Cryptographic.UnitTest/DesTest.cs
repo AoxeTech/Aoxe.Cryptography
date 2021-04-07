@@ -19,8 +19,8 @@ namespace Zaabee.Cryptographic.UnitTest
         [InlineData("Here is some data to encrypt!", "Here is the des key.", "Here is the des vector.", CipherMode.ECB)]
         public void DesStringTest(string original, string key, string vector, CipherMode cipherMode)
         {
-            var encrypt = DesHelper.Encrypt(original, key, vector, cipherMode);
-            var decrypt = DesHelper.Decrypt(encrypt, key, vector, cipherMode);
+            var encrypt = original.EncryptByDes(key, vector, cipherMode);
+            var decrypt = encrypt.DecryptByDes(key, vector, cipherMode);
             Assert.Equal(original, decrypt);
         }
 
@@ -31,8 +31,8 @@ namespace Zaabee.Cryptographic.UnitTest
         {
             var bKey = DesHelper.Encoding.GetBytes(key);
             var bVector = DesHelper.Encoding.GetBytes(vector);
-            var encrypt = DesHelper.Encrypt(original, bKey, bVector, cipherMode);
-            var decrypt = DesHelper.Decrypt(encrypt, bKey, bVector, cipherMode);
+            var encrypt = original.EncryptByDes(bKey, bVector, cipherMode);
+            var decrypt = encrypt.DecryptByDes(bKey, bVector, cipherMode);
             Assert.Equal(original, decrypt);
         }
 

@@ -11,24 +11,24 @@ namespace Zaabee.Cryptographic.UnitTest
             DsaHelper.Encoding = Encoding.UTF8;
             Assert.Equal(DsaHelper.Encoding, Encoding.UTF8);
         }
-        
+
         [Theory]
         [InlineData("Here is some data to encrypt!")]
         public void BytesTest(string original)
         {
             var (privateKey, publicKey) = DsaHelper.GenerateParameters();
             var originalBytes = DsaHelper.Encoding.GetBytes(original);
-            var signature = DsaHelper.CreateSignature(originalBytes, privateKey);
-            Assert.True(DsaHelper.VerifySignature(originalBytes, signature, publicKey));
+            var signature = originalBytes.CreateSignatureByDsa(privateKey);
+            Assert.True(originalBytes.VerifySignatureByDsa(signature, publicKey));
         }
-        
+
         [Theory]
         [InlineData("Here is some data to encrypt!")]
         public void StringTest(string original)
         {
             var (privateKey, publicKey) = DsaHelper.GenerateParameters();
-            var signature = DsaHelper.CreateSignature(original, privateKey);
-            Assert.True(DsaHelper.VerifySignature(original, signature, publicKey));
+            var signature = original.CreateSignatureByDsa(privateKey);
+            Assert.True(original.VerifySignatureByDsa(signature, publicKey));
         }
     }
 }

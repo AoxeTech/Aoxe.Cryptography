@@ -19,8 +19,8 @@ namespace Zaabee.Cryptographic.UnitTest
         [InlineData("Here is some data to encrypt!", "Here is the aes key.", "Here is the aes vector.", CipherMode.ECB)]
         public void AesStringTest(string original, string key, string vector, CipherMode cipherMode)
         {
-            var encrypt = AesHelper.Encrypt(original, key, vector, cipherMode);
-            var decrypt = AesHelper.Decrypt(encrypt, key, vector, cipherMode);
+            var encrypt = original.EncryptByAes(key, vector, cipherMode);
+            var decrypt = encrypt.DecryptByAes(key, vector, cipherMode);
             Assert.Equal(original, decrypt);
         }
 
@@ -31,8 +31,8 @@ namespace Zaabee.Cryptographic.UnitTest
         {
             var bKey = AesHelper.Encoding.GetBytes(key);
             var bVector = AesHelper.Encoding.GetBytes(vector);
-            var encrypt = AesHelper.Encrypt(original, bKey, bVector, cipherMode);
-            var decrypt = AesHelper.Decrypt(encrypt, bKey, bVector, cipherMode);
+            var encrypt = original.EncryptByAes(bKey, bVector, cipherMode);
+            var decrypt = encrypt.DecryptByAes(bKey, bVector, cipherMode);
             Assert.Equal(original, decrypt);
         }
 

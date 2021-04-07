@@ -1,3 +1,4 @@
+using System;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -16,6 +17,7 @@ namespace Zaabee.Cryptographic
         public static byte[] CreateSignature(byte[] original, DSAParameters privateKey)
         {
             using var dsa = DSA.Create();
+            if (dsa is null) throw new NotSupportedException(nameof(dsa));
             dsa.ImportParameters(privateKey);
             return dsa.CreateSignature(original);
         }
@@ -30,6 +32,7 @@ namespace Zaabee.Cryptographic
         public static bool VerifySignature(byte[] original, byte[] signature, DSAParameters publicKey)
         {
             using var dsa = DSA.Create();
+            if (dsa is null) throw new NotSupportedException(nameof(dsa));
             dsa.ImportParameters(publicKey);
             return dsa.VerifySignature(original, signature);
         }
@@ -37,6 +40,7 @@ namespace Zaabee.Cryptographic
         public static (DSAParameters privateKey, DSAParameters publicKey) GenerateParameters()
         {
             using var dsa = DSA.Create();
+            if (dsa is null) throw new NotSupportedException(nameof(dsa));
             var privateKey = dsa.ExportParameters(true);
             var publicKey = dsa.ExportParameters(false);
             return (privateKey, publicKey);
