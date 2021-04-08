@@ -52,7 +52,7 @@ namespace Zaabee.Cryptographic
             if (original is null) throw new ArgumentNullException(nameof(original));
             if (key is null) throw new ArgumentNullException(nameof(key));
             Array.Resize(ref key, 32);
-            if (vector != null) Array.Resize(ref vector, 16);
+            if (vector is not null) Array.Resize(ref vector, 16);
             using (var aes = Aes.Create())
             {
                 if (aes is null) throw new NotSupportedException(nameof(aes));
@@ -109,7 +109,7 @@ namespace Zaabee.Cryptographic
             if (encrypted is null) throw new ArgumentNullException(nameof(encrypted));
             if (key is null) throw new ArgumentNullException(nameof(key));
             Array.Resize(ref key, 32);
-            if (vector != null) Array.Resize(ref vector, 16);
+            if (vector is not null) Array.Resize(ref vector, 16);
             using (var aes = Aes.Create())
             {
                 if (aes is null) throw new NotSupportedException(nameof(aes));
