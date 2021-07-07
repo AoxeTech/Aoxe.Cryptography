@@ -22,11 +22,8 @@ namespace Zaabee.Cryptographic
         /// <param name="encoding"></param>
         /// <returns></returns>
         public static string ComputeSha1(string str, bool isUpper = true, bool isIncludeHyphen = false,
-            Encoding encoding = null)
-        {
-            encoding ??= Encoding;
-            return ComputeSha1(encoding.GetBytes(str), isUpper, isIncludeHyphen);
-        }
+            Encoding encoding = null) =>
+            ComputeSha1((encoding ?? Encoding).GetBytes(str), isUpper, isIncludeHyphen);
 
         /// <summary>
         /// Get SHA1 hash string
@@ -59,11 +56,7 @@ namespace Zaabee.Cryptographic
         /// <param name="encoding"></param>
         /// <returns></returns>
         public static string ComputeSha256(string str, bool isUpper = true, bool isIncludeHyphen = false,
-            Encoding encoding = null)
-        {
-            encoding ??= Encoding;
-            return ComputeSha256(encoding.GetBytes(str), isUpper, isIncludeHyphen);
-        }
+            Encoding encoding = null) => ComputeSha256((encoding ?? Encoding).GetBytes(str), isUpper, isIncludeHyphen);
 
         /// <summary>
         /// Get SHA1 hash string
@@ -96,11 +89,7 @@ namespace Zaabee.Cryptographic
         /// <param name="encoding"></param>
         /// <returns></returns>
         public static string ComputeSha384(string str, bool isUpper = true, bool isIncludeHyphen = false,
-            Encoding encoding = null)
-        {
-            encoding ??= Encoding;
-            return ComputeSha384(encoding.GetBytes(str), isUpper, isIncludeHyphen);
-        }
+            Encoding encoding = null) => ComputeSha384((encoding ?? Encoding).GetBytes(str), isUpper, isIncludeHyphen);
 
         /// <summary>
         /// Get SHA1 hash string
@@ -133,11 +122,7 @@ namespace Zaabee.Cryptographic
         /// <param name="encoding"></param>
         /// <returns></returns>
         public static string ComputeSha512(string str, bool isUpper = true, bool isIncludeHyphen = false,
-            Encoding encoding = null)
-        {
-            encoding ??= Encoding;
-            return ComputeSha512(encoding.GetBytes(str), isUpper, isIncludeHyphen);
-        }
+            Encoding encoding = null) => ComputeSha512((encoding ?? Encoding).GetBytes(str), isUpper, isIncludeHyphen);
 
         /// <summary>
         /// Get SHA1 hash string

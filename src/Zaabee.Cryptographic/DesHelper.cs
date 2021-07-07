@@ -29,9 +29,8 @@ namespace Zaabee.Cryptographic
         {
             if (original is null) throw new ArgumentNullException(nameof(original));
             if (key is null) throw new ArgumentNullException(nameof(key));
-            encoding ??= Encoding;
-            var bKey = encoding.GetBytes(key);
-            var bVector = vector is null ? null : encoding.GetBytes(vector);
+            var bKey = (encoding??Encoding).GetBytes(key);
+            var bVector = vector is null ? null : (encoding??Encoding).GetBytes(vector);
             return Encrypt(original, bKey, bVector, cipherMode, paddingMode);
         }
 
@@ -86,9 +85,8 @@ namespace Zaabee.Cryptographic
         {
             if (encrypted is null) throw new ArgumentNullException(nameof(encrypted));
             if (key is null) throw new ArgumentNullException(nameof(key));
-            encoding ??= Encoding;
-            var bKey = encoding.GetBytes(key);
-            var bVector = vector is null ? null : encoding.GetBytes(vector);
+            var bKey = (encoding??Encoding).GetBytes(key);
+            var bVector = vector is null ? null : (encoding??Encoding).GetBytes(vector);
             return Decrypt(encrypted, bKey, bVector, cipherMode, paddingMode);
         }
 

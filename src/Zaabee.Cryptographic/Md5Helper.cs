@@ -18,11 +18,8 @@ namespace Zaabee.Cryptographic
         /// <param name="resultLength"></param>
         /// <returns></returns>
         public static string ComputeMd5(string str, bool isUpper = true, bool isIncludeHyphen = false,
-            Encoding encoding = null, int resultLength = 32)
-        {
-            encoding ??= Encoding;
-            return ComputeMd5(encoding.GetBytes(str), isUpper, isIncludeHyphen, resultLength);
-        }
+            Encoding encoding = null, int resultLength = 32) =>
+            ComputeMd5((encoding ?? Encoding).GetBytes(str), isUpper, isIncludeHyphen, resultLength);
 
         /// <summary>
         /// Get MD5 hash string
@@ -39,7 +36,7 @@ namespace Zaabee.Cryptographic
         public static string ComputeMd5(byte[] bytes, bool isUpper = true, bool isIncludeHyphen = false,
             int resultLength = 32)
         {
-            if (resultLength <= 0 || resultLength > 32)
+            if (resultLength is <= 0 or > 32)
                 throw new ArgumentOutOfRangeException(nameof(resultLength),
                     "Result length can only be greater than 0 and less than or equal to 32.");
             if (resultLength % 2 != 0)
