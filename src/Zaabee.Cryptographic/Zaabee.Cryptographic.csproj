@@ -9,8 +9,8 @@
         <Company>Mutuduxf</Company>
         <PackageProjectUrl>https://github.com/Mutuduxf/Zaabee.Cryptographic</PackageProjectUrl>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageTags>Zaabee;Cryptographic;AES;MD5;SHA;RSA;ECDSA;DSA;DES;TripleDES</PackageTags>
         <Description>The wrappers and extension methods of AES/MD5/SHA/RSA/ECDSA/DSA.</Description>
-        <PackageTags>Zaabee Cryptographic AES MD5 SHA RSA ECDSA DSA DES TripleDES</PackageTags>
         <LangVersion>latest</LangVersion>
     </PropertyGroup>
   
