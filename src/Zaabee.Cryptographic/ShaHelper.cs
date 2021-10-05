@@ -21,9 +21,9 @@ namespace Zaabee.Cryptographic
         /// <param name="isIncludeHyphen"></param>
         /// <param name="encoding"></param>
         /// <returns></returns>
-        public static string ComputeSha1(string str, bool isUpper = true, bool isIncludeHyphen = false,
+        public static string GetSha1Hash(string str, bool isUpper = true, bool isIncludeHyphen = false,
             Encoding encoding = null) =>
-            ComputeSha1((encoding ?? Encoding).GetBytes(str), isUpper, isIncludeHyphen);
+            GetSha1Hash((encoding ?? Encoding).GetBytes(str), isUpper, isIncludeHyphen);
 
         /// <summary>
         /// Get SHA1 hash string
@@ -32,7 +32,7 @@ namespace Zaabee.Cryptographic
         /// <param name="isUpper"></param>
         /// <param name="isIncludeHyphen"></param>
         /// <returns></returns>
-        public static string ComputeSha1(byte[] bytes, bool isUpper = true, bool isIncludeHyphen = false)
+        public static string GetSha1Hash(byte[] bytes, bool isUpper = true, bool isIncludeHyphen = false)
         {
             using var sha1 = SHA1.Create();
             if (sha1 is null) throw new NotSupportedException(nameof(sha1));
@@ -48,24 +48,24 @@ namespace Zaabee.Cryptographic
         #region SHA256
 
         /// <summary>
-        /// Get SHA1 hash string
+        /// Get SHA256 hash string
         /// </summary>
         /// <param name="str"></param>
         /// <param name="isUpper"></param>
         /// <param name="isIncludeHyphen"></param>
         /// <param name="encoding"></param>
         /// <returns></returns>
-        public static string ComputeSha256(string str, bool isUpper = true, bool isIncludeHyphen = false,
-            Encoding encoding = null) => ComputeSha256((encoding ?? Encoding).GetBytes(str), isUpper, isIncludeHyphen);
+        public static string GetSha256Hash(string str, bool isUpper = true, bool isIncludeHyphen = false,
+            Encoding encoding = null) => GetSha256Hash((encoding ?? Encoding).GetBytes(str), isUpper, isIncludeHyphen);
 
         /// <summary>
-        /// Get SHA1 hash string
+        /// Get SHA256 hash string
         /// </summary>
         /// <param name="bytes"></param>
         /// <param name="isUpper"></param>
         /// <param name="isIncludeHyphen"></param>
         /// <returns></returns>
-        public static string ComputeSha256(byte[] bytes, bool isUpper = true, bool isIncludeHyphen = false)
+        public static string GetSha256Hash(byte[] bytes, bool isUpper = true, bool isIncludeHyphen = false)
         {
             using var sha256 = SHA256.Create();
             if (sha256 is null) throw new NotSupportedException(nameof(sha256));
@@ -81,24 +81,24 @@ namespace Zaabee.Cryptographic
         #region SHA384
 
         /// <summary>
-        /// Get SHA1 hash string
+        /// Get SHA384 hash string
         /// </summary>
         /// <param name="str"></param>
         /// <param name="isUpper"></param>
         /// <param name="isIncludeHyphen"></param>
         /// <param name="encoding"></param>
         /// <returns></returns>
-        public static string ComputeSha384(string str, bool isUpper = true, bool isIncludeHyphen = false,
-            Encoding encoding = null) => ComputeSha384((encoding ?? Encoding).GetBytes(str), isUpper, isIncludeHyphen);
+        public static string GetSha384Hash(string str, bool isUpper = true, bool isIncludeHyphen = false,
+            Encoding encoding = null) => GetSha384Hash((encoding ?? Encoding).GetBytes(str), isUpper, isIncludeHyphen);
 
         /// <summary>
-        /// Get SHA1 hash string
+        /// Get SHA384 hash string
         /// </summary>
         /// <param name="bytes"></param>
         /// <param name="isUpper"></param>
         /// <param name="isIncludeHyphen"></param>
         /// <returns></returns>
-        public static string ComputeSha384(byte[] bytes, bool isUpper = true, bool isIncludeHyphen = false)
+        public static string GetSha384Hash(byte[] bytes, bool isUpper = true, bool isIncludeHyphen = false)
         {
             using var sha384 = SHA384.Create();
             if (sha384 is null) throw new NotSupportedException(nameof(sha384));
@@ -114,24 +114,24 @@ namespace Zaabee.Cryptographic
         #region SHA512
 
         /// <summary>
-        /// Get SHA1 hash string
+        /// Get SHA512 hash string
         /// </summary>
         /// <param name="str"></param>
         /// <param name="isUpper"></param>
         /// <param name="isIncludeHyphen"></param>
         /// <param name="encoding"></param>
         /// <returns></returns>
-        public static string ComputeSha512(string str, bool isUpper = true, bool isIncludeHyphen = false,
-            Encoding encoding = null) => ComputeSha512((encoding ?? Encoding).GetBytes(str), isUpper, isIncludeHyphen);
+        public static string GetSha512Hash(string str, bool isUpper = true, bool isIncludeHyphen = false,
+            Encoding encoding = null) => GetSha512Hash((encoding ?? Encoding).GetBytes(str), isUpper, isIncludeHyphen);
 
         /// <summary>
-        /// Get SHA1 hash string
+        /// Get SHA512 hash string
         /// </summary>
         /// <param name="bytes"></param>
         /// <param name="isUpper"></param>
         /// <param name="isIncludeHyphen"></param>
         /// <returns></returns>
-        public static string ComputeSha512(byte[] bytes, bool isUpper = true, bool isIncludeHyphen = false)
+        public static string GetSha512Hash(byte[] bytes, bool isUpper = true, bool isIncludeHyphen = false)
         {
             using var sha512 = SHA512.Create();
             if (sha512 is null) throw new NotSupportedException(nameof(sha512));

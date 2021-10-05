@@ -17,9 +17,9 @@ namespace Zaabee.Cryptographic
         /// <param name="encoding"></param>
         /// <param name="resultLength"></param>
         /// <returns></returns>
-        public static string ComputeMd5(string str, bool isUpper = true, bool isIncludeHyphen = false,
+        public static string GetMd5Hash(string str, bool isUpper = true, bool isIncludeHyphen = false,
             Encoding encoding = null, int resultLength = 32) =>
-            ComputeMd5((encoding ?? Encoding).GetBytes(str), isUpper, isIncludeHyphen, resultLength);
+            GetMd5Hash((encoding ?? Encoding).GetBytes(str), isUpper, isIncludeHyphen, resultLength);
 
         /// <summary>
         /// Get MD5 hash string
@@ -33,7 +33,7 @@ namespace Zaabee.Cryptographic
         /// <exception cref="ArgumentException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="NotSupportedException"></exception>
-        public static string ComputeMd5(byte[] bytes, bool isUpper = true, bool isIncludeHyphen = false,
+        public static string GetMd5Hash(byte[] bytes, bool isUpper = true, bool isIncludeHyphen = false,
             int resultLength = 32)
         {
             if (resultLength is <= 0 or > 32)
