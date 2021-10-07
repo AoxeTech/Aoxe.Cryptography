@@ -12,47 +12,49 @@ namespace Zaabee.Cryptographic
         /// Get MD5 hash string
         /// </summary>
         /// <param name="str"></param>
-        /// <param name="isUpper"></param>
-        /// <param name="isIncludeHyphen"></param>
         /// <param name="encoding"></param>
-        /// <param name="resultLength"></param>
         /// <returns></returns>
-        public static string GetMd5Hash(string str, bool isUpper = true, bool isIncludeHyphen = false,
-            Encoding encoding = null, int resultLength = 32) =>
-            GetMd5Hash((encoding ?? Encoding).GetBytes(str), isUpper, isIncludeHyphen, resultLength);
+        public static string GetMd5HashString(string str, Encoding encoding = null) =>
+            GetMd5HashString((encoding ?? Encoding).GetBytes(str));
 
         /// <summary>
         /// Get MD5 hash string
         /// </summary>
         /// <param name="bytes"></param>
-        /// <param name="isUpper"></param>
-        /// <param name="isIncludeHyphen"></param>
-        /// <param name="resultLength"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         /// <exception cref="ArgumentException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="NotSupportedException"></exception>
-        public static string GetMd5Hash(byte[] bytes, bool isUpper = true, bool isIncludeHyphen = false,
-            int resultLength = 32)
+        public static string GetMd5HashString(byte[] bytes)
         {
-            if (resultLength is <= 0 or > 32)
-                throw new ArgumentOutOfRangeException(nameof(resultLength),
-                    "Result length can only be greater than 0 and less than or equal to 32.");
-            if (resultLength % 2 != 0)
-                throw new ArgumentException("Result length can only be an even number.", nameof(resultLength));
-            if (bytes is null)
-                throw new ArgumentNullException(nameof(bytes));
+            var hashBytes = GetMd5HashBytes(bytes);
+            return BitConverter.ToString(hashBytes);
+        }
 
-            var length = resultLength / 2;
-            var startIndex = (16 - length) / 2;
+        /// <summary>
+        /// Get MD5 hash bytes
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="encoding"></param>
+        /// <returns></returns>
+        public static byte[] GetMd5HashBytes(string str, Encoding encoding = null) =>
+            GetMd5HashBytes((encoding ?? Encoding).GetBytes(str));
+
+        /// <summary>
+        /// Get MD5 hash bytes
+        /// </summary>
+        /// <param name="bytes"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="NotSupportedException"></exception>
+        public static byte[] GetMd5HashBytes(byte[] bytes)
+        {
             using var md5 = MD5.Create();
             if (md5 is null) throw new NotSupportedException(nameof(md5));
-            var hashBytes = md5.ComputeHash(bytes);
-            var str = BitConverter.ToString(hashBytes, startIndex, length);
-            str = isUpper ? str.ToUpper() : str.ToLower();
-            str = isIncludeHyphen ? str : str.Replace("-", "");
-            return str;
+            return md5.ComputeHash(bytes);
         }
     }
 }
