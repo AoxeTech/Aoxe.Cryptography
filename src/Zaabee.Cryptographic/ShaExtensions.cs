@@ -2,7 +2,7 @@ using System.Text;
 
 namespace Zaabee.Cryptographic
 {
-    public static class ShaExtension
+    public static class ShaExtensions
     {
         public static string ToSha1(this string str, bool isUpper = true, bool isIncludeHyphen = false,
             Encoding encoding = null) =>

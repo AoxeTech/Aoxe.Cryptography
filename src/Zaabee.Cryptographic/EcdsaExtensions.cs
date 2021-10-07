@@ -3,7 +3,7 @@ using System.Text;
 
 namespace Zaabee.Cryptographic
 {
-    public static class EcdsaExtension
+    public static class EcdsaExtensions
     {
         #region Data
         

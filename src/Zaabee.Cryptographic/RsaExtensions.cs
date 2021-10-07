@@ -3,7 +3,7 @@ using System.Text;
 
 namespace Zaabee.Cryptographic
 {
-    public static class RsaExtension
+    public static class RsaExtensions
     {
         public static byte[] EncryptByRsa(this string original, RSAParameters publicKey,
             RSAEncryptionPadding rsaEncryptionPadding = null, Encoding encoding = null) =>

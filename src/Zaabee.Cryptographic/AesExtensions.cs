@@ -3,7 +3,7 @@ using System.Text;
 
 namespace Zaabee.Cryptographic
 {
-    public static class AesExtension
+    public static class AesExtensions
     {
         public static byte[] EncryptByAes(this string original, string key, string vector = null,
             CipherMode cipherMode = CipherMode.CBC, PaddingMode paddingMode = PaddingMode.PKCS7,

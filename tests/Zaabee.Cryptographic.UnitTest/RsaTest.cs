@@ -22,8 +22,13 @@ namespace Zaabee.Cryptographic.UnitTest
         {
             var (privateKey, publicKey) = RsaHelper.GenerateParameters();
             var originalBytes = RsaHelper.Encoding.GetBytes(original);
+#if NET48
+            var encryptBytes = originalBytes.EncryptByRsa(publicKey, RSAEncryptionPadding.OaepSHA1);
+            var decryptBytes = encryptBytes.DecryptByRsa(privateKey, RSAEncryptionPadding.OaepSHA1);
+#else
             var encryptBytes = originalBytes.EncryptByRsa(publicKey);
             var decryptBytes = encryptBytes.DecryptByRsa(privateKey);
+#endif
             Assert.True(Equal(originalBytes, decryptBytes));
         }
 
@@ -32,11 +37,16 @@ namespace Zaabee.Cryptographic.UnitTest
         public void StringTest(string original)
         {
             var (privateKey, publicKey) = RsaHelper.GenerateParameters();
+#if NET48
+            var encryptBytes = original.EncryptByRsa(publicKey, RSAEncryptionPadding.OaepSHA1);
+            var decrypt = encryptBytes.DecryptToStringByRsa(privateKey, RSAEncryptionPadding.OaepSHA1);
+#else
             var encryptBytes = original.EncryptByRsa(publicKey);
             var decrypt = encryptBytes.DecryptToStringByRsa(privateKey);
+#endif
             Assert.Equal(original, decrypt);
         }
-
+ 
         private static bool Equal(byte[] first, byte[] second)
         {
             if (first is null || second is null) return false;

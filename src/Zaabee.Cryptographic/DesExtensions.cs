@@ -3,7 +3,7 @@ using System.Text;
 
 namespace Zaabee.Cryptographic
 {
-    public static class DesExtension
+    public static class DesExtensions
     {
         public static byte[] EncryptByDes(this string original, string key, string vector = null,
             CipherMode cipherMode = CipherMode.CBC, PaddingMode paddingMode = PaddingMode.PKCS7,

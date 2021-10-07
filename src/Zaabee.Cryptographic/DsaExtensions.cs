@@ -3,7 +3,7 @@ using System.Text;
 
 namespace Zaabee.Cryptographic
 {
-    public static class DsaExtension
+    public static class DsaExtensions
     {
         public static byte[] CreateSignatureByDsa(this string original, DSAParameters privateKey,
             Encoding encoding = null) =>

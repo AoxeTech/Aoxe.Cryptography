@@ -16,7 +16,12 @@ namespace Zaabee.Cryptographic
             using var dsa = DSA.Create();
             if (dsa is null) throw new NotSupportedException(nameof(dsa));
             dsa.ImportParameters(privateKey);
+#if NET48
+            using var sha1 = SHA1.Create();
+            return dsa.CreateSignature(sha1.ComputeHash(original));
+#else
             return dsa.CreateSignature(original);
+#endif
         }
 
         public static bool VerifySignature(string original, byte[] signature, DSAParameters publicKey,
@@ -28,7 +33,12 @@ namespace Zaabee.Cryptographic
             using var dsa = DSA.Create();
             if (dsa is null) throw new NotSupportedException(nameof(dsa));
             dsa.ImportParameters(publicKey);
+#if NET48
+            using var sha1 = SHA1.Create();
+            return dsa.VerifySignature(sha1.ComputeHash(original), signature);
+#else
             return dsa.VerifySignature(original, signature);
+#endif
         }
 
         public static (DSAParameters privateKey, DSAParameters publicKey) GenerateParameters()
