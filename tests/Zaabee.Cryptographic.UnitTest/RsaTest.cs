@@ -39,7 +39,7 @@ namespace Zaabee.Cryptographic.UnitTest
 
         [Theory]
         [InlineData("Here is some data to encrypt!")]
-        public void BytesSha1Test(string original)
+        public void BytesOaepSha1Test(string original)
         {
             var (privateKey, publicKey) = RsaHelper.GenerateParameters();
             var originalBytes = RsaHelper.Encoding.GetBytes(original);
@@ -50,7 +50,7 @@ namespace Zaabee.Cryptographic.UnitTest
 
         [Theory]
         [InlineData("Here is some data to encrypt!")]
-        public void StringSha1Test(string original)
+        public void StringOaepSha1Test(string original)
         {
             var (privateKey, publicKey) = RsaHelper.GenerateParameters();
             var encryptBytes = original.EncryptByRsa(publicKey, RSAEncryptionPadding.OaepSHA1);
@@ -62,7 +62,7 @@ namespace Zaabee.Cryptographic.UnitTest
 
         [Theory]
         [InlineData("Here is some data to encrypt!")]
-        public void BytesSha256Test(string original)
+        public void BytesOaepSha256Test(string original)
         {
             var (privateKey, publicKey) = RsaHelper.GenerateParameters();
             var originalBytes = RsaHelper.Encoding.GetBytes(original);
@@ -73,7 +73,7 @@ namespace Zaabee.Cryptographic.UnitTest
 
         [Theory]
         [InlineData("Here is some data to encrypt!")]
-        public void StringSha256Test(string original)
+        public void StringOaepSha256Test(string original)
         {
             var (privateKey, publicKey) = RsaHelper.GenerateParameters();
             var encryptBytes = original.EncryptByRsa(publicKey, RSAEncryptionPadding.OaepSHA256);
@@ -83,7 +83,7 @@ namespace Zaabee.Cryptographic.UnitTest
 
         [Theory]
         [InlineData("Here is some data to encrypt!")]
-        public void BytesSha384Test(string original)
+        public void BytesOaepSha384Test(string original)
         {
             var (privateKey, publicKey) = RsaHelper.GenerateParameters();
             var originalBytes = RsaHelper.Encoding.GetBytes(original);
@@ -94,7 +94,7 @@ namespace Zaabee.Cryptographic.UnitTest
 
         [Theory]
         [InlineData("Here is some data to encrypt!")]
-        public void StringSha384Test(string original)
+        public void StringOaepSha384Test(string original)
         {
             var (privateKey, publicKey) = RsaHelper.GenerateParameters();
             var encryptBytes = original.EncryptByRsa(publicKey, RSAEncryptionPadding.OaepSHA384);
@@ -104,7 +104,7 @@ namespace Zaabee.Cryptographic.UnitTest
 
         [Theory]
         [InlineData("Here is some data to encrypt!")]
-        public void BytesSha512Test(string original)
+        public void BytesOaepSha512Test(string original)
         {
             var (privateKey, publicKey) = RsaHelper.GenerateParameters();
             var originalBytes = RsaHelper.Encoding.GetBytes(original);
@@ -115,7 +115,7 @@ namespace Zaabee.Cryptographic.UnitTest
 
         [Theory]
         [InlineData("Here is some data to encrypt!")]
-        public void StringSha512Test(string original)
+        public void StringOaepSha512Test(string original)
         {
             var (privateKey, publicKey) = RsaHelper.GenerateParameters();
             var encryptBytes = original.EncryptByRsa(publicKey, RSAEncryptionPadding.OaepSHA512);
