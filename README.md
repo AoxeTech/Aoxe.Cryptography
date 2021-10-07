@@ -10,14 +10,8 @@ The result length must be an even number and greater than 0 and less than or equ
 
 ```CSharp
 var apple = "apple";
-//1F3870BE274F6C49B3E31A0C6728957F
-var result0 = apple.ToMd5();
-//1F-38-70-BE-27-4F-6C-49-B3-E3-1A-0C-67-28-95-7F
-var result1 = apple.ToMd5(isUpper:true, isIncludeHyphen:true);
-//274F6C49B3E31A0C
-var result0 = apple.ToMd5(resultLength:16);
-//27-4f-6c-49-b3-e3-1a-0c
-var result1 = apple.ToMd5(isUpper:false, isIncludeHyphen:true, resultLength:16);
+var md5String = apple.ToMd5String();//1F-38-70-BE-27-4F-6C-49-B3-E3-1A-0C-67-28-95-7F
+var md5Bytes = apple.ToMd5Bytes();
 ```
 
 ### SHA
@@ -26,14 +20,18 @@ Also the extension methods have params which named "isUpper" and "isIncludeHyphe
 
 ```CSharp
 var apple = "apple";
-//D0BE2DC421BE4FCD0172E5AFCEEA3970E2F3D940
-var sha1 = apple.ToSha1();
-//3A7BD3E2360A3D29EEA436FCFB7E44C735D117C42D1C1835420B6B9942DD4F1B
-var sha256 = apple.ToSha256();
-//3D8786FCB588C93348756C6429717DC6C374A14F7029362281A3B21DC10250DDF0D0578052749822EB08BC0DC1E68B0F
-var sha384 = apple.ToSha384();
-//844D8779103B94C18F4AA4CC0C3B4474058580A991FBA85D3CA698A0BC9E52C5940FEB7A65A3A290E17E6B23EE943ECC4F73E7490327245B4FE5D5EFB590FEB2
-var sha512 = apple.ToSha512();
+//D0-BE-2D-C4-21-BE-4F-CD-01-72-E5-AF-CE-EA-39-70-E2-F3-D9-40
+var sha1String = apple.ToSha1String();
+var sha1Bytes = apple.ToSha1Bytes();
+//3A-7B-D3-E2-36-0A-3D-29-EE-A4-36-FC-FB-7E-44-C7-35-D1-17-C4-2D-1C-18-35-42-0B-6B-99-42-DD-4F-1B
+var sha256String = apple.ToSha256String();
+var sha256Bytes = apple.ToSha256Bytes();
+//3D-87-86-FC-B5-88-C9-33-48-75-6C-64-29-71-7D-C6-C3-74-A1-4F-70-29-36-22-81-A3-B2-1D-C1-02-50-DD-F0-D0-57-80-52-74-98-22-EB-08-BC-0D-C1-E6-8B-0F
+var sha384String = apple.ToSha384String();
+var sha384Bytes = apple.ToSha384Bytes();
+//84-4D-87-79-10-3B-94-C1-8F-4A-A4-CC-0C-3B-44-74-05-85-80-A9-91-FB-A8-5D-3C-A6-98-A0-BC-9E-52-C5-94-0F-EB-7A-65-A3-A2-90-E1-7E-6B-23-EE-94-3E-CC-4F-73-E7-49-03-27-24-5B-4F-E5-D5-EF-B5-90-FE-B2
+var sha512String = apple.ToSha512String();
+var sha512Bytes = apple.ToSha512Bytes();
 ```
 
 ### AES
