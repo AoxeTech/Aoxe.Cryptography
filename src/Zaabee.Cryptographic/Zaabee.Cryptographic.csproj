@@ -12,6 +12,7 @@
         <PackageTags>Zaabee;Cryptographic;AES;MD5;SHA;RSA;ECDSA;DSA;DES;TripleDES</PackageTags>
         <Description>The wrappers and extension methods of AES/MD5/SHA/RSA/ECDSA/DSA.</Description>
         <LangVersion>latest</LangVersion>
+        <Nullable>enable</Nullable>
     </PropertyGroup>
   
 </Project>
