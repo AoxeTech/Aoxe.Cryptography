@@ -7,6 +7,28 @@ public static class DesHelper
 {
     public static Encoding Encoding { get; set; } = Encoding.UTF8;
 
+    public static byte[] GenerateKey()
+    {
+        using var des = DES.Create();
+        des.GenerateKey();
+        return des.Key;
+    }
+
+    public static byte[] GenerateVector()
+    {
+        using var des = DES.Create();
+        des.GenerateIV();
+        return des.IV;
+    }
+
+    public static (byte[] key, byte[] vector) GenerateKeyAndVector()
+    {
+        using var des = DES.Create();
+        des.GenerateKey();
+        des.GenerateIV();
+        return (des.Key, des.IV);
+    }
+
     /// <summary>
     /// DES Encrypt
     /// </summary>
@@ -18,14 +40,11 @@ public static class DesHelper
     /// <param name="encoding"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
-    public static byte[] Encrypt(string original, string key, string vector = null,
-        CipherMode cipherMode = CipherMode.CBC, PaddingMode paddingMode = PaddingMode.PKCS7,
-        Encoding encoding = null)
+    public static byte[] Encrypt(string original, string key, string vector, CipherMode cipherMode = CipherMode.CBC,
+        PaddingMode paddingMode = PaddingMode.PKCS7, Encoding? encoding = null)
     {
-        if (original is null) throw new ArgumentNullException(nameof(original));
-        if (key is null) throw new ArgumentNullException(nameof(key));
-        var bKey = (encoding??Encoding).GetBytes(key);
-        var bVector = vector is null ? null : (encoding??Encoding).GetBytes(vector);
+        var bKey = (encoding ?? Encoding).GetBytes(key);
+        var bVector = (encoding ?? Encoding).GetBytes(vector);
         return Encrypt(original, bKey, bVector, cipherMode, paddingMode);
     }
 
@@ -40,19 +59,16 @@ public static class DesHelper
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
     /// <exception cref="NotSupportedException"></exception>
-    public static byte[] Encrypt(string original, byte[] key, byte[] vector = null,
-        CipherMode cipherMode = CipherMode.CBC, PaddingMode paddingMode = PaddingMode.PKCS7)
+    public static byte[] Encrypt(string original, byte[] key, byte[] vector, CipherMode cipherMode = CipherMode.CBC,
+        PaddingMode paddingMode = PaddingMode.PKCS7)
     {
-        if (original is null) throw new ArgumentNullException(nameof(original));
-        if (key is null) throw new ArgumentNullException(nameof(key));
         Array.Resize(ref key, 8);
-        if (vector is not null) Array.Resize(ref vector, 8);
+        Array.Resize(ref vector, 8);
         using (var des = DES.Create())
         {
-            if (des is null) throw new NotSupportedException(nameof(des));
             des.Mode = cipherMode;
             des.Padding = paddingMode;
-            using (var encryptor = des.CreateEncryptor(key, vector ?? des.IV))
+            using (var encryptor = des.CreateEncryptor(key, vector))
             using (var msEncrypt = new MemoryStream())
             using (var csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
             {
@@ -74,14 +90,11 @@ public static class DesHelper
     /// <param name="encoding"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
-    public static string Decrypt(byte[] encrypted, string key, string vector = null,
-        CipherMode cipherMode = CipherMode.CBC, PaddingMode paddingMode = PaddingMode.PKCS7,
-        Encoding encoding = null)
+    public static string Decrypt(byte[] encrypted, string key, string vector, CipherMode cipherMode = CipherMode.CBC,
+        PaddingMode paddingMode = PaddingMode.PKCS7, Encoding? encoding = null)
     {
-        if (encrypted is null) throw new ArgumentNullException(nameof(encrypted));
-        if (key is null) throw new ArgumentNullException(nameof(key));
-        var bKey = (encoding??Encoding).GetBytes(key);
-        var bVector = vector is null ? null : (encoding??Encoding).GetBytes(vector);
+        var bKey = (encoding ?? Encoding).GetBytes(key);
+        var bVector = (encoding ?? Encoding).GetBytes(vector);
         return Decrypt(encrypted, bKey, bVector, cipherMode, paddingMode);
     }
 
@@ -96,19 +109,16 @@ public static class DesHelper
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
     /// <exception cref="NotSupportedException"></exception>
-    public static string Decrypt(byte[] encrypted, byte[] key, byte[] vector = null,
-        CipherMode cipherMode = CipherMode.CBC, PaddingMode paddingMode = PaddingMode.PKCS7)
+    public static string Decrypt(byte[] encrypted, byte[] key, byte[] vector, CipherMode cipherMode = CipherMode.CBC,
+        PaddingMode paddingMode = PaddingMode.PKCS7)
     {
-        if (encrypted is null) throw new ArgumentNullException(nameof(encrypted));
-        if (key is null) throw new ArgumentNullException(nameof(key));
         Array.Resize(ref key, 8);
-        if (vector is not null) Array.Resize(ref vector, 8);
+        Array.Resize(ref vector, 8);
         using (var des = DES.Create())
         {
-            if (des is null) throw new NotSupportedException(nameof(des));
             des.Mode = cipherMode;
             des.Padding = paddingMode;
-            using (var decryptor = des.CreateDecryptor(key, vector ?? des.IV))
+            using (var decryptor = des.CreateDecryptor(key, vector))
             using (var msDecrypt = new MemoryStream(encrypted))
             using (var csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
             using (var srDecrypt = new StreamReader(csDecrypt))

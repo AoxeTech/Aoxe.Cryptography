@@ -3,53 +3,57 @@ namespace Zaabee.Cryptographic.UnitTest;
 public class AesTest
 {
     [Fact]
-    public void Test()
+    public void EncodingTest()
     {
         AesHelper.Encoding = Encoding.UTF8;
         Assert.Equal(AesHelper.Encoding, Encoding.UTF8);
     }
 
-    [Theory]
-    [InlineData("Here is some data to encrypt!", "Here is the aes key.", "Here is the aes vector.", CipherMode.CBC)]
-    [InlineData("Here is some data to encrypt!", "Here is the aes key.", "Here is the aes vector.", CipherMode.ECB)]
-    public void AesStringTest(string original, string key, string vector, CipherMode cipherMode)
+    [Fact]
+    public void GenerateKeyTest()
     {
-        var encrypt = original.EncryptByAes(key, vector, cipherMode);
-        var decrypt = encrypt.DecryptByAes(key, vector, cipherMode);
+        var key0 = AesHelper.GenerateKey();
+        var key1 = AesHelper.GenerateKey();
+        Assert.NotEqual(key0, key1);
+    }
+
+    [Fact]
+    public void GenerateVectorTest()
+    {
+        var vector0 = AesHelper.GenerateVector();
+        var vector1 = AesHelper.GenerateVector();
+        Assert.NotEqual(vector0, vector1);
+    }
+
+    [Fact]
+    public void GenerateKeyAndVectorTest()
+    {
+        var (key0, vector0) = AesHelper.GenerateKeyAndVector();
+        var (key1, vector1) = AesHelper.GenerateKeyAndVector();
+        Assert.NotEqual(key0, key1);
+        Assert.NotEqual(vector0, vector1);
+    }
+
+    [Theory]
+    [InlineData("Here is some data to encrypt!", "Here is the key.", "Here is the vector.")]
+    public void AesStringTest(string original, string key, string vector)
+    {
+        var encrypt = original.EncryptByAes(key, vector);
+        var decrypt = encrypt.DecryptByAes(key, vector);
         Assert.Equal(original, decrypt);
     }
 
     [Theory]
-    [InlineData("Here is some data to encrypt!", "Here is the aes key.", "Here is the aes vector.", CipherMode.CBC)]
-    [InlineData("Here is some data to encrypt!", "Here is the aes key.", "Here is the aes vector.", CipherMode.ECB)]
-    public void AesBytesTest(string original, string key, string vector, CipherMode cipherMode)
+    [InlineData("Here is some data to encrypt!", "Here is the key.", "Here is the vector.")]
+    [InlineData("Here is some data to encrypt!", null, "Here is the vector.")]
+    [InlineData("Here is some data to encrypt!", "Here is the key.", null)]
+    [InlineData("Here is some data to encrypt!", null, null)]
+    public void AesBytesTest(string original, string? key, string? vector)
     {
-        var bKey = AesHelper.Encoding.GetBytes(key);
-        var bVector = AesHelper.Encoding.GetBytes(vector);
-        var encrypt = original.EncryptByAes(bKey, bVector, cipherMode);
-        var decrypt = encrypt.DecryptByAes(bKey, bVector, cipherMode);
+        var bKey = key is null ? AesHelper.GenerateKey() : AesHelper.Encoding.GetBytes(key);
+        var bVector = vector is null ? AesHelper.GenerateVector() : AesHelper.Encoding.GetBytes(vector);
+        var encrypt = original.EncryptByAes(bKey, bVector);
+        var decrypt = encrypt.DecryptByAes(bKey, bVector);
         Assert.Equal(original, decrypt);
-    }
-
-    [Theory]
-    [InlineData("Here is some data to encrypt!", "Here is the aes key.", "01234567890123456789", new byte[] { })]
-    public void AesStringNullTest(string original, string key, string vector, byte[] encrypted)
-    {
-        Assert.Throws<ArgumentNullException>(() => AesHelper.Encrypt(null, key, vector));
-        Assert.Throws<ArgumentNullException>(() => AesHelper.Encrypt(original, null, vector));
-
-        Assert.Throws<ArgumentNullException>(() => AesHelper.Decrypt(null, key, vector));
-        Assert.Throws<ArgumentNullException>(() => AesHelper.Decrypt(encrypted, null, vector));
-    }
-
-    [Theory]
-    [InlineData("Here is some data to encrypt!", new byte[] { }, new byte[] { }, new byte[] { })]
-    public void AesByteNullTest(string original, byte[] key, byte[] vector, byte[] encrypted)
-    {
-        Assert.Throws<ArgumentNullException>(() => AesHelper.Encrypt(null, key, vector));
-        Assert.Throws<ArgumentNullException>(() => AesHelper.Encrypt(original, null, vector));
-
-        Assert.Throws<ArgumentNullException>(() => AesHelper.Decrypt(null, key, vector));
-        Assert.Throws<ArgumentNullException>(() => AesHelper.Decrypt(encrypted, null, vector));
     }
 }

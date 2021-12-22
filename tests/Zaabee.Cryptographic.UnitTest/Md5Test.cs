@@ -14,6 +14,7 @@ public class Md5Test
     public void ComputeHashStringTest(string str, string result)
     {
         Assert.Equal(str.ToMd5String(), result);
+        Assert.Equal(Md5Helper.Encoding.GetBytes(str).ToMd5String(), result);
     }
 
     [Theory]
@@ -21,19 +22,7 @@ public class Md5Test
     public void ComputeHashBytesTest(string str, string result)
     {
         Assert.True(str.ToMd5Bytes().SequenceEqual(HexToBytes(result)));
-    }
-
-    [Fact]
-    public void NullTest()
-    {
-        string str = null;
-        byte[] bytes = null;
-            
-        Assert.Throws<ArgumentNullException>(() => str.ToMd5String());
-        Assert.Throws<ArgumentNullException>(() => bytes.ToMd5String());
-            
-        Assert.Throws<ArgumentNullException>(() => str.ToMd5Bytes());
-        Assert.Throws<ArgumentNullException>(() => bytes.ToMd5Bytes());
+        Assert.True(Md5Helper.Encoding.GetBytes(str).ToMd5Bytes().SequenceEqual(HexToBytes(result)));
     }
 
     private static IEnumerable<byte> HexToBytes(string str)

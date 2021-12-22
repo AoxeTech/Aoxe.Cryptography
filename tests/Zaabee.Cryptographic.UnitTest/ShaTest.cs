@@ -14,6 +14,7 @@ public class ShaTest
     public void Sha1StringTest(string str, string result)
     {
         Assert.Equal(str.ToSha1String(), result);
+        Assert.Equal(ShaHelper.Encoding.GetBytes(str).ToSha1String(), result);
     }
 
     [Theory]
@@ -21,6 +22,7 @@ public class ShaTest
     public void Sha1BytesTest(string str, string result)
     {
         Assert.True(str.ToSha1Bytes().SequenceEqual(HexToBytes(result)));
+        Assert.True(ShaHelper.Encoding.GetBytes(str).ToSha1Bytes().SequenceEqual(HexToBytes(result)));
     }
 
     [Theory]
@@ -29,6 +31,7 @@ public class ShaTest
     public void Sha256StringTest(string str, string result)
     {
         Assert.Equal(str.ToSha256String(), result);
+        Assert.Equal(ShaHelper.Encoding.GetBytes(str).ToSha256String(), result);
     }
 
     [Theory]
@@ -37,6 +40,7 @@ public class ShaTest
     public void Sha256BytesTest(string str, string result)
     {
         Assert.True(str.ToSha256Bytes().SequenceEqual(HexToBytes(result)));
+        Assert.True(ShaHelper.Encoding.GetBytes(str).ToSha256Bytes().SequenceEqual(HexToBytes(result)));
     }
 
     [Theory]
@@ -45,6 +49,7 @@ public class ShaTest
     public void Sha384StringTest(string str, string result)
     {
         Assert.Equal(str.ToSha384String(), result);
+        Assert.Equal(ShaHelper.Encoding.GetBytes(str).ToSha384String(), result);
     }
 
     [Theory]
@@ -53,6 +58,7 @@ public class ShaTest
     public void Sha384BytesTest(string str, string result)
     {
         Assert.True(str.ToSha384Bytes().SequenceEqual(HexToBytes(result)));
+        Assert.True(ShaHelper.Encoding.GetBytes(str).ToSha384Bytes().SequenceEqual(HexToBytes(result)));
     }
 
     [Theory]
@@ -61,6 +67,7 @@ public class ShaTest
     public void Sha512StringTest(string str, string result)
     {
         Assert.Equal(str.ToSha512String(), result);
+        Assert.Equal(ShaHelper.Encoding.GetBytes(str).ToSha512String(), result);
     }
 
     [Theory]
@@ -69,31 +76,7 @@ public class ShaTest
     public void Sha512BytesTest(string str, string result)
     {
         Assert.True(str.ToSha512Bytes().SequenceEqual(HexToBytes(result)));
-    }
-
-    [Fact]
-    public void ShaNullTest()
-    {
-        string str = null;
-        byte[] bytes = null;
-
-        Assert.Throws<ArgumentNullException>(() => str.ToSha1String());
-        Assert.Throws<ArgumentNullException>(() => bytes.ToSha1String());
-        Assert.Throws<ArgumentNullException>(() => str.ToSha256String());
-        Assert.Throws<ArgumentNullException>(() => bytes.ToSha256String());
-        Assert.Throws<ArgumentNullException>(() => str.ToSha384String());
-        Assert.Throws<ArgumentNullException>(() => bytes.ToSha384String());
-        Assert.Throws<ArgumentNullException>(() => str.ToSha512String());
-        Assert.Throws<ArgumentNullException>(() => bytes.ToSha512String());
-
-        Assert.Throws<ArgumentNullException>(() => str.ToSha1Bytes());
-        Assert.Throws<ArgumentNullException>(() => bytes.ToSha1Bytes());
-        Assert.Throws<ArgumentNullException>(() => str.ToSha256Bytes());
-        Assert.Throws<ArgumentNullException>(() => bytes.ToSha256Bytes());
-        Assert.Throws<ArgumentNullException>(() => str.ToSha384Bytes());
-        Assert.Throws<ArgumentNullException>(() => bytes.ToSha384Bytes());
-        Assert.Throws<ArgumentNullException>(() => str.ToSha512Bytes());
-        Assert.Throws<ArgumentNullException>(() => bytes.ToSha512Bytes());
+        Assert.True(ShaHelper.Encoding.GetBytes(str).ToSha512Bytes().SequenceEqual(HexToBytes(result)));
     }
 
     private static IEnumerable<byte> HexToBytes(string str)
