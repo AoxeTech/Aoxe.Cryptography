@@ -6,17 +6,13 @@ The wraps and extension methods of AES/MD5/SHA/RSA/DSA/ECDSA/DES/TripleDES
 
 ### MD5
 
-The result length must be an even number and greater than 0 and less than or equal to 32.
-
 ```CSharp
 var apple = "apple";
-var md5String = apple.ToMd5String();//1F-38-70-BE-27-4F-6C-49-B3-E3-1A-0C-67-28-95-7F
+var md5String = apple.ToMd5String();
 var md5Bytes = apple.ToMd5Bytes();
 ```
 
 ### SHA
-
-Also the extension methods have params which named "isUpper" and "isIncludeHyphen" like the Md5 extension methods.
 
 ```CSharp
 var apple = "apple";
@@ -39,15 +35,12 @@ var sha512Bytes = apple.ToSha512Bytes();
 ```CSharp
 var original = "Here is some data to encrypt!";
 //The key will be resized to 32 size when encrypting or decrypting.
-var key = "0123456789";
+var key = "Here is the key.";
 //The vector will be resized to 16 size when encrypting or decrypting.
-var vector = "abcdefg";
-//Default cipher mode is CBC
+var vector = "Here is the vector.";
+//Default cipher mode is CBC and padding mode is PKCS7.
 var encrypt = original.EncryptByAes(key, vector);
 var decrypt = encrypt.DecryptByAes(key, vector);
-//Or you can use ECB
-var ecbEncrypt = original.EncryptByAes(key, cipherMode: CipherMode.ECB);
-var ecbDecrypt = encrypt.DecryptByAes(key, cipherMode: CipherMode.ECB);
 ```
 
 ### DES
@@ -55,15 +48,12 @@ var ecbDecrypt = encrypt.DecryptByAes(key, cipherMode: CipherMode.ECB);
 ```CSharp
 var original = "Here is some data to encrypt!";
 //The key will be resized to 8 size when encrypting or decrypting.
-var key = "0123456789";
+var key = "Here is the key.";
 //The vector will be resized to 8 size when encrypting or decrypting.
 var vector = "abcdefg";
-//Default cipher mode is CBC
+//Default cipher mode is CBC and padding mode is PKCS7.
 var encrypt = original.EncryptByDes(key, vector);
 var decrypt = encrypt.DecryptByDes(key, vector);
-//Or you can use ECB
-var ecbEncrypt = original.EncryptByDes(key, cipherMode: CipherMode.ECB);
-var ecbDecrypt = encrypt.DecryptByDes(key, cipherMode: CipherMode.ECB);
 ```
 
 ### TripleDES
@@ -71,15 +61,12 @@ var ecbDecrypt = encrypt.DecryptByDes(key, cipherMode: CipherMode.ECB);
 ```CSharp
 var original = "Here is some data to encrypt!";
 //The key will be resized to 24 size when encrypting or decrypting.
-var key = "0123456789";
+var key = "Here is the key.";
 //The vector will be resized to 8 size when encrypting or decrypting.
-var vector = "abcdefg";
-//Default cipher mode is CBC
+var vector = "Here is the vector.";
+//Default cipher mode is CBC and padding mode is PKCS7.
 var encrypt = original.EncryptByTripleDes(key, vector);
 var decrypt = encrypt.DecryptByTripleDes(key, vector);
-//Or you can use ECB
-var ecbEncrypt = original.EncryptByTripleDes(key, cipherMode: CipherMode.ECB);
-var ecbDecrypt = encrypt.DecryptByTripleDes(key, cipherMode: CipherMode.ECB);
 ```
 
 ### RSA
