@@ -3,7 +3,7 @@ namespace Zaabee.Cryptographic;
 public static class EcdsaExtensions
 {
     #region Data
-        
+
     public static byte[] SignDataByEcdsa(this string original, ECParameters privateKey,
         HashAlgorithmName? hashAlgorithmName = null, Encoding? encoding = null) =>
         EcdsaHelper.SignData(original, privateKey, hashAlgorithmName, encoding);
