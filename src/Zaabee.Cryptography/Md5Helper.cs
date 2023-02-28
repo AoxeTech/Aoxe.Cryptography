@@ -1,4 +1,4 @@
-﻿namespace Zaabee.Cryptographic;
+﻿namespace Zaabee.Cryptography;
 
 public static class Md5Helper
 {

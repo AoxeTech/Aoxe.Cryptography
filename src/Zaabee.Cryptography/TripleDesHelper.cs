@@ -1,4 +1,4 @@
-namespace Zaabee.Cryptographic;
+namespace Zaabee.Cryptography;
 
 /// <summary>
 /// Triple DES Helper

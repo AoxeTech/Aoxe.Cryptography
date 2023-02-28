@@ -1,4 +1,4 @@
-namespace Zaabee.Cryptographic.UnitTest;
+namespace Zaabee.Cryptography.UnitTest;
 
 public class RsaTest
 {

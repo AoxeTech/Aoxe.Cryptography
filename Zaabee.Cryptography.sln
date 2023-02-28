@@ -7,9 +7,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5DCF8E77-957
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{268D4E02-CE5F-4205-97D2-B18EF95A6B44}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaabee.Cryptographic", "src\Zaabee.Cryptographic\Zaabee.Cryptographic.csproj", "{DC23C5A5-43A9-4C8D-BEA1-9C08EF061A51}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaabee.Cryptography", "src\Zaabee.Cryptography\Zaabee.Cryptography.csproj", "{DC23C5A5-43A9-4C8D-BEA1-9C08EF061A51}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaabee.Cryptographic.UnitTest", "tests\Zaabee.Cryptographic.UnitTest\Zaabee.Cryptographic.UnitTest.csproj", "{F9412899-E4F1-448E-A80A-A10B719CD7B4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaabee.Cryptography.UnitTest", "tests\Zaabee.Cryptography.UnitTest\Zaabee.Cryptography.UnitTest.csproj", "{F9412899-E4F1-448E-A80A-A10B719CD7B4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

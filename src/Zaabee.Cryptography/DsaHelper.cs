@@ -1,4 +1,4 @@
-namespace Zaabee.Cryptographic;
+namespace Zaabee.Cryptography;
 public static class DsaHelper
 {
     public static Encoding Encoding { get; set; } = Encoding.UTF8;
