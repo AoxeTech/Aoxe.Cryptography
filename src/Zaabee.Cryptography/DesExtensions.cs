@@ -4,7 +4,8 @@ public static class DesExtensions
 {
     public static byte[] EncryptByDes(
         this string original,
-        string key, string vector,
+        string key,
+        string vector,
         CipherMode cipherMode = CipherMode.CBC,
         PaddingMode paddingMode = PaddingMode.PKCS7,
         Encoding? encoding = null) =>
@@ -20,7 +21,8 @@ public static class DesExtensions
 
     public static string DecryptByDes(
         this byte[] encrypted,
-        string key, string vector,
+        string key,
+        string vector,
         CipherMode cipherMode = CipherMode.CBC,
         PaddingMode paddingMode = PaddingMode.PKCS7,
         Encoding? encoding = null) =>
