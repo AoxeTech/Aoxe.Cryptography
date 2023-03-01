@@ -77,8 +77,8 @@ public static class DesHelper
         {
             des.Mode = cipherMode;
             des.Padding = paddingMode;
-            using (var encryptor = des.CreateEncryptor(key, vector))
             using (var msEncrypt = new MemoryStream())
+            using (var encryptor = des.CreateEncryptor(key, vector))
             using (var csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
             {
                 using (var swEncrypt = new StreamWriter(csEncrypt))
@@ -136,8 +136,8 @@ public static class DesHelper
         {
             des.Mode = cipherMode;
             des.Padding = paddingMode;
-            using (var decryptor = des.CreateDecryptor(key, vector))
             using (var msDecrypt = new MemoryStream(encrypted))
+            using (var decryptor = des.CreateDecryptor(key, vector))
             using (var csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
             using (var srDecrypt = new StreamReader(csDecrypt))
                 return srDecrypt.ReadToEnd();

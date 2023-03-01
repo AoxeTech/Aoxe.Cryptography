@@ -77,8 +77,8 @@ public static class TripleDesHelper
         {
             tripleDes.Mode = cipherMode;
             tripleDes.Padding = paddingMode;
-            using (var encryptor = tripleDes.CreateEncryptor(key, vector))
             using (var msEncrypt = new MemoryStream())
+            using (var encryptor = tripleDes.CreateEncryptor(key, vector))
             using (var csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
             {
                 using (var swEncrypt = new StreamWriter(csEncrypt))
@@ -136,8 +136,8 @@ public static class TripleDesHelper
         {
             tripleDes.Mode = cipherMode;
             tripleDes.Padding = paddingMode;
-            using (var decryptor = tripleDes.CreateDecryptor(key, vector))
             using (var msDecrypt = new MemoryStream(encrypted))
+            using (var decryptor = tripleDes.CreateDecryptor(key, vector))
             using (var csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
             using (var srDecrypt = new StreamReader(csDecrypt))
                 return srDecrypt.ReadToEnd();

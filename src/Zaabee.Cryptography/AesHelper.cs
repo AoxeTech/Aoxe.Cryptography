@@ -77,8 +77,8 @@ public static class AesHelper
         {
             aes.Mode = cipherMode;
             aes.Padding = paddingMode;
-            using (var encryptor = aes.CreateEncryptor(key, vector))
             using (var msEncrypt = new MemoryStream())
+            using (var encryptor = aes.CreateEncryptor(key, vector))
             using (var csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
             {
                 using (var swEncrypt = new StreamWriter(csEncrypt))
@@ -136,8 +136,8 @@ public static class AesHelper
         {
             aes.Mode = cipherMode;
             aes.Padding = paddingMode;
-            using (var decryptor = aes.CreateDecryptor(key, vector))
             using (var msDecrypt = new MemoryStream(encrypted))
+            using (var decryptor = aes.CreateDecryptor(key, vector))
             using (var csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
             using (var srDecrypt = new StreamReader(csDecrypt))
                 return srDecrypt.ReadToEnd();
