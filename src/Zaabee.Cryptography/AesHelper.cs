@@ -40,8 +40,13 @@ public static class AesHelper
     /// <param name="encoding"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
-    public static byte[] Encrypt(string original, string key, string vector, CipherMode cipherMode = CipherMode.CBC,
-        PaddingMode paddingMode = PaddingMode.PKCS7, Encoding? encoding = null)
+    public static byte[] Encrypt(
+        string original,
+        string key,
+        string vector,
+        CipherMode cipherMode = CipherMode.CBC,
+        PaddingMode paddingMode = PaddingMode.PKCS7,
+        Encoding? encoding = null)
     {
         var bKey = (encoding ?? Encoding).GetBytes(key);
         var bVector = (encoding ?? Encoding).GetBytes(vector);
@@ -59,7 +64,11 @@ public static class AesHelper
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
     /// <exception cref="NotSupportedException"></exception>
-    public static byte[] Encrypt(string original, byte[] key, byte[] vector, CipherMode cipherMode = CipherMode.CBC,
+    public static byte[] Encrypt(
+        string original,
+        byte[] key,
+        byte[] vector,
+        CipherMode cipherMode = CipherMode.CBC,
         PaddingMode paddingMode = PaddingMode.PKCS7)
     {
         Array.Resize(ref key, 32);
@@ -90,8 +99,13 @@ public static class AesHelper
     /// <param name="encoding"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
-    public static string Decrypt(byte[] encrypted, string key, string vector, CipherMode cipherMode = CipherMode.CBC,
-        PaddingMode paddingMode = PaddingMode.PKCS7, Encoding? encoding = null)
+    public static string Decrypt(
+        byte[] encrypted,
+        string key,
+        string vector,
+        CipherMode cipherMode = CipherMode.CBC,
+        PaddingMode paddingMode = PaddingMode.PKCS7,
+        Encoding? encoding = null)
     {
         var bKey = (encoding ?? Encoding).GetBytes(key);
         var bVector = (encoding ?? Encoding).GetBytes(vector);
@@ -109,7 +123,11 @@ public static class AesHelper
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
     /// <exception cref="NotSupportedException"></exception>
-    public static string Decrypt(byte[] encrypted, byte[] key, byte[] vector, CipherMode cipherMode = CipherMode.CBC,
+    public static string Decrypt(
+        byte[] encrypted,
+        byte[] key,
+        byte[] vector,
+        CipherMode cipherMode = CipherMode.CBC,
         PaddingMode paddingMode = PaddingMode.PKCS7)
     {
         Array.Resize(ref key, 32);

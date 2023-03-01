@@ -10,7 +10,9 @@ public static class Md5Helper
     /// <param name="str"></param>
     /// <param name="encoding"></param>
     /// <returns></returns>
-    public static string GetMd5HashString(string str, Encoding? encoding = null) =>
+    public static string GetMd5HashString(
+        string str,
+        Encoding? encoding = null) =>
         GetMd5HashString((encoding ?? Encoding).GetBytes(str));
 
     /// <summary>
@@ -34,7 +36,9 @@ public static class Md5Helper
     /// <param name="str"></param>
     /// <param name="encoding"></param>
     /// <returns></returns>
-    public static byte[] GetMd5HashBytes(string str, Encoding? encoding = null) =>
+    public static byte[] GetMd5HashBytes(
+        string str,
+        Encoding? encoding = null) =>
         GetMd5HashBytes((encoding ?? Encoding).GetBytes(str));
 
     /// <summary>

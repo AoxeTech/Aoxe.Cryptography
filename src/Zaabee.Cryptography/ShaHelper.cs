@@ -15,7 +15,9 @@ public static class ShaHelper
     /// <param name="str"></param>
     /// <param name="encoding"></param>
     /// <returns></returns>
-    public static string GetSha1HashString(string str, Encoding? encoding = null) =>
+    public static string GetSha1HashString(
+        string str,
+        Encoding? encoding = null) =>
         GetSha1HashString((encoding ?? Encoding).GetBytes(str));
 
     /// <summary>
@@ -35,7 +37,9 @@ public static class ShaHelper
     /// <param name="str"></param>
     /// <param name="encoding"></param>
     /// <returns></returns>
-    public static byte[] GetSha1HashBytes(string str, Encoding? encoding = null) =>
+    public static byte[] GetSha1HashBytes(
+        string str,
+        Encoding? encoding = null) =>
         GetSha1HashBytes((encoding ?? Encoding).GetBytes(str));
 
     /// <summary>
@@ -60,7 +64,9 @@ public static class ShaHelper
     /// <param name="str"></param>
     /// <param name="encoding"></param>
     /// <returns></returns>
-    public static string GetSha256HashString(string str, Encoding? encoding = null) =>
+    public static string GetSha256HashString(
+        string str,
+        Encoding? encoding = null) =>
         GetSha256HashString((encoding ?? Encoding).GetBytes(str));
 
     /// <summary>
@@ -80,7 +86,9 @@ public static class ShaHelper
     /// <param name="str"></param>
     /// <param name="encoding"></param>
     /// <returns></returns>
-    public static byte[] GetSha256HashBytes(string str, Encoding? encoding = null) =>
+    public static byte[] GetSha256HashBytes(
+        string str,
+        Encoding? encoding = null) =>
         GetSha256HashBytes((encoding ?? Encoding).GetBytes(str));
 
     /// <summary>
@@ -105,7 +113,9 @@ public static class ShaHelper
     /// <param name="str"></param>
     /// <param name="encoding"></param>
     /// <returns></returns>
-    public static string GetSha384HashString(string str, Encoding? encoding = null) =>
+    public static string GetSha384HashString(
+        string str,
+        Encoding? encoding = null) =>
         GetSha384HashString((encoding ?? Encoding).GetBytes(str));
 
     /// <summary>
@@ -125,7 +135,9 @@ public static class ShaHelper
     /// <param name="str"></param>
     /// <param name="encoding"></param>
     /// <returns></returns>
-    public static byte[] GetSha384HashBytes(string str, Encoding? encoding = null) =>
+    public static byte[] GetSha384HashBytes(
+        string str,
+        Encoding? encoding = null) =>
         GetSha384HashBytes((encoding ?? Encoding).GetBytes(str));
 
     /// <summary>
@@ -150,7 +162,9 @@ public static class ShaHelper
     /// <param name="str"></param>
     /// <param name="encoding"></param>
     /// <returns></returns>
-    public static string GetSha512HashString(string str, Encoding? encoding = null) =>
+    public static string GetSha512HashString(
+        string str,
+        Encoding? encoding = null) =>
         GetSha512HashString((encoding ?? Encoding).GetBytes(str));
 
     /// <summary>
@@ -170,7 +184,9 @@ public static class ShaHelper
     /// <param name="str"></param>
     /// <param name="encoding"></param>
     /// <returns></returns>
-    public static byte[] GetSha512HashBytes(string str, Encoding? encoding = null) =>
+    public static byte[] GetSha512HashBytes(
+        string str,
+        Encoding? encoding = null) =>
         GetSha512HashBytes((encoding ?? Encoding).GetBytes(str));
 
     /// <summary>

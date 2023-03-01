@@ -1,12 +1,18 @@
 namespace Zaabee.Cryptography;
+
 public static class DsaHelper
 {
     public static Encoding Encoding { get; set; } = Encoding.UTF8;
 
-    public static byte[] CreateSignature(string original, DSAParameters privateKey, Encoding? encoding = null) =>
+    public static byte[] CreateSignature(
+        string original,
+        DSAParameters privateKey,
+        Encoding? encoding = null) =>
         CreateSignature((encoding ?? Encoding).GetBytes(original), privateKey);
 
-    public static byte[] CreateSignature(byte[] original, DSAParameters privateKey)
+    public static byte[] CreateSignature(
+        byte[] original,
+        DSAParameters privateKey)
     {
         using var dsa = DSA.Create();
         dsa.ImportParameters(privateKey);
@@ -18,11 +24,17 @@ public static class DsaHelper
 #endif
     }
 
-    public static bool VerifySignature(string original, byte[] signature, DSAParameters publicKey,
+    public static bool VerifySignature(
+        string original,
+        byte[] signature,
+        DSAParameters publicKey,
         Encoding? encoding = null) =>
         VerifySignature((encoding ?? Encoding).GetBytes(original), signature, publicKey);
 
-    public static bool VerifySignature(byte[] original, byte[] signature, DSAParameters publicKey)
+    public static bool VerifySignature(
+        byte[] original,
+        byte[] signature,
+        DSAParameters publicKey)
     {
         using var dsa = DSA.Create();
         dsa.ImportParameters(publicKey);

@@ -5,12 +5,17 @@ public static class RsaHelper
     public static Encoding Encoding { get; set; } = Encoding.UTF8;
     public static RSAEncryptionPadding Padding { get; set; } = RSAEncryptionPadding.OaepSHA256;
 
-    public static byte[] Encrypt(string original, RSAParameters publicKey,
-        RSAEncryptionPadding? rsaEncryptionPadding = null, Encoding? encoding = null) =>
+    public static byte[] Encrypt(
+        string original,
+        RSAParameters publicKey,
+        RSAEncryptionPadding? rsaEncryptionPadding = null,
+        Encoding? encoding = null) =>
         Encrypt((encoding ?? Encoding).GetBytes(original), publicKey, rsaEncryptionPadding);
 
 
-    public static byte[] Encrypt(byte[] original, RSAParameters publicKey,
+    public static byte[] Encrypt(
+        byte[] original,
+        RSAParameters publicKey,
         RSAEncryptionPadding? rsaEncryptionPadding = null)
     {
         using var rsa = RSA.Create();
@@ -18,11 +23,16 @@ public static class RsaHelper
         return rsa.Encrypt(original, rsaEncryptionPadding ?? Padding);
     }
 
-    public static string DecryptToString(byte[] encryptBytes, RSAParameters privateKey,
-        RSAEncryptionPadding? rsaEncryptionPadding = null, Encoding? encoding = null) =>
+    public static string DecryptToString(
+        byte[] encryptBytes,
+        RSAParameters privateKey,
+        RSAEncryptionPadding? rsaEncryptionPadding = null,
+        Encoding? encoding = null) =>
         (encoding ?? Encoding).GetString(Decrypt(encryptBytes, privateKey, rsaEncryptionPadding));
 
-    public static byte[] Decrypt(byte[] encryptBytes, RSAParameters privateKey,
+    public static byte[] Decrypt(
+        byte[] encryptBytes,
+        RSAParameters privateKey,
         RSAEncryptionPadding? rsaEncryptionPadding = null)
     {
         using var rsa = RSA.Create();

@@ -7,11 +7,16 @@ public static class EcdsaHelper
 
     #region Data
 
-    public static byte[] SignData(string original, ECParameters privateKey,
-        HashAlgorithmName? hashAlgorithmName = null, Encoding? encoding = null) =>
+    public static byte[] SignData(
+        string original,
+        ECParameters privateKey,
+        HashAlgorithmName? hashAlgorithmName = null,
+        Encoding? encoding = null) =>
         SignData((encoding ?? Encoding).GetBytes(original), privateKey, hashAlgorithmName);
 
-    public static byte[] SignData(byte[] original, ECParameters privateKey,
+    public static byte[] SignData(
+        byte[] original,
+        ECParameters privateKey,
         HashAlgorithmName? hashAlgorithmName = null)
     {
         using var ecDsa = ECDsa.Create();
@@ -19,11 +24,18 @@ public static class EcdsaHelper
         return ecDsa.SignData(original, hashAlgorithmName ?? HashAlgorithmName);
     }
 
-    public static bool VerifyData(string original, byte[] signature, ECParameters publicKey,
-        HashAlgorithmName? hashAlgorithmName = null, Encoding? encoding = null) =>
+    public static bool VerifyData(
+        string original,
+        byte[] signature,
+        ECParameters publicKey,
+        HashAlgorithmName? hashAlgorithmName = null,
+        Encoding? encoding = null) =>
         VerifyData((encoding ?? Encoding).GetBytes(original), signature, publicKey, hashAlgorithmName);
 
-    public static bool VerifyData(byte[] original, byte[] signature, ECParameters publicKey,
+    public static bool VerifyData(
+        byte[] original,
+        byte[] signature,
+        ECParameters publicKey,
         HashAlgorithmName? hashAlgorithmName = null)
     {
         using var ecDsa = ECDsa.Create();
@@ -35,21 +47,32 @@ public static class EcdsaHelper
 
     #region Hash
 
-    public static byte[] SignHash(string original, ECParameters privateKey, Encoding? encoding = null) =>
+    public static byte[] SignHash(
+        string original,
+        ECParameters privateKey,
+        Encoding? encoding = null) =>
         SignHash((encoding ?? Encoding).GetBytes(original), privateKey);
 
-    public static byte[] SignHash(byte[] original, ECParameters privateKey)
+    public static byte[] SignHash(
+        byte[] original,
+        ECParameters privateKey)
     {
         using var ecDsa = ECDsa.Create();
         ecDsa.ImportParameters(privateKey);
         return ecDsa.SignHash(original);
     }
 
-    public static bool VerifyHash(string original, byte[] signature, ECParameters publicKey,
+    public static bool VerifyHash(
+        string original,
+        byte[] signature,
+        ECParameters publicKey,
         Encoding? encoding = null) =>
         VerifyHash((encoding ?? Encoding).GetBytes(original), signature, publicKey);
 
-    public static bool VerifyHash(byte[] original, byte[] signature, ECParameters publicKey)
+    public static bool VerifyHash(
+        byte[] original,
+        byte[] signature,
+        ECParameters publicKey)
     {
         using var ecDsa = ECDsa.Create();
         ecDsa.ImportParameters(publicKey);
