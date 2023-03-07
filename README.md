@@ -1,4 +1,4 @@
-# Zaabee.Cryptographic
+# Zaabee.Cryptography
 
 The wraps and extension methods of AES/MD5/SHA/RSA/DSA/ECDSA/DES/TripleDES
 
