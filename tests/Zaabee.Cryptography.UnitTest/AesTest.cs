@@ -3,10 +3,10 @@ namespace Zaabee.Cryptography.UnitTest;
 public class AesTest
 {
     [Fact]
-    public void EncodingTest()
+    public void DefaultEncodingTest()
     {
         AesHelper.Encoding = Encoding.UTF8;
-        Assert.Equal(AesHelper.Encoding, Encoding.UTF8);
+        Assert.Equal(Encoding.UTF8, AesHelper.Encoding);
     }
 
     [Fact]
@@ -35,25 +35,24 @@ public class AesTest
     }
 
     [Theory]
-    [InlineData("Here is some data to encrypt!", "Here is the key.", "Here is the vector.")]
-    public void AesStringTest(string original, string key, string vector)
+    [InlineData("Here is some data to encrypt!")]
+    public void AesStringTest(string original)
     {
+        var (key, vector) = AesHelper.GenerateKeyAndVector();
         var encrypt = original.EncryptByAes(key, vector);
-        var decrypt = encrypt.DecryptByAes(key, vector);
+        var decrypt = encrypt.DecryptToStringByAes(key, vector);
         Assert.Equal(original, decrypt);
     }
 
     [Theory]
-    [InlineData("Here is some data to encrypt!", "Here is the key.", "Here is the vector.")]
-    [InlineData("Here is some data to encrypt!", null, "Here is the vector.")]
-    [InlineData("Here is some data to encrypt!", "Here is the key.", null)]
-    [InlineData("Here is some data to encrypt!", null, null)]
-    public void AesBytesTest(string original, string? key, string? vector)
+    [InlineData("Here is some data to encrypt!")]
+    public void AesBytesTest(string original)
     {
-        var bKey = key is null ? AesHelper.GenerateKey() : AesHelper.Encoding.GetBytes(key);
-        var bVector = vector is null ? AesHelper.GenerateVector() : AesHelper.Encoding.GetBytes(vector);
-        var encrypt = original.EncryptByAes(bKey, bVector);
-        var decrypt = encrypt.DecryptByAes(bKey, bVector);
-        Assert.Equal(original, decrypt);
+        var originalBytes = Encoding.UTF8.GetBytes(original);
+        var (key, vector) = AesHelper.GenerateKeyAndVector();
+        var encrypt = originalBytes.EncryptByAes(key, vector);
+        var decrypt = encrypt.DecryptToBytesByAes(key, vector);
+        var decryptString = Encoding.UTF8.GetString(decrypt);
+        Assert.Equal(original, decryptString);
     }
 }

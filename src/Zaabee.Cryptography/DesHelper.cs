@@ -40,18 +40,15 @@ public static class DesHelper
     /// <param name="encoding"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
+    /// <exception cref="NotSupportedException"></exception>
     public static byte[] Encrypt(
         string original,
-        string key,
-        string vector,
+        byte[] key,
+        byte[] vector,
         CipherMode cipherMode = CipherMode.CBC,
         PaddingMode paddingMode = PaddingMode.PKCS7,
-        Encoding? encoding = null)
-    {
-        var bKey = (encoding ?? Encoding).GetBytes(key);
-        var bVector = (encoding ?? Encoding).GetBytes(vector);
-        return Encrypt(original, bKey, bVector, cipherMode, paddingMode);
-    }
+        Encoding? encoding = null) =>
+        Encrypt((encoding ?? Encoding).GetBytes(original), key, vector, cipherMode, paddingMode);
 
     /// <summary>
     /// DES Encrypt
@@ -65,24 +62,27 @@ public static class DesHelper
     /// <exception cref="ArgumentNullException"></exception>
     /// <exception cref="NotSupportedException"></exception>
     public static byte[] Encrypt(
-        string original,
+        byte[] original,
         byte[] key,
         byte[] vector,
         CipherMode cipherMode = CipherMode.CBC,
         PaddingMode paddingMode = PaddingMode.PKCS7)
     {
-        Array.Resize(ref key, 8);
-        Array.Resize(ref vector, 8);
         using (var des = DES.Create())
         {
             des.Mode = cipherMode;
             des.Padding = paddingMode;
             using (var msEncrypt = new MemoryStream())
-            using (var encryptor = des.CreateEncryptor(key, vector))
-            using (var csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
             {
-                using (var swEncrypt = new StreamWriter(csEncrypt))
-                    swEncrypt.Write(original);
+                using (var encryptor = des.CreateEncryptor(key, vector))
+                using (var csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
+                {
+#if NETSTANDARD2_0
+                    csEncrypt.Write(original, 0, original.Length);
+#else
+                    csEncrypt.Write(original);
+#endif
+                }
                 return msEncrypt.ToArray();
             }
         }
@@ -99,18 +99,15 @@ public static class DesHelper
     /// <param name="encoding"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
-    public static string Decrypt(
+    /// <exception cref="NotSupportedException"></exception>
+    public static string DecryptToString(
         byte[] encrypted,
-        string key,
-        string vector,
+        byte[] key,
+        byte[] vector,
         CipherMode cipherMode = CipherMode.CBC,
         PaddingMode paddingMode = PaddingMode.PKCS7,
-        Encoding? encoding = null)
-    {
-        var bKey = (encoding ?? Encoding).GetBytes(key);
-        var bVector = (encoding ?? Encoding).GetBytes(vector);
-        return Decrypt(encrypted, bKey, bVector, cipherMode, paddingMode);
-    }
+        Encoding? encoding = null) =>
+        (encoding ?? Encoding).GetString(DecryptToBytes(encrypted, key, vector, cipherMode, paddingMode));
 
     /// <summary>
     /// DES Decrypt
@@ -123,15 +120,13 @@ public static class DesHelper
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
     /// <exception cref="NotSupportedException"></exception>
-    public static string Decrypt(
+    public static byte[] DecryptToBytes(
         byte[] encrypted,
         byte[] key,
         byte[] vector,
         CipherMode cipherMode = CipherMode.CBC,
         PaddingMode paddingMode = PaddingMode.PKCS7)
     {
-        Array.Resize(ref key, 8);
-        Array.Resize(ref vector, 8);
         using (var des = DES.Create())
         {
             des.Mode = cipherMode;
@@ -139,8 +134,7 @@ public static class DesHelper
             using (var msDecrypt = new MemoryStream(encrypted))
             using (var decryptor = des.CreateDecryptor(key, vector))
             using (var csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
-            using (var srDecrypt = new StreamReader(csDecrypt))
-                return srDecrypt.ReadToEnd();
+                return csDecrypt.ReadToEnd();
         }
     }
 }

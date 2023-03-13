@@ -3,10 +3,10 @@ namespace Zaabee.Cryptography.UnitTest;
 public class DesTest
 {
     [Fact]
-    public void EncodingTest()
+    public void DefaultEncodingTest()
     {
         DesHelper.Encoding = Encoding.UTF8;
-        Assert.Equal(DesHelper.Encoding, Encoding.UTF8);
+        Assert.Equal(Encoding.UTF8, DesHelper.Encoding);
     }
 
     [Fact]
@@ -35,25 +35,24 @@ public class DesTest
     }
 
     [Theory]
-    [InlineData("Here is some data to encrypt!", "Here is the key.", "Here is the vector.")]
-    public void DesStringTest(string original, string key, string vector)
+    [InlineData("Here is some data to encrypt!")]
+    public void DesStringTest(string original)
     {
+        var (key, vector) = DesHelper.GenerateKeyAndVector();
         var encrypt = original.EncryptByDes(key, vector);
-        var decrypt = encrypt.DecryptByDes(key, vector);
+        var decrypt = encrypt.DecryptToStringByDes(key, vector);
         Assert.Equal(original, decrypt);
     }
 
     [Theory]
-    [InlineData("Here is some data to encrypt!", "Here is the key.", "Here is the vector.")]
-    [InlineData("Here is some data to encrypt!", null, "Here is the vector.")]
-    [InlineData("Here is some data to encrypt!", "Here is the key.", null)]
-    [InlineData("Here is some data to encrypt!", null, null)]
-    public void DesBytesTest(string original, string? key, string? vector)
+    [InlineData("Here is some data to encrypt!")]
+    public void DesBytesTest(string original)
     {
-        var bKey = key is null ? DesHelper.GenerateKey() : DesHelper.Encoding.GetBytes(key);
-        var bVector = vector is null ? DesHelper.GenerateVector() : DesHelper.Encoding.GetBytes(vector);
-        var encrypt = original.EncryptByDes(bKey, bVector);
-        var decrypt = encrypt.DecryptByDes(bKey, bVector);
-        Assert.Equal(original, decrypt);
+        var originalBytes = Encoding.UTF8.GetBytes(original);
+        var (key, vector) = DesHelper.GenerateKeyAndVector();
+        var encrypt = originalBytes.EncryptByDes(key, vector);
+        var decrypt = encrypt.DecryptToBytesByDes(key, vector);
+        var decryptString = Encoding.UTF8.GetString(decrypt);
+        Assert.Equal(original, decryptString);
     }
 }

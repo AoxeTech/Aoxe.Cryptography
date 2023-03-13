@@ -3,36 +3,36 @@ namespace Zaabee.Cryptography;
 public static class DesExtensions
 {
     public static byte[] EncryptByDes(
-        this string original,
-        string key,
-        string vector,
-        CipherMode cipherMode = CipherMode.CBC,
-        PaddingMode paddingMode = PaddingMode.PKCS7,
-        Encoding? encoding = null) =>
-        DesHelper.Encrypt(original, key, vector, cipherMode, paddingMode, encoding);
-
-    public static byte[] EncryptByDes(
-        this string original,
+        this byte[] original,
         byte[] key,
         byte[] vector,
         CipherMode cipherMode = CipherMode.CBC,
         PaddingMode paddingMode = PaddingMode.PKCS7) =>
         DesHelper.Encrypt(original, key, vector, cipherMode, paddingMode);
 
-    public static string DecryptByDes(
-        this byte[] encrypted,
-        string key,
-        string vector,
+    public static byte[] EncryptByDes(
+        this string original,
+        byte[] key,
+        byte[] vector,
         CipherMode cipherMode = CipherMode.CBC,
         PaddingMode paddingMode = PaddingMode.PKCS7,
         Encoding? encoding = null) =>
-        DesHelper.Decrypt(encrypted, key, vector, cipherMode, paddingMode, encoding);
+        DesHelper.Encrypt(original, key, vector, cipherMode, paddingMode, encoding);
 
-    public static string DecryptByDes(
+    public static byte[] DecryptToBytesByDes(
         this byte[] encrypted,
         byte[] key,
         byte[] vector,
         CipherMode cipherMode = CipherMode.CBC,
         PaddingMode paddingMode = PaddingMode.PKCS7) =>
-        DesHelper.Decrypt(encrypted, key, vector, cipherMode, paddingMode);
+        DesHelper.DecryptToBytes(encrypted, key, vector, cipherMode, paddingMode);
+
+    public static string DecryptToStringByDes(
+        this byte[] encrypted,
+        byte[] key,
+        byte[] vector,
+        CipherMode cipherMode = CipherMode.CBC,
+        PaddingMode paddingMode = PaddingMode.PKCS7,
+        Encoding? encoding = null) =>
+        DesHelper.DecryptToString(encrypted, key, vector, cipherMode, paddingMode, encoding);
 }

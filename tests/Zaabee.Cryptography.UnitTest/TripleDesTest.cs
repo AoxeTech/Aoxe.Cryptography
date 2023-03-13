@@ -3,10 +3,10 @@ namespace Zaabee.Cryptography.UnitTest;
 public class TripleDesTest
 {
     [Fact]
-    public void EncodingTest()
+    public void DefaultEncodingTest()
     {
         TripleDesHelper.Encoding = Encoding.UTF8;
-        Assert.Equal(TripleDesHelper.Encoding, Encoding.UTF8);
+        Assert.Equal(Encoding.UTF8, TripleDesHelper.Encoding);
     }
 
     [Fact]
@@ -35,25 +35,24 @@ public class TripleDesTest
     }
 
     [Theory]
-    [InlineData("Here is some data to encrypt!", "Here is the key.", "Here is the vector.")]
-    public void TripleDesStringTest(string original, string key, string vector)
+    [InlineData("Here is some data to encrypt!")]
+    public void TripleDesStringTest(string original)
     {
+        var (key, vector) = TripleDesHelper.GenerateKeyAndVector();
         var encrypt = original.EncryptByTripleDes(key, vector);
-        var decrypt = encrypt.DecryptByTripleDes(key, vector);
+        var decrypt = encrypt.DecryptToStringByTripleDes(key, vector);
         Assert.Equal(original, decrypt);
     }
 
     [Theory]
-    [InlineData("Here is some data to encrypt!", "Here is the key.", "Here is the vector.")]
-    [InlineData("Here is some data to encrypt!", null, "Here is the vector.")]
-    [InlineData("Here is some data to encrypt!", "Here is the key.", null)]
-    [InlineData("Here is some data to encrypt!", null, null)]
-    public void TripleDesBytesTest(string original, string? key, string? vector)
+    [InlineData("Here is some data to encrypt!")]
+    public void TripleDesBytesTest(string original)
     {
-        var bKey = key is null ? TripleDesHelper.GenerateKey() : TripleDesHelper.Encoding.GetBytes(key);
-        var bVector = vector is null ? TripleDesHelper.GenerateVector() : TripleDesHelper.Encoding.GetBytes(vector);
-        var encrypt = original.EncryptByTripleDes(bKey, bVector);
-        var decrypt = encrypt.DecryptByTripleDes(bKey, bVector);
-        Assert.Equal(original, decrypt);
+        var originalBytes = Encoding.UTF8.GetBytes(original);
+        var (key, vector) = TripleDesHelper.GenerateKeyAndVector();
+        var encrypt = originalBytes.EncryptByTripleDes(key, vector);
+        var decrypt = encrypt.DecryptToBytesByTripleDes(key, vector);
+        var decryptString = Encoding.UTF8.GetString(decrypt);
+        Assert.Equal(original, decryptString);
     }
 }

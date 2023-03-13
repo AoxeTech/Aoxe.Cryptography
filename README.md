@@ -40,7 +40,8 @@ var key = "Here is the key.";
 var vector = "Here is the vector.";
 //Default cipher mode is CBC and padding mode is PKCS7.
 var encrypt = original.EncryptByAes(key, vector);
-var decrypt = encrypt.DecryptByAes(key, vector);
+// Also has an other method to encrypt bytes by AES.
+var decrypt = encrypt.DecryptToStringByAes(key, vector);
 ```
 
 ### DES
@@ -53,7 +54,8 @@ var key = "Here is the key.";
 var vector = "abcdefg";
 //Default cipher mode is CBC and padding mode is PKCS7.
 var encrypt = original.EncryptByDes(key, vector);
-var decrypt = encrypt.DecryptByDes(key, vector);
+// Also has an other method to encrypt bytes by DES.
+var decrypt = encrypt.DecryptToStringByDes(key, vector);
 ```
 
 ### TripleDES
@@ -66,7 +68,8 @@ var key = "Here is the key.";
 var vector = "Here is the vector.";
 //Default cipher mode is CBC and padding mode is PKCS7.
 var encrypt = original.EncryptByTripleDes(key, vector);
-var decrypt = encrypt.DecryptByTripleDes(key, vector);
+// Also has an other method to encrypt bytes by Triple DES.
+var decrypt = encrypt.DecryptToStringByTripleDes(key, vector);
 ```
 
 ### RSA
