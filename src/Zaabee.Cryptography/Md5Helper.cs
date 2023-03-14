@@ -52,7 +52,11 @@ public static class Md5Helper
     /// <exception cref="NotSupportedException"></exception>
     public static byte[] GetMd5HashBytes(byte[] bytes)
     {
+#if NETSTANDARD2_0
         using var md5 = MD5.Create();
         return md5.ComputeHash(bytes);
+#else
+        return MD5.HashData(bytes);
+#endif
     }
 }
