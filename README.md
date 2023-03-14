@@ -34,24 +34,32 @@ var sha512Bytes = apple.ToSha512Bytes();
 
 ```CSharp
 var original = "Here is some data to encrypt!";
-//The key will be resized to 32 size when encrypting or decrypting.
-var key = "Here is the key.";
-//The vector will be resized to 16 size when encrypting or decrypting.
-var vector = "Here is the vector.";
+var key = AesHelper.GenerateKey();
+var vector = AesHelper.GenerateVector();
 //Default cipher mode is CBC and padding mode is PKCS7.
 var encrypt = original.EncryptByAes(key, vector);
 // Also has an other method to encrypt bytes by AES.
 var decrypt = encrypt.DecryptToStringByAes(key, vector);
 ```
 
+### RC2
+
+```CSharp
+var original = "Here is some data to encrypt!";
+var key = Rc2Helper.GenerateKey();
+var vector = Rc2Helper.GenerateVector();
+//Default cipher mode is CBC and padding mode is PKCS7.
+var encrypt = original.EncryptByRc2(key, vector);
+// Also has an other method to encrypt bytes by RC2.
+var decrypt = encrypt.DecryptToStringByRc2(key, vector);
+```
+
 ### DES
 
 ```CSharp
 var original = "Here is some data to encrypt!";
-//The key will be resized to 8 size when encrypting or decrypting.
-var key = "Here is the key.";
-//The vector will be resized to 8 size when encrypting or decrypting.
-var vector = "abcdefg";
+var key = DesHelper.GenerateKey();
+var vector = DesHelper.GenerateVector();
 //Default cipher mode is CBC and padding mode is PKCS7.
 var encrypt = original.EncryptByDes(key, vector);
 // Also has an other method to encrypt bytes by DES.
@@ -62,10 +70,8 @@ var decrypt = encrypt.DecryptToStringByDes(key, vector);
 
 ```CSharp
 var original = "Here is some data to encrypt!";
-//The key will be resized to 24 size when encrypting or decrypting.
-var key = "Here is the key.";
-//The vector will be resized to 8 size when encrypting or decrypting.
-var vector = "Here is the vector.";
+var key = TripleDesHelper.GenerateKey();
+var vector = TripleDesHelper.GenerateVector();
 //Default cipher mode is CBC and padding mode is PKCS7.
 var encrypt = original.EncryptByTripleDes(key, vector);
 // Also has an other method to encrypt bytes by Triple DES.
