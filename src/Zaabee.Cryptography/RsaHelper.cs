@@ -12,7 +12,6 @@ public static class RsaHelper
         Encoding? encoding = null) =>
         Encrypt((encoding ?? Encoding).GetBytes(original), publicKey, rsaEncryptionPadding);
 
-
     public static byte[] Encrypt(
         byte[] original,
         RSAParameters publicKey,
