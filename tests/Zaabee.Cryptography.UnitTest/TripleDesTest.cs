@@ -51,7 +51,7 @@ public class TripleDesTest
         var originalBytes = Encoding.UTF8.GetBytes(original);
         var (key, vector) = TripleDesHelper.GenerateKeyAndVector();
         var encrypt = originalBytes.EncryptByTripleDes(key, vector);
-        var decrypt = encrypt.DecryptToBytesByTripleDes(key, vector);
+        var decrypt = encrypt.DecryptByTripleDes(key, vector);
         var decryptString = Encoding.UTF8.GetString(decrypt);
         Assert.Equal(original, decryptString);
     }

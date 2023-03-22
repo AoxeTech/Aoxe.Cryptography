@@ -51,7 +51,7 @@ public class DesTest
         var originalBytes = Encoding.UTF8.GetBytes(original);
         var (key, vector) = DesHelper.GenerateKeyAndVector();
         var encrypt = originalBytes.EncryptByDes(key, vector);
-        var decrypt = encrypt.DecryptToBytesByDes(key, vector);
+        var decrypt = encrypt.DecryptByDes(key, vector);
         var decryptString = Encoding.UTF8.GetString(decrypt);
         Assert.Equal(original, decryptString);
     }

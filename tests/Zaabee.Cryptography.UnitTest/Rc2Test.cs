@@ -51,7 +51,7 @@ public class Rc2Test
         var originalBytes = Encoding.UTF8.GetBytes(original);
         var (key, vector) = Rc2Helper.GenerateKeyAndVector();
         var encrypt = originalBytes.EncryptByRc2(key, vector);
-        var decrypt = encrypt.DecryptToBytesByRc2(key, vector);
+        var decrypt = encrypt.DecryptByRc2(key, vector);
         var decryptString = Encoding.UTF8.GetString(decrypt);
         Assert.Equal(original, decryptString);
     }

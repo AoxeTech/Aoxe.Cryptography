@@ -19,13 +19,13 @@ public static class AesExtensions
         Encoding? encoding = null) =>
         AesHelper.Encrypt(original, key, vector, cipherMode, paddingMode, encoding);
 
-    public static byte[] DecryptToBytesByAes(
+    public static byte[] DecryptByAes(
         this byte[] encrypted,
         byte[] key,
         byte[] vector,
         CipherMode cipherMode = CipherMode.CBC,
         PaddingMode paddingMode = PaddingMode.PKCS7) =>
-        AesHelper.DecryptToBytes(encrypted, key, vector, cipherMode, paddingMode);
+        AesHelper.Decrypt(encrypted, key, vector, cipherMode, paddingMode);
 
     public static string DecryptToStringByAes(
         this byte[] encrypted,

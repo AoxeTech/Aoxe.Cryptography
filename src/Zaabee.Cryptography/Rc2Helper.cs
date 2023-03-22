@@ -104,7 +104,7 @@ public static class Rc2Helper
         CipherMode cipherMode = CipherMode.CBC,
         PaddingMode paddingMode = PaddingMode.PKCS7,
         Encoding? encoding = null) =>
-        (encoding ?? Encoding).GetString(DecryptToBytes(encrypted, key, vector, cipherMode, paddingMode));
+        (encoding ?? Encoding).GetString(Decrypt(encrypted, key, vector, cipherMode, paddingMode));
 
     /// <summary>
     /// RC2 Decrypt
@@ -117,7 +117,7 @@ public static class Rc2Helper
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
     /// <exception cref="NotSupportedException"></exception>
-    public static byte[] DecryptToBytes(
+    public static byte[] Decrypt(
         byte[] encrypted,
         byte[] key,
         byte[] vector,

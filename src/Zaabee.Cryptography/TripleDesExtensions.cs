@@ -20,13 +20,13 @@ public static class TripleDesExtensions
         Encoding? encoding = null) =>
         TripleDesHelper.Encrypt(original, key, vector, cipherMode, paddingMode, encoding);
 
-    public static byte[] DecryptToBytesByTripleDes(
+    public static byte[] DecryptByTripleDes(
         this byte[] encrypted,
         byte[] key,
         byte[] vector,
         CipherMode cipherMode = CipherMode.CBC,
         PaddingMode paddingMode = PaddingMode.PKCS7) =>
-        TripleDesHelper.DecryptToBytes(encrypted, key, vector, cipherMode, paddingMode);
+        TripleDesHelper.Decrypt(encrypted, key, vector, cipherMode, paddingMode);
 
     public static string DecryptToStringByTripleDes(
         this byte[] encrypted,

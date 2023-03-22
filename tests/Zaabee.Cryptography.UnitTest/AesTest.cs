@@ -51,7 +51,7 @@ public class AesTest
         var originalBytes = Encoding.UTF8.GetBytes(original);
         var (key, vector) = AesHelper.GenerateKeyAndVector();
         var encrypt = originalBytes.EncryptByAes(key, vector);
-        var decrypt = encrypt.DecryptToBytesByAes(key, vector);
+        var decrypt = encrypt.DecryptByAes(key, vector);
         var decryptString = Encoding.UTF8.GetString(decrypt);
         Assert.Equal(original, decryptString);
     }

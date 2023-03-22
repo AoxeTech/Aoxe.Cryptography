@@ -19,13 +19,13 @@ public static class DesExtensions
         Encoding? encoding = null) =>
         DesHelper.Encrypt(original, key, vector, cipherMode, paddingMode, encoding);
 
-    public static byte[] DecryptToBytesByDes(
+    public static byte[] DecryptByDes(
         this byte[] encrypted,
         byte[] key,
         byte[] vector,
         CipherMode cipherMode = CipherMode.CBC,
         PaddingMode paddingMode = PaddingMode.PKCS7) =>
-        DesHelper.DecryptToBytes(encrypted, key, vector, cipherMode, paddingMode);
+        DesHelper.Decrypt(encrypted, key, vector, cipherMode, paddingMode);
 
     public static string DecryptToStringByDes(
         this byte[] encrypted,
