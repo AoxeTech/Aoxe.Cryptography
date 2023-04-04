@@ -2,17 +2,6 @@ namespace Zaabee.Cryptography.DES;
 
 public static partial class DesHelper
 {
-    /// <summary>
-    /// DES Encrypt
-    /// </summary>
-    /// <param name="original"></param>
-    /// <param name="key"></param>
-    /// <param name="vector"></param>
-    /// <param name="cipherMode"></param>
-    /// <param name="paddingMode"></param>
-    /// <returns></returns>
-    /// <exception cref="ArgumentNullException"></exception>
-    /// <exception cref="NotSupportedException"></exception>
     public static byte[] Encrypt(
         byte[] original,
         byte[] key,
@@ -40,17 +29,6 @@ public static partial class DesHelper
         }
     }
 
-    /// <summary>
-    /// DES Decrypt
-    /// </summary>
-    /// <param name="encrypted"></param>
-    /// <param name="key"></param>
-    /// <param name="vector"></param>
-    /// <param name="cipherMode"></param>
-    /// <param name="paddingMode"></param>
-    /// <returns></returns>
-    /// <exception cref="ArgumentNullException"></exception>
-    /// <exception cref="NotSupportedException"></exception>
     public static byte[] Decrypt(
         byte[] encrypted,
         byte[] key,

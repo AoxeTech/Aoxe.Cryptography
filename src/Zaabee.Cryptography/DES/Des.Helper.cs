@@ -1,8 +1,5 @@
 namespace Zaabee.Cryptography.DES;
 
-/// <summary>
-/// DES Helper
-/// </summary>
 public static partial class DesHelper
 {
     public static byte[] GenerateKey()
