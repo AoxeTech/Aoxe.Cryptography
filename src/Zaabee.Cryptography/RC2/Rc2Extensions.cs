@@ -1,4 +1,4 @@
-namespace Zaabee.Cryptography;
+namespace Zaabee.Cryptography.RC2;
 
 public static class Rc2Extensions
 {

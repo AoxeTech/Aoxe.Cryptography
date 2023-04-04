@@ -1,4 +1,4 @@
-namespace Zaabee.Cryptography;
+namespace Zaabee.Cryptography.MD5;
 
 public static class Md5Extensions
 {

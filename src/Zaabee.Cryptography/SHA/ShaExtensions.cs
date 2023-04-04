@@ -1,4 +1,4 @@
-namespace Zaabee.Cryptography;
+namespace Zaabee.Cryptography.SHA;
 
 public static class ShaExtensions
 {

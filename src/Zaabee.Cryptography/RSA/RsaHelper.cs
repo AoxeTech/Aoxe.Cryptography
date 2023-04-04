@@ -1,4 +1,4 @@
-namespace Zaabee.Cryptography;
+namespace Zaabee.Cryptography.RSA;
 
 public static class RsaHelper
 {
@@ -17,7 +17,7 @@ public static class RsaHelper
         RSAParameters publicKey,
         RSAEncryptionPadding? rsaEncryptionPadding = null)
     {
-        using var rsa = RSA.Create();
+        using var rsa = System.Security.Cryptography.RSA.Create();
         rsa.ImportParameters(publicKey);
         return rsa.Encrypt(original, rsaEncryptionPadding ?? Padding);
     }
@@ -34,14 +34,14 @@ public static class RsaHelper
         RSAParameters privateKey,
         RSAEncryptionPadding? rsaEncryptionPadding = null)
     {
-        using var rsa = RSA.Create();
+        using var rsa = System.Security.Cryptography.RSA.Create();
         rsa.ImportParameters(privateKey);
         return rsa.Decrypt(encryptBytes, rsaEncryptionPadding ?? Padding);
     }
 
     public static (RSAParameters privateKey, RSAParameters publicKey) GenerateParameters()
     {
-        using var rsa = RSA.Create();
+        using var rsa = System.Security.Cryptography.RSA.Create();
         var privateKey = rsa.ExportParameters(true);
         var publicKey = rsa.ExportParameters(false);
         return (privateKey, publicKey);

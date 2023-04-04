@@ -1,4 +1,4 @@
-namespace Zaabee.Cryptography;
+namespace Zaabee.Cryptography.DES;
 
 /// <summary>
 /// DES Helper
@@ -9,21 +9,21 @@ public static class DesHelper
 
     public static byte[] GenerateKey()
     {
-        using var des = DES.Create();
+        using var des = System.Security.Cryptography.DES.Create();
         des.GenerateKey();
         return des.Key;
     }
 
     public static byte[] GenerateVector()
     {
-        using var des = DES.Create();
+        using var des = System.Security.Cryptography.DES.Create();
         des.GenerateIV();
         return des.IV;
     }
 
     public static (byte[] key, byte[] vector) GenerateKeyAndVector()
     {
-        using var des = DES.Create();
+        using var des = System.Security.Cryptography.DES.Create();
         des.GenerateKey();
         des.GenerateIV();
         return (des.Key, des.IV);
@@ -68,7 +68,7 @@ public static class DesHelper
         CipherMode cipherMode = CipherMode.CBC,
         PaddingMode paddingMode = PaddingMode.PKCS7)
     {
-        using (var des = DES.Create())
+        using (var des = System.Security.Cryptography.DES.Create())
         {
             des.Mode = cipherMode;
             des.Padding = paddingMode;
@@ -127,7 +127,7 @@ public static class DesHelper
         CipherMode cipherMode = CipherMode.CBC,
         PaddingMode paddingMode = PaddingMode.PKCS7)
     {
-        using (var des = DES.Create())
+        using (var des = System.Security.Cryptography.DES.Create())
         {
             des.Mode = cipherMode;
             des.Padding = paddingMode;

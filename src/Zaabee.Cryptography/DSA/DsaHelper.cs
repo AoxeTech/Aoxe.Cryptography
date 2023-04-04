@@ -1,4 +1,4 @@
-namespace Zaabee.Cryptography;
+namespace Zaabee.Cryptography.DSA;
 
 public static class DsaHelper
 {
@@ -14,7 +14,7 @@ public static class DsaHelper
         byte[] original,
         DSAParameters privateKey)
     {
-        using var dsa = DSA.Create();
+        using var dsa = System.Security.Cryptography.DSA.Create();
         dsa.ImportParameters(privateKey);
 #if NET48
         using var sha1 = SHA1.Create();
@@ -36,7 +36,7 @@ public static class DsaHelper
         byte[] signature,
         DSAParameters publicKey)
     {
-        using var dsa = DSA.Create();
+        using var dsa = System.Security.Cryptography.DSA.Create();
         dsa.ImportParameters(publicKey);
 #if NET48
         using var sha1 = SHA1.Create();
@@ -48,7 +48,7 @@ public static class DsaHelper
 
     public static (DSAParameters privateKey, DSAParameters publicKey) GenerateParameters()
     {
-        using var dsa = DSA.Create();
+        using var dsa = System.Security.Cryptography.DSA.Create();
         var privateKey = dsa.ExportParameters(true);
         var publicKey = dsa.ExportParameters(false);
         return (privateKey, publicKey);

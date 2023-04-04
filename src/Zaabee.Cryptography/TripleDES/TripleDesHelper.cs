@@ -1,4 +1,4 @@
-namespace Zaabee.Cryptography;
+namespace Zaabee.Cryptography.TripleDES;
 
 /// <summary>
 /// Triple DES Helper
@@ -9,21 +9,21 @@ public static class TripleDesHelper
 
     public static byte[] GenerateKey()
     {
-        using var tripleDes = TripleDES.Create();
+        using var tripleDes = System.Security.Cryptography.TripleDES.Create();
         tripleDes.GenerateKey();
         return tripleDes.Key;
     }
 
     public static byte[] GenerateVector()
     {
-        using var tripleDes = TripleDES.Create();
+        using var tripleDes = System.Security.Cryptography.TripleDES.Create();
         tripleDes.GenerateIV();
         return tripleDes.IV;
     }
 
     public static (byte[] key, byte[] vector) GenerateKeyAndVector()
     {
-        using var tripleDes = TripleDES.Create();
+        using var tripleDes = System.Security.Cryptography.TripleDES.Create();
         tripleDes.GenerateKey();
         tripleDes.GenerateIV();
         return (tripleDes.Key, tripleDes.IV);
@@ -68,7 +68,7 @@ public static class TripleDesHelper
         CipherMode cipherMode = CipherMode.CBC,
         PaddingMode paddingMode = PaddingMode.PKCS7)
     {
-        using (var tripleDes = TripleDES.Create())
+        using (var tripleDes = System.Security.Cryptography.TripleDES.Create())
         {
             tripleDes.Mode = cipherMode;
             tripleDes.Padding = paddingMode;
@@ -127,7 +127,7 @@ public static class TripleDesHelper
         CipherMode cipherMode = CipherMode.CBC,
         PaddingMode paddingMode = PaddingMode.PKCS7)
     {
-        using (var tripleDes = TripleDES.Create())
+        using (var tripleDes = System.Security.Cryptography.TripleDES.Create())
         {
             tripleDes.Mode = cipherMode;
             tripleDes.Padding = paddingMode;

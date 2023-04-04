@@ -1,4 +1,4 @@
-namespace Zaabee.Cryptography;
+namespace Zaabee.Cryptography.RSA;
 
 public static class RsaExtensions
 {

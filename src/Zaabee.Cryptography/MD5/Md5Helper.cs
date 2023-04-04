@@ -1,4 +1,4 @@
-﻿namespace Zaabee.Cryptography;
+﻿namespace Zaabee.Cryptography.MD5;
 
 public static class Md5Helper
 {
@@ -53,10 +53,10 @@ public static class Md5Helper
     public static byte[] GetMd5HashBytes(byte[] bytes)
     {
 #if NET48
-        using var md5 = MD5.Create();
+        using var md5 = System.Security.Cryptography.MD5.Create();
         return md5.ComputeHash(bytes);
 #else
-        return MD5.HashData(bytes);
+        return System.Security.Cryptography.MD5.HashData(bytes);
 #endif
     }
 }

@@ -1,4 +1,4 @@
-namespace Zaabee.Cryptography;
+namespace Zaabee.Cryptography.TripleDES;
 
 public static class TripleDesExtensions
 {

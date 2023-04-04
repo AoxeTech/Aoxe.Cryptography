@@ -1,4 +1,4 @@
-namespace Zaabee.Cryptography;
+namespace Zaabee.Cryptography.RC2;
 
 public static class Rc2Helper
 {
@@ -6,21 +6,21 @@ public static class Rc2Helper
 
     public static byte[] GenerateKey()
     {
-        using var rc2 = RC2.Create();
+        using var rc2 = System.Security.Cryptography.RC2.Create();
         rc2.GenerateKey();
         return rc2.Key;
     }
 
     public static byte[] GenerateVector()
     {
-        using var rc2 = RC2.Create();
+        using var rc2 = System.Security.Cryptography.RC2.Create();
         rc2.GenerateIV();
         return rc2.IV;
     }
 
     public static (byte[] key, byte[] vector) GenerateKeyAndVector()
     {
-        using var rc2 = RC2.Create();
+        using var rc2 = System.Security.Cryptography.RC2.Create();
         rc2.GenerateKey();
         rc2.GenerateIV();
         return (rc2.Key, rc2.IV);
@@ -65,7 +65,7 @@ public static class Rc2Helper
         CipherMode cipherMode = CipherMode.CBC,
         PaddingMode paddingMode = PaddingMode.PKCS7)
     {
-        using (var rc2 = RC2.Create())
+        using (var rc2 = System.Security.Cryptography.RC2.Create())
         {
             rc2.Mode = cipherMode;
             rc2.Padding = paddingMode;
@@ -124,7 +124,7 @@ public static class Rc2Helper
         CipherMode cipherMode = CipherMode.CBC,
         PaddingMode paddingMode = PaddingMode.PKCS7)
     {
-        using (var rc2 = RC2.Create())
+        using (var rc2 = System.Security.Cryptography.RC2.Create())
         {
             rc2.Mode = cipherMode;
             rc2.Padding = paddingMode;

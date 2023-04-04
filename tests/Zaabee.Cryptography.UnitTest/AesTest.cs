@@ -41,7 +41,7 @@ public class AesTest
 
     [Theory]
     [InlineData("Here is some data to encrypt!")]
-    public void AesStreamTest(string original)
+    public void AesStreamTest1(string original)
     {
         var originalStream = original.GetUtf8Bytes().ToMemoryStream();
         var (key, vector) = AesHelper.GenerateKeyAndVector();
@@ -53,12 +53,40 @@ public class AesTest
 
     [Theory]
     [InlineData("Here is some data to encrypt!")]
-    public async Task AesStreamAsyncTest(string original)
+    public async Task AesStreamAsyncTest1(string original)
     {
         var originalStream = original.GetUtf8Bytes().ToMemoryStream();
         var (key, vector) = AesHelper.GenerateKeyAndVector();
         var encryptStream = await originalStream.EncryptByAesAsync(key, vector);
         var decryptStream = await encryptStream.DecryptByAesAsync(key, vector);
+        var decryptString = (await decryptStream.ReadToEndAsync()).GetStringByUtf8();
+        Assert.Equal(original, decryptString);
+    }
+
+    [Theory]
+    [InlineData("Here is some data to encrypt!")]
+    public void AesStreamTest2(string original)
+    {
+        var originalStream = original.GetUtf8Bytes().ToMemoryStream();
+        var (key, vector) = AesHelper.GenerateKeyAndVector();
+        var encryptStream = new MemoryStream();
+        var decryptStream = new MemoryStream();
+        originalStream.EncryptByAes(encryptStream, key, vector);
+        encryptStream.DecryptByAes(decryptStream, key, vector);
+        var decryptString = decryptStream.ReadToEnd().GetStringByUtf8();
+        Assert.Equal(original, decryptString);
+    }
+
+    [Theory]
+    [InlineData("Here is some data to encrypt!")]
+    public async Task AesStreamAsyncTest2(string original)
+    {
+        var originalStream = original.GetUtf8Bytes().ToMemoryStream();
+        var (key, vector) = AesHelper.GenerateKeyAndVector();
+        var encryptStream = new MemoryStream();
+        var decryptStream = new MemoryStream();
+        await originalStream.EncryptByAesAsync(encryptStream, key, vector);
+        await encryptStream.DecryptByAesAsync(decryptStream, key, vector);
         var decryptString = (await decryptStream.ReadToEndAsync()).GetStringByUtf8();
         Assert.Equal(original, decryptString);
     }

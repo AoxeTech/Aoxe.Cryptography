@@ -1,4 +1,4 @@
-namespace Zaabee.Cryptography;
+namespace Zaabee.Cryptography.DSA;
 
 public static class DsaExtensions
 {

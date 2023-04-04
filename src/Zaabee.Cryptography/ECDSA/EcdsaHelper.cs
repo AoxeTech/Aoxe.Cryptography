@@ -1,4 +1,4 @@
-namespace Zaabee.Cryptography;
+namespace Zaabee.Cryptography.ECDSA;
 
 public static class EcdsaHelper
 {
