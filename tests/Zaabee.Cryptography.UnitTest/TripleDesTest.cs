@@ -3,13 +3,6 @@ namespace Zaabee.Cryptography.UnitTest;
 public class TripleDesTest
 {
     [Fact]
-    public void DefaultEncodingTest()
-    {
-        TripleDesHelper.Encoding = Encoding.UTF8;
-        Assert.Equal(Encoding.UTF8, TripleDesHelper.Encoding);
-    }
-
-    [Fact]
     public void GenerateKeyTest()
     {
         var key0 = TripleDesHelper.GenerateKey();
@@ -36,16 +29,6 @@ public class TripleDesTest
 
     [Theory]
     [InlineData("Here is some data to encrypt!")]
-    public void TripleDesStringTest(string original)
-    {
-        var (key, vector) = TripleDesHelper.GenerateKeyAndVector();
-        var encrypt = original.EncryptByTripleDes(key, vector);
-        var decrypt = encrypt.DecryptToStringByTripleDes(key, vector);
-        Assert.Equal(original, decrypt);
-    }
-
-    [Theory]
-    [InlineData("Here is some data to encrypt!")]
     public void TripleDesBytesTest(string original)
     {
         var originalBytes = Encoding.UTF8.GetBytes(original);
@@ -53,6 +36,58 @@ public class TripleDesTest
         var encrypt = originalBytes.EncryptByTripleDes(key, vector);
         var decrypt = encrypt.DecryptByTripleDes(key, vector);
         var decryptString = Encoding.UTF8.GetString(decrypt);
+        Assert.Equal(original, decryptString);
+    }
+
+    [Theory]
+    [InlineData("Here is some data to encrypt!")]
+    public void TripleDesStreamTest1(string original)
+    {
+        var originalStream = original.GetUtf8Bytes().ToMemoryStream();
+        var (key, vector) = TripleDesHelper.GenerateKeyAndVector();
+        var encryptStream = originalStream.EncryptByTripleDes(key, vector);
+        var decryptStream = encryptStream.DecryptByTripleDes(key, vector);
+        var decryptString = decryptStream.ReadToEnd().GetStringByUtf8();
+        Assert.Equal(original, decryptString);
+    }
+
+    [Theory]
+    [InlineData("Here is some data to encrypt!")]
+    public async Task TripleDesStreamAsyncTest1(string original)
+    {
+        var originalStream = original.GetUtf8Bytes().ToMemoryStream();
+        var (key, vector) = TripleDesHelper.GenerateKeyAndVector();
+        var encryptStream = await originalStream.EncryptByTripleDesAsync(key, vector);
+        var decryptStream = await encryptStream.DecryptByTripleDesAsync(key, vector);
+        var decryptString = (await decryptStream.ReadToEndAsync()).GetStringByUtf8();
+        Assert.Equal(original, decryptString);
+    }
+
+    [Theory]
+    [InlineData("Here is some data to encrypt!")]
+    public void TripleDesStreamTest2(string original)
+    {
+        var originalStream = original.GetUtf8Bytes().ToMemoryStream();
+        var (key, vector) = TripleDesHelper.GenerateKeyAndVector();
+        var encryptStream = new MemoryStream();
+        var decryptStream = new MemoryStream();
+        originalStream.EncryptByTripleDes(encryptStream, key, vector);
+        encryptStream.DecryptByTripleDes(decryptStream, key, vector);
+        var decryptString = decryptStream.ReadToEnd().GetStringByUtf8();
+        Assert.Equal(original, decryptString);
+    }
+
+    [Theory]
+    [InlineData("Here is some data to encrypt!")]
+    public async Task TripleDesStreamAsyncTest2(string original)
+    {
+        var originalStream = original.GetUtf8Bytes().ToMemoryStream();
+        var (key, vector) = TripleDesHelper.GenerateKeyAndVector();
+        var encryptStream = new MemoryStream();
+        var decryptStream = new MemoryStream();
+        await originalStream.EncryptByTripleDesAsync(encryptStream, key, vector);
+        await encryptStream.DecryptByTripleDesAsync(decryptStream, key, vector);
+        var decryptString = (await decryptStream.ReadToEndAsync()).GetStringByUtf8();
         Assert.Equal(original, decryptString);
     }
 }
