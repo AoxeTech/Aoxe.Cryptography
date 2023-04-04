@@ -3,13 +3,6 @@ namespace Zaabee.Cryptography.UnitTest;
 public class DesTest
 {
     [Fact]
-    public void DefaultEncodingTest()
-    {
-        DesHelper.Encoding = Encoding.UTF8;
-        Assert.Equal(Encoding.UTF8, DesHelper.Encoding);
-    }
-
-    [Fact]
     public void GenerateKeyTest()
     {
         var key0 = DesHelper.GenerateKey();
@@ -36,16 +29,6 @@ public class DesTest
 
     [Theory]
     [InlineData("Here is some data to encrypt!")]
-    public void DesStringTest(string original)
-    {
-        var (key, vector) = DesHelper.GenerateKeyAndVector();
-        var encrypt = original.EncryptByDes(key, vector);
-        var decrypt = encrypt.DecryptToStringByDes(key, vector);
-        Assert.Equal(original, decrypt);
-    }
-
-    [Theory]
-    [InlineData("Here is some data to encrypt!")]
     public void DesBytesTest(string original)
     {
         var originalBytes = Encoding.UTF8.GetBytes(original);
@@ -53,6 +36,58 @@ public class DesTest
         var encrypt = originalBytes.EncryptByDes(key, vector);
         var decrypt = encrypt.DecryptByDes(key, vector);
         var decryptString = Encoding.UTF8.GetString(decrypt);
+        Assert.Equal(original, decryptString);
+    }
+
+    [Theory]
+    [InlineData("Here is some data to encrypt!")]
+    public void DesStreamTest1(string original)
+    {
+        var originalStream = original.GetUtf8Bytes().ToMemoryStream();
+        var (key, vector) = DesHelper.GenerateKeyAndVector();
+        var encryptStream = originalStream.EncryptByDes(key, vector);
+        var decryptStream = encryptStream.DecryptByDes(key, vector);
+        var decryptString = decryptStream.ReadToEnd().GetStringByUtf8();
+        Assert.Equal(original, decryptString);
+    }
+
+    [Theory]
+    [InlineData("Here is some data to encrypt!")]
+    public async Task DesStreamAsyncTest1(string original)
+    {
+        var originalStream = original.GetUtf8Bytes().ToMemoryStream();
+        var (key, vector) = DesHelper.GenerateKeyAndVector();
+        var encryptStream = await originalStream.EncryptByDesAsync(key, vector);
+        var decryptStream = await encryptStream.DecryptByDesAsync(key, vector);
+        var decryptString = (await decryptStream.ReadToEndAsync()).GetStringByUtf8();
+        Assert.Equal(original, decryptString);
+    }
+
+    [Theory]
+    [InlineData("Here is some data to encrypt!")]
+    public void DesStreamTest2(string original)
+    {
+        var originalStream = original.GetUtf8Bytes().ToMemoryStream();
+        var (key, vector) = DesHelper.GenerateKeyAndVector();
+        var encryptStream = new MemoryStream();
+        var decryptStream = new MemoryStream();
+        originalStream.EncryptByDes(encryptStream, key, vector);
+        encryptStream.DecryptByDes(decryptStream, key, vector);
+        var decryptString = decryptStream.ReadToEnd().GetStringByUtf8();
+        Assert.Equal(original, decryptString);
+    }
+
+    [Theory]
+    [InlineData("Here is some data to encrypt!")]
+    public async Task DesStreamAsyncTest2(string original)
+    {
+        var originalStream = original.GetUtf8Bytes().ToMemoryStream();
+        var (key, vector) = DesHelper.GenerateKeyAndVector();
+        var encryptStream = new MemoryStream();
+        var decryptStream = new MemoryStream();
+        await originalStream.EncryptByDesAsync(encryptStream, key, vector);
+        await encryptStream.DecryptByDesAsync(decryptStream, key, vector);
+        var decryptString = (await decryptStream.ReadToEndAsync()).GetStringByUtf8();
         Assert.Equal(original, decryptString);
     }
 }

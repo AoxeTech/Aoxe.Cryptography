@@ -1,21 +1,7 @@
 ﻿namespace Zaabee.Cryptography.AES;
 
-/// <summary>
-/// AES helper
-/// </summary>
 public static partial class AesHelper
 {
-    /// <summary>
-    /// AES Encrypt
-    /// </summary>
-    /// <param name="original"></param>
-    /// <param name="key"></param>
-    /// <param name="vector"></param>
-    /// <param name="cipherMode"></param>
-    /// <param name="paddingMode"></param>
-    /// <returns></returns>
-    /// <exception cref="ArgumentNullException"></exception>
-    /// <exception cref="NotSupportedException"></exception>
     public static byte[] Encrypt(
         byte[] original,
         byte[] key,
@@ -43,17 +29,6 @@ public static partial class AesHelper
         }
     }
 
-    /// <summary>
-    /// AES Decrypt
-    /// </summary>
-    /// <param name="encrypted"></param>
-    /// <param name="key"></param>
-    /// <param name="vector"></param>
-    /// <param name="cipherMode"></param>
-    /// <param name="paddingMode"></param>
-    /// <returns></returns>
-    /// <exception cref="ArgumentNullException"></exception>
-    /// <exception cref="NotSupportedException"></exception>
     public static byte[] Decrypt(
         byte[] encrypted,
         byte[] key,
