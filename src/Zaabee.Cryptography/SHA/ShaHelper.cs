@@ -50,7 +50,7 @@ public static class ShaHelper
     /// <exception cref="NotSupportedException"></exception>
     public static byte[] GetSha1HashBytes(byte[] bytes)
     {
-#if NETSTANDARD2_0
+#if NET48
         using var sha1 = SHA1.Create();
         return sha1.ComputeHash(bytes);
 #else
@@ -103,7 +103,7 @@ public static class ShaHelper
     /// <exception cref="NotSupportedException"></exception>
     public static byte[] GetSha256HashBytes(byte[] bytes)
     {
-#if NETSTANDARD2_0
+#if NET48
         using var sha256 = SHA256.Create();
         return sha256.ComputeHash(bytes);
 #else
@@ -156,7 +156,7 @@ public static class ShaHelper
     /// <exception cref="NotSupportedException"></exception>
     public static byte[] GetSha384HashBytes(byte[] bytes)
     {
-#if NETSTANDARD2_0
+#if NET48
         using var sha384 = SHA384.Create();
         return sha384.ComputeHash(bytes);
 #else
@@ -209,7 +209,7 @@ public static class ShaHelper
     /// <exception cref="NotSupportedException"></exception>
     public static byte[] GetSha512HashBytes(byte[] bytes)
     {
-#if NETSTANDARD2_0
+#if NET48
         using var sha512 = SHA512.Create();
         return sha512.ComputeHash(bytes);
 #else

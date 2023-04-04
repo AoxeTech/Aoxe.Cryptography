@@ -77,7 +77,7 @@ public static class DesHelper
                 using (var encryptor = des.CreateEncryptor(key, vector))
                 using (var csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
                 {
-#if NETSTANDARD2_0
+#if NET48
                     csEncrypt.Write(original, 0, original.Length);
 #else
                     csEncrypt.Write(original);

@@ -1,33 +1,36 @@
 namespace Zaabee.Cryptography;
 
-public static class Rc2Helper
+/// <summary>
+/// Triple DES Helper
+/// </summary>
+public static class TripleDesHelper
 {
     public static Encoding Encoding { get; set; } = Encoding.UTF8;
 
     public static byte[] GenerateKey()
     {
-        using var rc2 = RC2.Create();
-        rc2.GenerateKey();
-        return rc2.Key;
+        using var tripleDes = TripleDES.Create();
+        tripleDes.GenerateKey();
+        return tripleDes.Key;
     }
 
     public static byte[] GenerateVector()
     {
-        using var rc2 = RC2.Create();
-        rc2.GenerateIV();
-        return rc2.IV;
+        using var tripleDes = TripleDES.Create();
+        tripleDes.GenerateIV();
+        return tripleDes.IV;
     }
 
     public static (byte[] key, byte[] vector) GenerateKeyAndVector()
     {
-        using var rc2 = RC2.Create();
-        rc2.GenerateKey();
-        rc2.GenerateIV();
-        return (rc2.Key, rc2.IV);
+        using var tripleDes = TripleDES.Create();
+        tripleDes.GenerateKey();
+        tripleDes.GenerateIV();
+        return (tripleDes.Key, tripleDes.IV);
     }
 
     /// <summary>
-    /// RC2 Encrypt
+    /// TripleDES Encrypt
     /// </summary>
     /// <param name="original"></param>
     /// <param name="key"></param>
@@ -48,7 +51,7 @@ public static class Rc2Helper
         Encrypt((encoding ?? Encoding).GetBytes(original), key, vector, cipherMode, paddingMode);
 
     /// <summary>
-    /// RC2 Encrypt
+    /// TripleDES Encrypt
     /// </summary>
     /// <param name="original"></param>
     /// <param name="key"></param>
@@ -65,16 +68,16 @@ public static class Rc2Helper
         CipherMode cipherMode = CipherMode.CBC,
         PaddingMode paddingMode = PaddingMode.PKCS7)
     {
-        using (var rc2 = RC2.Create())
+        using (var tripleDes = TripleDES.Create())
         {
-            rc2.Mode = cipherMode;
-            rc2.Padding = paddingMode;
+            tripleDes.Mode = cipherMode;
+            tripleDes.Padding = paddingMode;
             using (var msEncrypt = new MemoryStream())
             {
-                using (var encryptor = rc2.CreateEncryptor(key, vector))
+                using (var encryptor = tripleDes.CreateEncryptor(key, vector))
                 using (var csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
                 {
-#if NETSTANDARD2_0
+#if NET48
                     csEncrypt.Write(original, 0, original.Length);
 #else
                     csEncrypt.Write(original);
@@ -86,7 +89,7 @@ public static class Rc2Helper
     }
 
     /// <summary>
-    /// RC2 Decrypt
+    /// TripleDES Decrypt
     /// </summary>
     /// <param name="encrypted"></param>
     /// <param name="key"></param>
@@ -107,7 +110,7 @@ public static class Rc2Helper
         (encoding ?? Encoding).GetString(Decrypt(encrypted, key, vector, cipherMode, paddingMode));
 
     /// <summary>
-    /// RC2 Decrypt
+    /// TripleDES Decrypt
     /// </summary>
     /// <param name="encrypted"></param>
     /// <param name="key"></param>
@@ -124,12 +127,12 @@ public static class Rc2Helper
         CipherMode cipherMode = CipherMode.CBC,
         PaddingMode paddingMode = PaddingMode.PKCS7)
     {
-        using (var rc2 = RC2.Create())
+        using (var tripleDes = TripleDES.Create())
         {
-            rc2.Mode = cipherMode;
-            rc2.Padding = paddingMode;
+            tripleDes.Mode = cipherMode;
+            tripleDes.Padding = paddingMode;
             using (var msDecrypt = new MemoryStream(encrypted))
-            using (var decryptor = rc2.CreateDecryptor(key, vector))
+            using (var decryptor = tripleDes.CreateDecryptor(key, vector))
             using (var csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
                 return csDecrypt.ReadToEnd();
         }
