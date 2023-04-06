@@ -10,7 +10,7 @@ public static partial class Md5Helper
 
     public static byte[] GetMd5Bytes(byte[] bytes)
     {
-#if NET48
+#if NETSTANDARD2_0
         using var md5 = System.Security.Cryptography.MD5.Create();
         return md5.ComputeHash(bytes);
 #else

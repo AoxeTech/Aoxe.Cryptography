@@ -9,7 +9,7 @@ public static partial class ShaHelper
 
     public static byte[] GetSha512HashBytes(byte[] bytes)
     {
-#if NET48
+#if NETSTANDARD2_0
         using var sha512 = SHA512.Create();
         return sha512.ComputeHash(bytes);
 #else

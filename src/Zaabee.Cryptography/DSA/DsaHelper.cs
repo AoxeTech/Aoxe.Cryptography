@@ -16,7 +16,7 @@ public static class DsaHelper
     {
         using var dsa = System.Security.Cryptography.DSA.Create();
         dsa.ImportParameters(privateKey);
-#if NET48
+#if NETSTANDARD2_0
         using var sha1 = SHA1.Create();
         return dsa.CreateSignature(sha1.ComputeHash(original));
 #else
@@ -38,7 +38,7 @@ public static class DsaHelper
     {
         using var dsa = System.Security.Cryptography.DSA.Create();
         dsa.ImportParameters(publicKey);
-#if NET48
+#if NETSTANDARD2_0
         using var sha1 = SHA1.Create();
         return dsa.VerifySignature(sha1.ComputeHash(original), signature);
 #else
