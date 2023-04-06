@@ -10,7 +10,7 @@ public static partial class ShaHelper
     public static string GetSha256HashString(byte[] bytes)
     {
         var hashBytes = GetSha256HashBytes(bytes);
-        return BitConverter.ToString(hashBytes);
+        return BitConverter.ToString(hashBytes).Replace("-",string.Empty);
     }
 
     public static byte[] GetSha256HashBytes(

@@ -10,7 +10,7 @@ public static partial class ShaHelper
     public static string GetSha512HashString(byte[] bytes)
     {
         var hashBytes = GetSha512HashBytes(bytes);
-        return BitConverter.ToString(hashBytes);
+        return BitConverter.ToString(hashBytes).Replace("-",string.Empty);
     }
 
     public static byte[] GetSha512HashBytes(

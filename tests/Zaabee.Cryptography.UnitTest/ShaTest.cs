@@ -10,7 +10,7 @@ public class ShaTest
     }
 
     [Theory]
-    [InlineData("apple", "D0-BE-2D-C4-21-BE-4F-CD-01-72-E5-AF-CE-EA-39-70-E2-F3-D9-40")]
+    [InlineData("apple", "D0BE2DC421BE4FCD0172E5AFCEEA3970E2F3D940")]
     public void Sha1StringTest(string str, string result)
     {
         Assert.Equal(str.ToSha1String(), result);
@@ -27,7 +27,7 @@ public class ShaTest
 
     [Theory]
     [InlineData("apple",
-        "3A-7B-D3-E2-36-0A-3D-29-EE-A4-36-FC-FB-7E-44-C7-35-D1-17-C4-2D-1C-18-35-42-0B-6B-99-42-DD-4F-1B")]
+        "3A7BD3E2360A3D29EEA436FCFB7E44C735D117C42D1C1835420B6B9942DD4F1B")]
     public void Sha256StringTest(string str, string result)
     {
         Assert.Equal(str.ToSha256String(), result);
@@ -45,7 +45,7 @@ public class ShaTest
 
     [Theory]
     [InlineData("apple",
-        "3D-87-86-FC-B5-88-C9-33-48-75-6C-64-29-71-7D-C6-C3-74-A1-4F-70-29-36-22-81-A3-B2-1D-C1-02-50-DD-F0-D0-57-80-52-74-98-22-EB-08-BC-0D-C1-E6-8B-0F")]
+        "3D8786FCB588C93348756C6429717DC6C374A14F7029362281A3B21DC10250DDF0D0578052749822EB08BC0DC1E68B0F")]
     public void Sha384StringTest(string str, string result)
     {
         Assert.Equal(str.ToSha384String(), result);
@@ -63,7 +63,7 @@ public class ShaTest
 
     [Theory]
     [InlineData("apple",
-        "84-4D-87-79-10-3B-94-C1-8F-4A-A4-CC-0C-3B-44-74-05-85-80-A9-91-FB-A8-5D-3C-A6-98-A0-BC-9E-52-C5-94-0F-EB-7A-65-A3-A2-90-E1-7E-6B-23-EE-94-3E-CC-4F-73-E7-49-03-27-24-5B-4F-E5-D5-EF-B5-90-FE-B2")]
+        "844D8779103B94C18F4AA4CC0C3B4474058580A991FBA85D3CA698A0BC9E52C5940FEB7A65A3A290E17E6B23EE943ECC4F73E7490327245B4FE5D5EFB590FEB2")]
     public void Sha512StringTest(string str, string result)
     {
         Assert.Equal(str.ToSha512String(), result);
