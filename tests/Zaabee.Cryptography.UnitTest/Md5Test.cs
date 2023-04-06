@@ -10,7 +10,7 @@ public class Md5Test
     }
 
     [Theory]
-    [InlineData("apple", "1F-38-70-BE-27-4F-6C-49-B3-E3-1A-0C-67-28-95-7F")]
+    [InlineData("apple", "1F3870BE274F6C49B3E31A0C6728957F")]
     public void ComputeHashStringTest(string str, string result)
     {
         Assert.Equal(str.ToMd5String(), result);
