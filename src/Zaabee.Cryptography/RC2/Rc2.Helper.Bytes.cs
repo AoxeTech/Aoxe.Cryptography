@@ -16,12 +16,12 @@ public static partial class Rc2Helper
             using (var msEncrypt = new MemoryStream())
             {
                 using (var encryptor = rc2.CreateEncryptor(key, vector))
-                using (var csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
+                using (var cryptoStream = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
                 {
-#if NET48
-                    csEncrypt.Write(original, 0, original.Length);
+#if NETSTANDARD2_0
+                    cryptoStream.Write(original, 0, original.Length);
 #else
-                    csEncrypt.Write(original);
+                    cryptoStream.Write(original);
 #endif
                 }
                 return msEncrypt.ToArray();

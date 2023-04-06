@@ -29,13 +29,21 @@ public static partial class TripleDesHelper
             tripleDes.Mode = cipherMode;
             tripleDes.Padding = paddingMode;
             using (var encryptor = tripleDes.CreateEncryptor(key, vector))
-#if NET48
-            using (var csEncrypt = new CryptoStream(encrypted, encryptor, CryptoStreamMode.Write, true))
-                await original.CopyToAsync(csEncrypt, 81920, cancellationToken);
+            {
+#if NETSTANDARD2_0
+                var ms = new MemoryStream();
+                using (var cryptoStream = new CryptoStream(ms, encryptor, CryptoStreamMode.Write))
+                {
+                    await original.CopyToAsync(cryptoStream, 81920, cancellationToken);
+                    cryptoStream.FlushFinalBlock();
+                    ms.Seek(0, SeekOrigin.Begin);
+                    await ms.CopyToAsync(encrypted, 81920, cancellationToken);
+                }
 #else
-            await using (var csEncrypt = new CryptoStream(encrypted, encryptor, CryptoStreamMode.Write, true))
-                await original.CopyToAsync(csEncrypt, cancellationToken);
+                await using (var cryptoStream = new CryptoStream(encrypted, encryptor, CryptoStreamMode.Write, true))
+                    await original.CopyToAsync(cryptoStream, cancellationToken);
 #endif
+            }
         }
         original.TrySeek(0, SeekOrigin.Begin);
         encrypted.TrySeek(0, SeekOrigin.Begin);
@@ -68,13 +76,18 @@ public static partial class TripleDesHelper
             tripleDes.Mode = cipherMode;
             tripleDes.Padding = paddingMode;
             using (var decryptor = tripleDes.CreateDecryptor(key, vector))
-#if NET48
-            using (var csDecrypt = new CryptoStream(encrypted, decryptor, CryptoStreamMode.Read, true))
-                await csDecrypt.CopyToAsync(decrypted, 81920, cancellationToken);
+            {
+#if NETSTANDARD2_0
+                var ms = new MemoryStream();
+                await encrypted.CopyToAsync(ms);
+                ms.Seek(0, SeekOrigin.Begin);
+                using (var csDecrypt = new CryptoStream(ms, decryptor, CryptoStreamMode.Read))
+                    await csDecrypt.CopyToAsync(decrypted, 81920, cancellationToken);
 #else
-            await using (var csDecrypt = new CryptoStream(encrypted, decryptor, CryptoStreamMode.Read, true))
-                await csDecrypt.CopyToAsync(decrypted, cancellationToken);
+                await using (var csDecrypt = new CryptoStream(encrypted, decryptor, CryptoStreamMode.Read, true))
+                    await csDecrypt.CopyToAsync(decrypted, cancellationToken);
 #endif
+            }
         }
         encrypted.TrySeek(0, SeekOrigin.Begin);
         decrypted.TrySeek(0, SeekOrigin.Begin);
