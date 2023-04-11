@@ -22,10 +22,8 @@ public static partial class AesHelper
         CipherMode cipherMode = CipherMode.CBC,
         PaddingMode paddingMode = PaddingMode.PKCS7)
     {
-        using (var aes = Aes.Create())
-            aes.Encrypt(original, encrypted, key, vector, cipherMode, paddingMode);
-        original.TrySeek(0, SeekOrigin.Begin);
-        encrypted.TrySeek(0, SeekOrigin.Begin);
+        using var aes = Aes.Create();
+        aes.Encrypt(original, encrypted, key, vector, cipherMode, paddingMode);
     }
 
     public static MemoryStream Decrypt(

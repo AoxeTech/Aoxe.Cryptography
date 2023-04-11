@@ -22,10 +22,8 @@ public static partial class DesHelper
         CipherMode cipherMode = SymmetricAlgorithmHelper.DefaultCipherMode,
         PaddingMode paddingMode = SymmetricAlgorithmHelper.DefaultPaddingMode)
     {
-        using (var des = System.Security.Cryptography.DES.Create())
-            des.Encrypt(original, encrypted, key, vector, cipherMode, paddingMode);
-        original.TrySeek(0, SeekOrigin.Begin);
-        encrypted.TrySeek(0, SeekOrigin.Begin);
+        using var des = System.Security.Cryptography.DES.Create();
+        des.Encrypt(original, encrypted, key, vector, cipherMode, paddingMode);
     }
 
     public static MemoryStream Decrypt(
@@ -48,25 +46,7 @@ public static partial class DesHelper
         CipherMode cipherMode = SymmetricAlgorithmHelper.DefaultCipherMode,
         PaddingMode paddingMode = SymmetricAlgorithmHelper.DefaultPaddingMode)
     {
-        using (var des = System.Security.Cryptography.DES.Create())
-        {
-            des.Mode = cipherMode;
-            des.Padding = paddingMode;
-            using (var decryptor = des.CreateDecryptor(key, vector))
-            {
-#if NETSTANDARD2_0
-                var ms = new MemoryStream();
-                encrypted.CopyTo(ms);
-                ms.Seek(0, SeekOrigin.Begin);
-                using (var csDecrypt = new CryptoStream(ms, decryptor, CryptoStreamMode.Read))
-                    csDecrypt.CopyTo(decrypted);
-#else
-                using (var csDecrypt = new CryptoStream(encrypted, decryptor, CryptoStreamMode.Read, true))
-                    csDecrypt.CopyTo(decrypted);
-#endif
-            }
-        }
-        encrypted.TrySeek(0, SeekOrigin.Begin);
-        decrypted.TrySeek(0, SeekOrigin.Begin);
+        using var des = System.Security.Cryptography.DES.Create();
+        des.Decrypt(encrypted, decrypted, key, vector, cipherMode, paddingMode);
     }
 }

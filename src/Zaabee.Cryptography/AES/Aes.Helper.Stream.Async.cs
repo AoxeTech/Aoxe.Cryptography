@@ -24,10 +24,8 @@ public static partial class AesHelper
         PaddingMode paddingMode = PaddingMode.PKCS7,
         CancellationToken cancellationToken = default)
     {
-        using (var aes = Aes.Create())
-            await aes.EncryptAsync(original, encrypted, key, vector, cipherMode, paddingMode, cancellationToken);
-        original.TrySeek(0, SeekOrigin.Begin);
-        encrypted.TrySeek(0, SeekOrigin.Begin);
+        using var aes = Aes.Create();
+        await aes.EncryptAsync(original, encrypted, key, vector, cipherMode, paddingMode, cancellationToken);
     }
 
     public static async Task<MemoryStream> DecryptAsync(

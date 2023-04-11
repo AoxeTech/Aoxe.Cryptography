@@ -49,8 +49,8 @@ public static partial class SymmetricAlgorithmExtensions
         symmetricAlgorithm.Mode = cipherMode;
         symmetricAlgorithm.Padding = paddingMode;
         using (var decryptor = key is not null && vector is not null
-                   ? symmetricAlgorithm.CreateEncryptor(key, vector)
-                   : symmetricAlgorithm.CreateEncryptor())
+                   ? symmetricAlgorithm.CreateDecryptor(key, vector)
+                   : symmetricAlgorithm.CreateDecryptor())
         {
 #if NETSTANDARD2_0
             var ms = new MemoryStream();

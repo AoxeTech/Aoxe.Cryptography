@@ -21,11 +21,6 @@ public static partial class DesHelper
         PaddingMode paddingMode = SymmetricAlgorithmHelper.DefaultPaddingMode)
     {
         using var des = System.Security.Cryptography.DES.Create();
-        des.Mode = cipherMode;
-        des.Padding = paddingMode;
-        using var msDecrypt = new MemoryStream(encrypted);
-        using var decryptor = des.CreateDecryptor(key, vector);
-        using var csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read);
-        return csDecrypt.ReadToEnd();
+        return des.Decrypt(encrypted, key, vector, cipherMode, paddingMode);
     }
 }

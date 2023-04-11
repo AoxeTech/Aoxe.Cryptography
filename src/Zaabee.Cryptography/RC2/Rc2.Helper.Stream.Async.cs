@@ -24,29 +24,8 @@ public static partial class Rc2Helper
         PaddingMode paddingMode = PaddingMode.PKCS7,
         CancellationToken cancellationToken = default)
     {
-        using (var rc2 = System.Security.Cryptography.RC2.Create())
-        {
-            rc2.Mode = cipherMode;
-            rc2.Padding = paddingMode;
-            using (var encryptor = rc2.CreateEncryptor(key, vector))
-            {
-#if NETSTANDARD2_0
-                var ms = new MemoryStream();
-                using (var cryptoStream = new CryptoStream(ms, encryptor, CryptoStreamMode.Write))
-                {
-                    await original.CopyToAsync(cryptoStream, 81920, cancellationToken);
-                    cryptoStream.FlushFinalBlock();
-                    ms.Seek(0, SeekOrigin.Begin);
-                    await ms.CopyToAsync(encrypted, 81920, cancellationToken);
-                }
-#else
-                await using (var cryptoStream = new CryptoStream(encrypted, encryptor, CryptoStreamMode.Write, true))
-                    await original.CopyToAsync(cryptoStream, cancellationToken);
-#endif
-            }
-        }
-        original.TrySeek(0, SeekOrigin.Begin);
-        encrypted.TrySeek(0, SeekOrigin.Begin);
+        using var rc2 = System.Security.Cryptography.RC2.Create();
+        await rc2.EncryptAsync(original, encrypted, key, vector, cipherMode, paddingMode, cancellationToken);
     }
 
     public static async Task<MemoryStream> DecryptAsync(
@@ -71,26 +50,7 @@ public static partial class Rc2Helper
         PaddingMode paddingMode = PaddingMode.PKCS7,
         CancellationToken cancellationToken = default)
     {
-        using (var rc2 = System.Security.Cryptography.RC2.Create())
-        {
-            rc2.Mode = cipherMode;
-            rc2.Padding = paddingMode;
-            using (var decryptor = rc2.CreateDecryptor(key, vector))
-            {
-
-#if NETSTANDARD2_0
-                var ms = new MemoryStream();
-                await encrypted.CopyToAsync(ms);
-                ms.Seek(0, SeekOrigin.Begin);
-                using (var csDecrypt = new CryptoStream(ms, decryptor, CryptoStreamMode.Read))
-                    await csDecrypt.CopyToAsync(decrypted, 81920, cancellationToken);
-#else
-                await using (var csDecrypt = new CryptoStream(encrypted, decryptor, CryptoStreamMode.Read, true))
-                    await csDecrypt.CopyToAsync(decrypted, cancellationToken);
-#endif
-            }
-        }
-        encrypted.TrySeek(0, SeekOrigin.Begin);
-        decrypted.TrySeek(0, SeekOrigin.Begin);
+        using var rc2 = System.Security.Cryptography.RC2.Create();
+        await rc2.DecryptAsync(encrypted, decrypted, key, vector, cipherMode, paddingMode, cancellationToken);
     }
 }

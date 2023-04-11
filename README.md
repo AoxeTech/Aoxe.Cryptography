@@ -2,6 +2,22 @@
 
 The wraps and extension methods of AES/MD5/SHA/RSA/DSA/ECDSA/DES/TripleDES
 
+- Symmetric Algorithm
+  - AES
+  - DES
+  - TripleDES
+  - RC2
+- Asymmetric Algorithm
+  - RSA
+  - DSA
+  - ECDSA
+- Hash Algorithm
+  - MD5
+  - SHA1
+  - SHA256
+  - SHA384
+  - SHA512
+
 ## Quick Start
 
 ### MD5
