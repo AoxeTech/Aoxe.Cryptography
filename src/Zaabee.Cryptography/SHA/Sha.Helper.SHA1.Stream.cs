@@ -2,11 +2,9 @@ namespace Zaabee.Cryptography.SHA;
 
 public static partial class ShaHelper
 {
-    public static string ComputeSha1(
-        string str,
-        Encoding? encoding = null)
+    public static byte[] ComputeSha1(Stream inputStream)
     {
         using var sha1 = System.Security.Cryptography.SHA1.Create();
-        return sha1.ToHashString(str, encoding);
+        return sha1.ToHash(inputStream);
     }
 }

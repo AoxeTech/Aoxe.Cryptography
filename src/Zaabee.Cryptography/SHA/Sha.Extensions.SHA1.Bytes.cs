@@ -2,11 +2,12 @@ namespace Zaabee.Cryptography.SHA;
 
 public static partial class ShaExtensions
 {
-    public static byte[] ToSha1Bytes(
-        this string str,
-        Encoding? encoding = null) =>
-        ShaHelper.GetSha1HashBytes(str, encoding);
+    public static byte[] ToSha1(this byte[] bytes) =>
+        ShaHelper.ComputeSha1(bytes);
 
-    public static byte[] ToSha1Bytes(this byte[] bytes) =>
-        ShaHelper.GetSha1HashBytes(bytes);
+    public static byte[] ToSha1(
+        this byte[] bytes,
+        int offset,
+        int count) =>
+        ShaHelper.ComputeSha1(bytes, offset, count);
 }
