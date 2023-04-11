@@ -3,7 +3,7 @@ namespace Zaabee.Cryptography;
 public static partial class SymmetricAlgorithmExtensions
 {
     public static void Encrypt(
-        this SymmetricAlgorithm symmetricAlgorithm,
+        this System.Security.Cryptography.SymmetricAlgorithm symmetricAlgorithm,
         Stream original,
         Stream encrypted,
         byte[]? key = null,
@@ -36,7 +36,7 @@ public static partial class SymmetricAlgorithmExtensions
     }
 
     public static void Decrypt(
-        this SymmetricAlgorithm symmetricAlgorithm,
+        this System.Security.Cryptography.SymmetricAlgorithm symmetricAlgorithm,
         Stream encrypted,
         Stream decrypted,
         byte[]? key = null,

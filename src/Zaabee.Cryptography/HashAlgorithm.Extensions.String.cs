@@ -3,7 +3,7 @@ namespace Zaabee.Cryptography;
 public static partial class HashAlgorithmExtensions
 {
     public static string ToHashString(
-        this HashAlgorithm hashAlgorithm,
+        this System.Security.Cryptography.HashAlgorithm hashAlgorithm,
         string str,
         Encoding? encoding = null) =>
         BitConverter

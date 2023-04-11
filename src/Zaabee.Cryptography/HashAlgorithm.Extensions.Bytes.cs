@@ -3,12 +3,12 @@ namespace Zaabee.Cryptography;
 public static partial class HashAlgorithmExtensions
 {
     public static byte[] ToHash(
-        this HashAlgorithm hashAlgorithm,
+        this System.Security.Cryptography.HashAlgorithm hashAlgorithm,
         byte[] buffer) =>
         hashAlgorithm.ComputeHash(buffer);
 
     public static byte[] ToHash(
-        this HashAlgorithm hashAlgorithm,
+        this System.Security.Cryptography.HashAlgorithm hashAlgorithm,
         byte[] buffer,
         int offset,
         int count) =>
