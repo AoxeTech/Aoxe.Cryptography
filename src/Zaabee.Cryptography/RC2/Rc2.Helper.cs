@@ -5,22 +5,18 @@ public static partial class Rc2Helper
     public static byte[] GenerateKey()
     {
         using var rc2 = System.Security.Cryptography.RC2.Create();
-        rc2.GenerateKey();
-        return rc2.Key;
+        return SymmetricAlgorithmHelper.GenerateKey(rc2);
     }
 
     public static byte[] GenerateVector()
     {
         using var rc2 = System.Security.Cryptography.RC2.Create();
-        rc2.GenerateIV();
-        return rc2.IV;
+        return SymmetricAlgorithmHelper.GenerateVector(rc2);
     }
 
     public static (byte[] key, byte[] vector) GenerateKeyAndVector()
     {
         using var rc2 = System.Security.Cryptography.RC2.Create();
-        rc2.GenerateKey();
-        rc2.GenerateIV();
-        return (rc2.Key, rc2.IV);
+        return SymmetricAlgorithmHelper.GenerateKeyAndVector(rc2);
     }
 }

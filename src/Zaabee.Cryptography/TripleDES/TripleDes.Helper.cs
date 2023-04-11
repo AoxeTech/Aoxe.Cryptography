@@ -5,22 +5,18 @@ public static partial class TripleDesHelper
     public static byte[] GenerateKey()
     {
         using var tripleDes = System.Security.Cryptography.TripleDES.Create();
-        tripleDes.GenerateKey();
-        return tripleDes.Key;
+        return SymmetricAlgorithmHelper.GenerateKey(tripleDes);
     }
 
     public static byte[] GenerateVector()
     {
         using var tripleDes = System.Security.Cryptography.TripleDES.Create();
-        tripleDes.GenerateIV();
-        return tripleDes.IV;
+        return SymmetricAlgorithmHelper.GenerateVector(tripleDes);
     }
 
     public static (byte[] key, byte[] vector) GenerateKeyAndVector()
     {
         using var tripleDes = System.Security.Cryptography.TripleDES.Create();
-        tripleDes.GenerateKey();
-        tripleDes.GenerateIV();
-        return (tripleDes.Key, tripleDes.IV);
+        return SymmetricAlgorithmHelper.GenerateKeyAndVector(tripleDes);
     }
 }

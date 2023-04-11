@@ -5,22 +5,18 @@ public static partial class DesHelper
     public static byte[] GenerateKey()
     {
         using var des = System.Security.Cryptography.DES.Create();
-        des.GenerateKey();
-        return des.Key;
+        return SymmetricAlgorithmHelper.GenerateKey(des);
     }
 
     public static byte[] GenerateVector()
     {
         using var des = System.Security.Cryptography.DES.Create();
-        des.GenerateIV();
-        return des.IV;
+        return SymmetricAlgorithmHelper.GenerateVector(des);
     }
 
     public static (byte[] key, byte[] vector) GenerateKeyAndVector()
     {
         using var des = System.Security.Cryptography.DES.Create();
-        des.GenerateKey();
-        des.GenerateIV();
-        return (des.Key, des.IV);
+        return SymmetricAlgorithmHelper.GenerateKeyAndVector(des);
     }
 }
