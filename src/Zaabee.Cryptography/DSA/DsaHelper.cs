@@ -1,5 +1,3 @@
-using System.Text;
-
 namespace Zaabee.Cryptography.DSA;
 
 public static class DsaHelper

@@ -1,16 +1,13 @@
-using System.Text;
-
 namespace Zaabee.Cryptography.MD5;
 
 public static partial class Md5Extensions
 {
-    public static string ToMd5String(
-        this string str,
-        Encoding? encoding = null) =>
-        Md5Helper.GetMd5String(str, encoding);
+    public static byte[] ToMd5(this byte[] bytes) =>
+        Md5Helper.ComputeMd5(bytes);
 
-    public static byte[] ToMd5Bytes(
-        this string str,
-        Encoding? encoding = null) =>
-        Md5Helper.GetMd5Bytes(str, encoding);
+    public static byte[] ToMd5(
+        this byte[] bytes,
+        int offset,
+        int count) =>
+        Md5Helper.ComputeMd5(bytes, offset, count);
 }

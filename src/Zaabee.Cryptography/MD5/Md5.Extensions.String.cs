@@ -2,9 +2,8 @@ namespace Zaabee.Cryptography.MD5;
 
 public static partial class Md5Extensions
 {
-    public static string ToMd5String(this byte[] bytes) =>
-        Md5Helper.GetMd5String(bytes);
-
-    public static byte[] ToMd5Bytes(this byte[] bytes) =>
-        Md5Helper.GetMd5Bytes(bytes);
+    public static string ToMd5(
+        this string str,
+        Encoding? encoding = null) =>
+        Md5Helper.ComputeMd5(str, encoding);
 }

@@ -1,22 +1,19 @@
-using System;
-
 namespace Zaabee.Cryptography.MD5;
 
 public static partial class Md5Helper
 {
-    public static string GetMd5String(byte[] bytes)
+    public static byte[] ComputeMd5(byte[] bytes)
     {
-        var hashBytes = GetMd5Bytes(bytes);
-        return BitConverter.ToString(hashBytes).Replace("-", string.Empty);
+        using var md5 = System.Security.Cryptography.MD5.Create();
+        return md5.ToHash(bytes);
     }
 
-    public static byte[] GetMd5Bytes(byte[] bytes)
+    public static byte[] ComputeMd5(
+        byte[] bytes,
+        int offset,
+        int count)
     {
-#if NETSTANDARD2_0
         using var md5 = System.Security.Cryptography.MD5.Create();
-        return md5.ComputeHash(bytes);
-#else
-        return System.Security.Cryptography.MD5.HashData(bytes);
-#endif
+        return md5.ToHash(bytes, offset, count);
     }
 }
