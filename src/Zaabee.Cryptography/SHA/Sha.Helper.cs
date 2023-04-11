@@ -1,4 +1,6 @@
-﻿namespace Zaabee.Cryptography.SHA;
+﻿using System.Text;
+
+namespace Zaabee.Cryptography.SHA;
 
 public static partial class ShaHelper
 {

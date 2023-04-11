@@ -1,4 +1,6 @@
-﻿namespace Zaabee.Cryptography.MD5;
+﻿using System.Text;
+
+namespace Zaabee.Cryptography.MD5;
 
 public static partial class Md5Helper
 {

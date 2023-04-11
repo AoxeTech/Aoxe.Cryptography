@@ -6,8 +6,8 @@ public static partial class DesHelper
         Stream original,
         byte[] key,
         byte[] vector,
-        CipherMode cipherMode = CipherMode.CBC,
-        PaddingMode paddingMode = PaddingMode.PKCS7,
+        CipherMode cipherMode = SymmetricAlgorithmHelper.DefaultCipherMode,
+        PaddingMode paddingMode = SymmetricAlgorithmHelper.DefaultPaddingMode,
         CancellationToken cancellationToken = default)
     {
         var encrypted = new MemoryStream();
@@ -20,31 +20,12 @@ public static partial class DesHelper
         Stream encrypted,
         byte[] key,
         byte[] vector,
-        CipherMode cipherMode = CipherMode.CBC,
-        PaddingMode paddingMode = PaddingMode.PKCS7,
+        CipherMode cipherMode = SymmetricAlgorithmHelper.DefaultCipherMode,
+        PaddingMode paddingMode = SymmetricAlgorithmHelper.DefaultPaddingMode,
         CancellationToken cancellationToken = default)
     {
         using (var des = System.Security.Cryptography.DES.Create())
-        {
-            des.Mode = cipherMode;
-            des.Padding = paddingMode;
-            using (var encryptor = des.CreateEncryptor(key, vector))
-            {
-#if NETSTANDARD2_0
-                var ms = new MemoryStream();
-                using (var cryptoStream = new CryptoStream(ms, encryptor, CryptoStreamMode.Write))
-                {
-                    await original.CopyToAsync(cryptoStream, 81920, cancellationToken);
-                    cryptoStream.FlushFinalBlock();
-                    ms.Seek(0, SeekOrigin.Begin);
-                    await ms.CopyToAsync(encrypted, 81920, cancellationToken);
-                }
-#else
-                await using (var cryptoStream = new CryptoStream(encrypted, encryptor, CryptoStreamMode.Write, true))
-                    await original.CopyToAsync(cryptoStream, cancellationToken);
-#endif
-            }
-        }
+            await des.EncryptAsync(original, encrypted, key, vector, cipherMode, paddingMode, cancellationToken);
         original.TrySeek(0, SeekOrigin.Begin);
         encrypted.TrySeek(0, SeekOrigin.Begin);
     }
@@ -53,8 +34,8 @@ public static partial class DesHelper
         Stream encrypted,
         byte[] key,
         byte[] vector,
-        CipherMode cipherMode = CipherMode.CBC,
-        PaddingMode paddingMode = PaddingMode.PKCS7,
+        CipherMode cipherMode = SymmetricAlgorithmHelper.DefaultCipherMode,
+        PaddingMode paddingMode = SymmetricAlgorithmHelper.DefaultPaddingMode,
         CancellationToken cancellationToken = default)
     {
         var decrypted = new MemoryStream();
@@ -67,8 +48,8 @@ public static partial class DesHelper
         Stream decrypted,
         byte[] key,
         byte[] vector,
-        CipherMode cipherMode = CipherMode.CBC,
-        PaddingMode paddingMode = PaddingMode.PKCS7,
+        CipherMode cipherMode = SymmetricAlgorithmHelper.DefaultCipherMode,
+        PaddingMode paddingMode = SymmetricAlgorithmHelper.DefaultPaddingMode,
         CancellationToken cancellationToken = default)
     {
         using (var des = System.Security.Cryptography.DES.Create())
@@ -77,7 +58,6 @@ public static partial class DesHelper
             des.Padding = paddingMode;
             using (var decryptor = des.CreateDecryptor(key, vector))
             {
-
 #if NETSTANDARD2_0
                 var ms = new MemoryStream();
                 await encrypted.CopyToAsync(ms);

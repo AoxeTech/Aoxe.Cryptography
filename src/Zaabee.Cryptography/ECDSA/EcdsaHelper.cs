@@ -1,9 +1,19 @@
+using System.Text;
+
 namespace Zaabee.Cryptography.ECDSA;
 
 public static class EcdsaHelper
 {
     public static Encoding Encoding { get; set; } = Encoding.UTF8;
     public static HashAlgorithmName HashAlgorithmName { get; set; } = HashAlgorithmName.SHA256;
+
+    public static (ECParameters privateKey, ECParameters publicKey) GenerateParameters()
+    {
+        using var ecDsa = ECDsa.Create();
+        var privateKey = ecDsa.ExportParameters(true);
+        var publicKey = ecDsa.ExportParameters(false);
+        return (privateKey, publicKey);
+    }
 
     #region Data
 
@@ -80,12 +90,4 @@ public static class EcdsaHelper
     }
 
     #endregion
-
-    public static (ECParameters privateKey, ECParameters publicKey) GenerateParameters()
-    {
-        using var ecDsa = ECDsa.Create();
-        var privateKey = ecDsa.ExportParameters(true);
-        var publicKey = ecDsa.ExportParameters(false);
-        return (privateKey, publicKey);
-    }
 }

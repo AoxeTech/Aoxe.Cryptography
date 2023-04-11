@@ -1,3 +1,6 @@
+using System;
+using System.Text;
+
 namespace Zaabee.Cryptography.SHA;
 
 public static partial class ShaHelper
@@ -10,6 +13,6 @@ public static partial class ShaHelper
     public static string GetSha512HashString(byte[] bytes)
     {
         var hashBytes = GetSha512HashBytes(bytes);
-        return BitConverter.ToString(hashBytes).Replace("-",string.Empty);
+        return BitConverter.ToString(hashBytes).Replace("-", string.Empty);
     }
 }

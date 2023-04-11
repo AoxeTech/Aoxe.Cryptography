@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace Zaabee.Cryptography.ECDSA;
 
 public static class EcdsaExtensions

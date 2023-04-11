@@ -6,44 +6,26 @@ public static partial class DesHelper
         byte[] original,
         byte[] key,
         byte[] vector,
-        CipherMode cipherMode = CipherMode.CBC,
-        PaddingMode paddingMode = PaddingMode.PKCS7)
+        CipherMode cipherMode = SymmetricAlgorithmHelper.DefaultCipherMode,
+        PaddingMode paddingMode = SymmetricAlgorithmHelper.DefaultPaddingMode)
     {
-        using (var des = System.Security.Cryptography.DES.Create())
-        {
-            des.Mode = cipherMode;
-            des.Padding = paddingMode;
-            using (var msEncrypt = new MemoryStream())
-            {
-                using (var encryptor = des.CreateEncryptor(key, vector))
-                using (var cryptoStream = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
-                {
-#if NETSTANDARD2_0
-                    cryptoStream.Write(original, 0, original.Length);
-#else
-                    cryptoStream.Write(original);
-#endif
-                }
-                return msEncrypt.ToArray();
-            }
-        }
+        using var des = System.Security.Cryptography.DES.Create();
+        return des.Encrypt(original, key, vector, cipherMode, paddingMode);
     }
 
     public static byte[] Decrypt(
         byte[] encrypted,
         byte[] key,
         byte[] vector,
-        CipherMode cipherMode = CipherMode.CBC,
-        PaddingMode paddingMode = PaddingMode.PKCS7)
+        CipherMode cipherMode = SymmetricAlgorithmHelper.DefaultCipherMode,
+        PaddingMode paddingMode = SymmetricAlgorithmHelper.DefaultPaddingMode)
     {
-        using (var des = System.Security.Cryptography.DES.Create())
-        {
-            des.Mode = cipherMode;
-            des.Padding = paddingMode;
-            using (var msDecrypt = new MemoryStream(encrypted))
-            using (var decryptor = des.CreateDecryptor(key, vector))
-            using (var csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
-                return csDecrypt.ReadToEnd();
-        }
+        using var des = System.Security.Cryptography.DES.Create();
+        des.Mode = cipherMode;
+        des.Padding = paddingMode;
+        using var msDecrypt = new MemoryStream(encrypted);
+        using var decryptor = des.CreateDecryptor(key, vector);
+        using var csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read);
+        return csDecrypt.ReadToEnd();
     }
 }

@@ -1,3 +1,5 @@
+using System;
+
 namespace Zaabee.Cryptography.MD5;
 
 public static partial class Md5Helper
@@ -5,7 +7,7 @@ public static partial class Md5Helper
     public static string GetMd5String(byte[] bytes)
     {
         var hashBytes = GetMd5Bytes(bytes);
-        return BitConverter.ToString(hashBytes).Replace("-",string.Empty);
+        return BitConverter.ToString(hashBytes).Replace("-", string.Empty);
     }
 
     public static byte[] GetMd5Bytes(byte[] bytes)

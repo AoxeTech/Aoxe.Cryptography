@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace Zaabee.Cryptography.SHA;
 
 public static partial class ShaExtensions
