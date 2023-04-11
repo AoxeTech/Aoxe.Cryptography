@@ -6,8 +6,8 @@ public static partial class Rc2Helper
         Stream original,
         byte[] key,
         byte[] vector,
-        CipherMode cipherMode = CipherMode.CBC,
-        PaddingMode paddingMode = PaddingMode.PKCS7)
+        CipherMode cipherMode = SymmetricAlgorithmHelper.DefaultCipherMode,
+        PaddingMode paddingMode = SymmetricAlgorithmHelper.DefaultPaddingMode)
     {
         var encrypted = new MemoryStream();
         Encrypt(original, encrypted, key, vector, cipherMode, paddingMode);
@@ -19,8 +19,8 @@ public static partial class Rc2Helper
         Stream encrypted,
         byte[] key,
         byte[] vector,
-        CipherMode cipherMode = CipherMode.CBC,
-        PaddingMode paddingMode = PaddingMode.PKCS7)
+        CipherMode cipherMode = SymmetricAlgorithmHelper.DefaultCipherMode,
+        PaddingMode paddingMode = SymmetricAlgorithmHelper.DefaultPaddingMode)
     {
         using var rc2 = System.Security.Cryptography.RC2.Create();
         rc2.Encrypt(original, encrypted, key, vector, cipherMode, paddingMode);
@@ -30,8 +30,8 @@ public static partial class Rc2Helper
         Stream encrypted,
         byte[] key,
         byte[] vector,
-        CipherMode cipherMode = CipherMode.CBC,
-        PaddingMode paddingMode = PaddingMode.PKCS7)
+        CipherMode cipherMode = SymmetricAlgorithmHelper.DefaultCipherMode,
+        PaddingMode paddingMode = SymmetricAlgorithmHelper.DefaultPaddingMode)
     {
         var decrypted = new MemoryStream();
         Decrypt(encrypted, decrypted, key, vector, cipherMode, paddingMode);
@@ -43,8 +43,8 @@ public static partial class Rc2Helper
         Stream decrypted,
         byte[] key,
         byte[] vector,
-        CipherMode cipherMode = CipherMode.CBC,
-        PaddingMode paddingMode = PaddingMode.PKCS7)
+        CipherMode cipherMode = SymmetricAlgorithmHelper.DefaultCipherMode,
+        PaddingMode paddingMode = SymmetricAlgorithmHelper.DefaultPaddingMode)
     {
         using var rc2 = System.Security.Cryptography.RC2.Create();
         rc2.Decrypt(encrypted, decrypted, key, vector, cipherMode, paddingMode);

@@ -6,8 +6,8 @@ public static partial class Rc2Helper
         Stream original,
         byte[] key,
         byte[] vector,
-        CipherMode cipherMode = CipherMode.CBC,
-        PaddingMode paddingMode = PaddingMode.PKCS7,
+        CipherMode cipherMode = SymmetricAlgorithmHelper.DefaultCipherMode,
+        PaddingMode paddingMode = SymmetricAlgorithmHelper.DefaultPaddingMode,
         CancellationToken cancellationToken = default)
     {
         var encrypted = new MemoryStream();
@@ -20,8 +20,8 @@ public static partial class Rc2Helper
         Stream encrypted,
         byte[] key,
         byte[] vector,
-        CipherMode cipherMode = CipherMode.CBC,
-        PaddingMode paddingMode = PaddingMode.PKCS7,
+        CipherMode cipherMode = SymmetricAlgorithmHelper.DefaultCipherMode,
+        PaddingMode paddingMode = SymmetricAlgorithmHelper.DefaultPaddingMode,
         CancellationToken cancellationToken = default)
     {
         using var rc2 = System.Security.Cryptography.RC2.Create();
@@ -32,8 +32,8 @@ public static partial class Rc2Helper
         Stream encrypted,
         byte[] key,
         byte[] vector,
-        CipherMode cipherMode = CipherMode.CBC,
-        PaddingMode paddingMode = PaddingMode.PKCS7,
+        CipherMode cipherMode = SymmetricAlgorithmHelper.DefaultCipherMode,
+        PaddingMode paddingMode = SymmetricAlgorithmHelper.DefaultPaddingMode,
         CancellationToken cancellationToken = default)
     {
         var decrypted = new MemoryStream();
@@ -46,8 +46,8 @@ public static partial class Rc2Helper
         Stream decrypted,
         byte[] key,
         byte[] vector,
-        CipherMode cipherMode = CipherMode.CBC,
-        PaddingMode paddingMode = PaddingMode.PKCS7,
+        CipherMode cipherMode = SymmetricAlgorithmHelper.DefaultCipherMode,
+        PaddingMode paddingMode = SymmetricAlgorithmHelper.DefaultPaddingMode,
         CancellationToken cancellationToken = default)
     {
         using var rc2 = System.Security.Cryptography.RC2.Create();
