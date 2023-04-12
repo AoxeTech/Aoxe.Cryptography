@@ -1,6 +1,6 @@
 # Zaabee.Cryptography
 
-The wraps and extension methods of AES/MD5/SHA/RSA/DSA/ECDSA/DES/TripleDES
+Provide an easy way to use encryption algorithms. This package support the wraps and extension methods of AES/MD5/SHA/RSA/DSA/ECDSA/DES/TripleDES
 
 - Symmetric Algorithm
   - AES

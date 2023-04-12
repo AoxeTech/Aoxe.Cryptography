@@ -53,4 +53,20 @@ public static class DsaHelper
         var publicKey = dsa.ExportParameters(false);
         return (privateKey, publicKey);
     }
+
+    public static void Test()
+    {
+        var dsa = System.Security.Cryptography.DSA.Create();
+
+// Generate a new public/private key pair
+        var publicKey = dsa.ExportParameters(false);
+        var privateKey = dsa.ExportParameters(true);
+
+// Sign some data using the private key
+        var data = new byte[] { 1, 2, 3, 4, 5 };
+        var signature = dsa.SignData(data, privateKey);
+
+// Verify the signature using the public key
+        var verified = dsa.VerifyData(data, signature, publicKey);
+    }
 }

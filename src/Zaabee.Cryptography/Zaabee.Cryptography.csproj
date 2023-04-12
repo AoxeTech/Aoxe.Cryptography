@@ -16,13 +16,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Zaabee.Extensions" Version="2023.1.2"/>
+        <PackageReference Include="Zaabee.Extensions" Version="2023.1.2" />
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="AsymmetricAlgorithm\"/>
-        <Folder Include="HashAlgorithm\"/>
-        <Folder Include="SymmetricAlgorithm\"/>
+        <Folder Include="AsymmetricAlgorithm\" />
+        <Folder Include="HashAlgorithm\" />
+        <Folder Include="SymmetricAlgorithm\" />
     </ItemGroup>
 
 </Project>
