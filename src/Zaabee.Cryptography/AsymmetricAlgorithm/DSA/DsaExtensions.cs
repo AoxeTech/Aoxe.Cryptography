@@ -1,4 +1,4 @@
-namespace Zaabee.Cryptography.DSA;
+namespace Zaabee.Cryptography.AsymmetricAlgorithm.DSA;
 
 public static class DsaExtensions
 {

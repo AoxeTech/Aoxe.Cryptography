@@ -1,4 +1,4 @@
-namespace Zaabee.Cryptography.RSA;
+namespace Zaabee.Cryptography.AsymmetricAlgorithm.RSA;
 
 public static partial class RsaHelper
 {

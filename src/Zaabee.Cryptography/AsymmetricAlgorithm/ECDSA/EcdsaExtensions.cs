@@ -1,4 +1,4 @@
-namespace Zaabee.Cryptography.ECDSA;
+namespace Zaabee.Cryptography.AsymmetricAlgorithm.ECDSA;
 
 public static class EcdsaExtensions
 {
