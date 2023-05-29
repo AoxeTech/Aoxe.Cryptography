@@ -6,8 +6,8 @@ public static partial class DesHelper
         byte[] original,
         byte[] key,
         byte[] vector,
-        CipherMode cipherMode = SymmetricAlgorithmHelper.DefaultCipherMode,
-        PaddingMode paddingMode = SymmetricAlgorithmHelper.DefaultPaddingMode)
+        CipherMode cipherMode = CommonSettings.DefaultCipherMode,
+        PaddingMode paddingMode = CommonSettings.DefaultPaddingMode)
     {
         using var des = System.Security.Cryptography.DES.Create();
         return des.Encrypt(original, key, vector, cipherMode, paddingMode);
@@ -17,8 +17,8 @@ public static partial class DesHelper
         byte[] encrypted,
         byte[] key,
         byte[] vector,
-        CipherMode cipherMode = SymmetricAlgorithmHelper.DefaultCipherMode,
-        PaddingMode paddingMode = SymmetricAlgorithmHelper.DefaultPaddingMode)
+        CipherMode cipherMode = CommonSettings.DefaultCipherMode,
+        PaddingMode paddingMode = CommonSettings.DefaultPaddingMode)
     {
         using var des = System.Security.Cryptography.DES.Create();
         return des.Decrypt(encrypted, key, vector, cipherMode, paddingMode);

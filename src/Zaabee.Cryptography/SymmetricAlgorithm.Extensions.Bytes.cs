@@ -7,8 +7,8 @@ public static partial class SymmetricAlgorithmExtensions
         byte[] original,
         byte[]? key = null,
         byte[]? vector = null,
-        CipherMode cipherMode = SymmetricAlgorithmHelper.DefaultCipherMode,
-        PaddingMode paddingMode = SymmetricAlgorithmHelper.DefaultPaddingMode)
+        CipherMode cipherMode = CommonSettings.DefaultCipherMode,
+        PaddingMode paddingMode = CommonSettings.DefaultPaddingMode)
     {
         symmetricAlgorithm.Mode = cipherMode;
         symmetricAlgorithm.Padding = paddingMode;
@@ -32,8 +32,8 @@ public static partial class SymmetricAlgorithmExtensions
         byte[] encrypted,
         byte[]? key = null,
         byte[]? vector = null,
-        CipherMode cipherMode = SymmetricAlgorithmHelper.DefaultCipherMode,
-        PaddingMode paddingMode = SymmetricAlgorithmHelper.DefaultPaddingMode)
+        CipherMode cipherMode = CommonSettings.DefaultCipherMode,
+        PaddingMode paddingMode = CommonSettings.DefaultPaddingMode)
     {
         symmetricAlgorithm.Mode = cipherMode;
         symmetricAlgorithm.Padding = paddingMode;

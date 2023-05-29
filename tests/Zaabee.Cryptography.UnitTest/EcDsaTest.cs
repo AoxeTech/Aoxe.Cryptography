@@ -4,15 +4,6 @@ namespace Zaabee.Cryptography.UnitTest;
 
 public class EcDsaTest
 {
-    [Fact]
-    public void Test()
-    {
-        EcdsaHelper.Encoding = Encoding.UTF8;
-        EcdsaHelper.HashAlgorithmName = HashAlgorithmName.SHA256;
-        Assert.Equal(EcdsaHelper.Encoding, Encoding.UTF8);
-        Assert.Equal(EcdsaHelper.HashAlgorithmName, HashAlgorithmName.SHA256);
-    }
-
     [Theory]
     [InlineData("Here is some data to encrypt!", "MD5")]
     [InlineData("Here is some data to encrypt!", "SHA1")]
@@ -23,7 +14,7 @@ public class EcDsaTest
     {
         var hashAlgorithm = GetHashAlgorithmName(hashAlgorithmName);
         var (privateKey, publicKey) = EcdsaHelper.GenerateParameters();
-        var originalBytes = EcdsaHelper.Encoding.GetBytes(original);
+        var originalBytes = original.GetUtf8Bytes();
         var signBytes = originalBytes.SignDataByEcdsa(privateKey, hashAlgorithm);
         Assert.True(originalBytes.VerifyDataByEcdsa(signBytes, publicKey, hashAlgorithm));
     }
@@ -47,7 +38,7 @@ public class EcDsaTest
     public void BytesHashTest(string original)
     {
         var (privateKey, publicKey) = EcdsaHelper.GenerateParameters();
-        var originalBytes = EcdsaHelper.Encoding.GetBytes(original);
+        var originalBytes = original.GetUtf8Bytes();
         var signBytes = originalBytes.SignHashByEcdsa(privateKey);
         Assert.True(originalBytes.VerifyHashByEcdsa(signBytes, publicKey));
     }

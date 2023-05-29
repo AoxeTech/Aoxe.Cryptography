@@ -2,8 +2,6 @@ namespace Zaabee.Cryptography.AsymmetricAlgorithm.RSA;
 
 public static partial class RsaHelper
 {
-    public static RSAEncryptionPadding Padding { get; set; } = RSAEncryptionPadding.OaepSHA256;
-
     public static (RSAParameters privateKey, RSAParameters publicKey) GenerateParameters()
     {
         using var rsa = System.Security.Cryptography.RSA.Create();

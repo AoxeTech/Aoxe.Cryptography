@@ -1,7 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFrameworks>netstandard2.0;net6.0;net7.0;net8.0</TargetFrameworks>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageVersion>2023.1.0</PackageVersion>
+        <Version>2023.1.0</Version>
+        <Authors>Mutuduxf</Authors>
+        <Company>Mutuduxf</Company>
+        <PackageProjectUrl>https://github.com/PicoHex/Zaabee.Cryptography</PackageProjectUrl>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageTags>Zaabee;Cryptographic;AES;MD5;SHA;RSA;RC2;ECDSA;DSA;DES;TripleDES</PackageTags>
+        <Description>The helpers and extension methods of AES/MD5/SHA/RSA/RC2/ECDSA/DSA/DES/TripleDES.</Description>
+        <LangVersion>latest</LangVersion>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>

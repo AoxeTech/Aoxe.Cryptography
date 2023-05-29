@@ -6,8 +6,8 @@ public static partial class DesHelper
         Stream original,
         byte[] key,
         byte[] vector,
-        CipherMode cipherMode = SymmetricAlgorithmHelper.DefaultCipherMode,
-        PaddingMode paddingMode = SymmetricAlgorithmHelper.DefaultPaddingMode)
+        CipherMode cipherMode = CommonSettings.DefaultCipherMode,
+        PaddingMode paddingMode = CommonSettings.DefaultPaddingMode)
     {
         var encrypted = new MemoryStream();
         Encrypt(original, encrypted, key, vector, cipherMode, paddingMode);
@@ -19,8 +19,8 @@ public static partial class DesHelper
         Stream encrypted,
         byte[] key,
         byte[] vector,
-        CipherMode cipherMode = SymmetricAlgorithmHelper.DefaultCipherMode,
-        PaddingMode paddingMode = SymmetricAlgorithmHelper.DefaultPaddingMode)
+        CipherMode cipherMode = CommonSettings.DefaultCipherMode,
+        PaddingMode paddingMode = CommonSettings.DefaultPaddingMode)
     {
         using var des = System.Security.Cryptography.DES.Create();
         des.Encrypt(original, encrypted, key, vector, cipherMode, paddingMode);
@@ -30,8 +30,8 @@ public static partial class DesHelper
         Stream encrypted,
         byte[] key,
         byte[] vector,
-        CipherMode cipherMode = SymmetricAlgorithmHelper.DefaultCipherMode,
-        PaddingMode paddingMode = SymmetricAlgorithmHelper.DefaultPaddingMode)
+        CipherMode cipherMode = CommonSettings.DefaultCipherMode,
+        PaddingMode paddingMode = CommonSettings.DefaultPaddingMode)
     {
         var decrypted = new MemoryStream();
         Decrypt(encrypted, decrypted, key, vector, cipherMode, paddingMode);
@@ -43,8 +43,8 @@ public static partial class DesHelper
         Stream decrypted,
         byte[] key,
         byte[] vector,
-        CipherMode cipherMode = SymmetricAlgorithmHelper.DefaultCipherMode,
-        PaddingMode paddingMode = SymmetricAlgorithmHelper.DefaultPaddingMode)
+        CipherMode cipherMode = CommonSettings.DefaultCipherMode,
+        PaddingMode paddingMode = CommonSettings.DefaultPaddingMode)
     {
         using var des = System.Security.Cryptography.DES.Create();
         des.Decrypt(encrypted, decrypted, key, vector, cipherMode, paddingMode);

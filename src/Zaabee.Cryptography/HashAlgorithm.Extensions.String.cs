@@ -7,6 +7,6 @@ public static partial class HashAlgorithmExtensions
         string str,
         Encoding? encoding = null) =>
         BitConverter
-            .ToString(hashAlgorithm.ToHash((encoding ?? HashAlgorithmHelper.DefaultEncoding).GetBytes(str)))
+            .ToString(hashAlgorithm.ToHash((encoding ?? CommonSettings.DefaultEncoding).GetBytes(str)))
             .Replace("-", string.Empty);
 }

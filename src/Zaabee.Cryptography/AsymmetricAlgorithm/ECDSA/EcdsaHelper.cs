@@ -2,9 +2,6 @@ namespace Zaabee.Cryptography.AsymmetricAlgorithm.ECDSA;
 
 public static class EcdsaHelper
 {
-    public static Encoding Encoding { get; set; } = Encoding.UTF8;
-    public static HashAlgorithmName HashAlgorithmName { get; set; } = HashAlgorithmName.SHA256;
-
     public static (ECParameters privateKey, ECParameters publicKey) GenerateParameters()
     {
         using var ecDsa = ECDsa.Create();
@@ -20,7 +17,7 @@ public static class EcdsaHelper
         ECParameters privateKey,
         HashAlgorithmName? hashAlgorithmName = null,
         Encoding? encoding = null) =>
-        SignData((encoding ?? Encoding).GetBytes(original), privateKey, hashAlgorithmName);
+        SignData((encoding ?? CommonSettings.DefaultEncoding).GetBytes(original), privateKey, hashAlgorithmName);
 
     public static byte[] SignData(
         byte[] original,
@@ -29,7 +26,7 @@ public static class EcdsaHelper
     {
         using var ecDsa = ECDsa.Create();
         ecDsa.ImportParameters(privateKey);
-        return ecDsa.SignData(original, hashAlgorithmName ?? HashAlgorithmName);
+        return ecDsa.SignData(original, hashAlgorithmName ?? CommonSettings.DefaultHashAlgorithmName);
     }
 
     public static bool VerifyData(
@@ -38,7 +35,8 @@ public static class EcdsaHelper
         ECParameters publicKey,
         HashAlgorithmName? hashAlgorithmName = null,
         Encoding? encoding = null) =>
-        VerifyData((encoding ?? Encoding).GetBytes(original), signature, publicKey, hashAlgorithmName);
+        VerifyData((encoding ?? CommonSettings.DefaultEncoding).GetBytes(original), signature, publicKey,
+            hashAlgorithmName);
 
     public static bool VerifyData(
         byte[] original,
@@ -48,7 +46,7 @@ public static class EcdsaHelper
     {
         using var ecDsa = ECDsa.Create();
         ecDsa.ImportParameters(publicKey);
-        return ecDsa.VerifyData(original, signature, hashAlgorithmName ?? HashAlgorithmName);
+        return ecDsa.VerifyData(original, signature, hashAlgorithmName ?? CommonSettings.DefaultHashAlgorithmName);
     }
 
     #endregion
@@ -59,7 +57,7 @@ public static class EcdsaHelper
         string original,
         ECParameters privateKey,
         Encoding? encoding = null) =>
-        SignHash((encoding ?? Encoding).GetBytes(original), privateKey);
+        SignHash((encoding ?? CommonSettings.DefaultEncoding).GetBytes(original), privateKey);
 
     public static byte[] SignHash(
         byte[] original,
@@ -75,7 +73,7 @@ public static class EcdsaHelper
         byte[] signature,
         ECParameters publicKey,
         Encoding? encoding = null) =>
-        VerifyHash((encoding ?? Encoding).GetBytes(original), signature, publicKey);
+        VerifyHash((encoding ?? CommonSettings.DefaultEncoding).GetBytes(original), signature, publicKey);
 
     public static bool VerifyHash(
         byte[] original,

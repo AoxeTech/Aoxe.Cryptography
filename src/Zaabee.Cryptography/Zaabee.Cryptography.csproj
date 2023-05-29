@@ -12,6 +12,7 @@
         <PackageTags>Zaabee;Cryptographic;AES;MD5;SHA;RSA;RC2;ECDSA;DSA;DES;TripleDES</PackageTags>
         <Description>The helpers and extension methods of AES/MD5/SHA/RSA/RC2/ECDSA/DSA/DES/TripleDES.</Description>
         <LangVersion>latest</LangVersion>
+        <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
