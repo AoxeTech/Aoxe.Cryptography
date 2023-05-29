@@ -9,7 +9,7 @@ public static partial class RsaHelper
     {
         using var rsa = System.Security.Cryptography.RSA.Create();
         rsa.ImportParameters(publicKey);
-        return rsa.Encrypt(original, rsaEncryptionPadding ?? CommonSettings.DefaultPadding);
+        return rsa.Encrypt(original, rsaEncryptionPadding ?? CommonSettings.DefaultRsaEncryptionPadding);
     }
 
     public static byte[] Decrypt(
@@ -19,7 +19,7 @@ public static partial class RsaHelper
     {
         using var rsa = System.Security.Cryptography.RSA.Create();
         rsa.ImportParameters(privateKey);
-        return rsa.Decrypt(encryptBytes, rsaEncryptionPadding ?? CommonSettings.DefaultPadding);
+        return rsa.Decrypt(encryptBytes, rsaEncryptionPadding ?? CommonSettings.DefaultRsaEncryptionPadding);
     }
 
 #if !NETSTANDARD2_0
@@ -30,7 +30,7 @@ public static partial class RsaHelper
     {
         using var rsa = System.Security.Cryptography.RSA.Create();
         rsa.ImportRSAPublicKey(publicKey, out _);
-        return rsa.Encrypt(original, rsaEncryptionPadding ?? CommonSettings.DefaultPadding);
+        return rsa.Encrypt(original, rsaEncryptionPadding ?? CommonSettings.DefaultRsaEncryptionPadding);
     }
 
     public static byte[] Decrypt(
@@ -40,7 +40,7 @@ public static partial class RsaHelper
     {
         using var rsa = System.Security.Cryptography.RSA.Create();
         rsa.ImportRSAPrivateKey(privateKey, out _);
-        return rsa.Decrypt(encryptBytes, rsaEncryptionPadding ?? CommonSettings.DefaultPadding);
+        return rsa.Decrypt(encryptBytes, rsaEncryptionPadding ?? CommonSettings.DefaultRsaEncryptionPadding);
     }
 #endif
 }
