@@ -1,6 +1,6 @@
 namespace Zaabee.Cryptography.AsymmetricAlgorithm.RSA;
 
-public static class RsaExtensions
+public static partial class RsaExtensions
 {
     public static byte[] EncryptByRsa(
         this byte[] original,

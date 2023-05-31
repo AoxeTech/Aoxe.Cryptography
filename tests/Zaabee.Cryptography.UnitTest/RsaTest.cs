@@ -12,6 +12,25 @@ public class RsaTest
         Assert.Equal(original, decrypt);
     }
 
+    [Fact]
+    public void HashTest()
+    {
+        var data = new byte[] { 1, 2, 3, 4, 5 };
+        var sha256 = data.ToSha256();
+        var (privateKey, publicKey) = RsaHelper.GenerateParameters();
+        var signature = RsaHelper.SignHash(sha256, privateKey);
+        Assert.True(RsaHelper.VerifyHash(sha256, signature, publicKey));
+    }
+
+    [Fact]
+    public void DataTest()
+    {
+        var data = new byte[] { 1, 2, 3, 4, 5 };
+        var (privateKey, publicKey) = RsaHelper.GenerateParameters();
+        var signature = RsaHelper.SignData(data, privateKey);
+        Assert.True(RsaHelper.VerifyData(data, signature, publicKey));
+    }
+
 #if !NET48
     [Theory]
     [InlineData("Here is some data to encrypt!")]

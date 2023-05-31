@@ -21,7 +21,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="AsymmetricAlgorithm\" />
         <Folder Include="HashAlgorithm\" />
         <Folder Include="SymmetricAlgorithm\" />
     </ItemGroup>

@@ -7,4 +7,5 @@ internal class CommonSettings
     internal static readonly Encoding DefaultEncoding = Encoding.UTF8;
     internal static readonly HashAlgorithmName DefaultHashAlgorithmName = HashAlgorithmName.SHA256;
     internal static readonly RSAEncryptionPadding DefaultRsaEncryptionPadding = RSAEncryptionPadding.OaepSHA256;
+    internal static readonly RSASignaturePadding DefaultRsaSignaturePadding = RSASignaturePadding.Pkcs1;
 }
