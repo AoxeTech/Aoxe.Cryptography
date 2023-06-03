@@ -1,5 +1,3 @@
-using Zaabee.Cryptography.AsymmetricAlgorithm.ECDSA;
-
 namespace Zaabee.Cryptography.UnitTest;
 
 public class EcDsaTest
@@ -20,20 +18,6 @@ public class EcDsaTest
     }
 
     [Theory]
-    [InlineData("Here is some data to encrypt!", "MD5")]
-    [InlineData("Here is some data to encrypt!", "SHA1")]
-    [InlineData("Here is some data to encrypt!", "SHA256")]
-    [InlineData("Here is some data to encrypt!", "SHA384")]
-    [InlineData("Here is some data to encrypt!", "SHA512")]
-    public void StringDataTest(string original, string hashAlgorithmName)
-    {
-        var hashAlgorithm = GetHashAlgorithmName(hashAlgorithmName);
-        var (privateKey, publicKey) = EcdsaHelper.GenerateParameters();
-        var signBytes = original.SignDataByEcdsa(privateKey, hashAlgorithm);
-        Assert.True(original.VerifyDataByEcdsa(signBytes, publicKey, hashAlgorithm));
-    }
-
-    [Theory]
     [InlineData("Here is some data to encrypt!")]
     public void BytesHashTest(string original)
     {
@@ -41,15 +25,6 @@ public class EcDsaTest
         var originalBytes = original.GetUtf8Bytes();
         var signBytes = originalBytes.SignHashByEcdsa(privateKey);
         Assert.True(originalBytes.VerifyHashByEcdsa(signBytes, publicKey));
-    }
-
-    [Theory]
-    [InlineData("Here is some data to encrypt!")]
-    public void StringHashTest(string original)
-    {
-        var (privateKey, publicKey) = EcdsaHelper.GenerateParameters();
-        var signBytes = original.SignHashByEcdsa(privateKey);
-        Assert.True(original.VerifyHashByEcdsa(signBytes, publicKey));
     }
 
     private static HashAlgorithmName GetHashAlgorithmName(string name) =>

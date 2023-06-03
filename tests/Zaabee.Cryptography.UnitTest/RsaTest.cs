@@ -2,85 +2,140 @@ namespace Zaabee.Cryptography.UnitTest;
 
 public class RsaTest
 {
+    #region Bytes
+
     [Theory]
     [InlineData("Here is some data to encrypt!")]
-    public void Pkcs1Test(string original)
+    public void EncryptAndDecryptByBytesTest(string data)
     {
         var (privateKey, publicKey) = RsaHelper.GenerateParameters();
-        var encryptBytes = original.GetUtf8Bytes().EncryptByRsa(publicKey, RSAEncryptionPadding.Pkcs1);
-        var decrypt = encryptBytes.DecryptByRsa(privateKey, RSAEncryptionPadding.Pkcs1).GetStringByUtf8();
-        Assert.Equal(original, decrypt);
+        var encryptBytes = data.GetUtf8Bytes().EncryptByRsa(publicKey);
+        var decrypt = encryptBytes.DecryptByRsa(privateKey).GetStringByUtf8();
+        Assert.Equal(data, decrypt);
     }
 
-    [Fact]
-    public void HashTest()
+    [Theory]
+    [InlineData("Here is some data to encrypt!")]
+    public void SignAndVerifyDataByBytesTest(string data)
     {
-        var data = new byte[] { 1, 2, 3, 4, 5 };
-        var sha256 = data.ToSha256();
         var (privateKey, publicKey) = RsaHelper.GenerateParameters();
-        var signature = RsaHelper.SignHash(sha256, privateKey);
-        Assert.True(RsaHelper.VerifyHash(sha256, signature, publicKey));
+        var dataBytes = data.GetUtf8Bytes();
+        var signature = dataBytes.SignDataByRsa(privateKey);
+        Assert.True(dataBytes.VerifyDataByRsa(signature, publicKey));
     }
 
-    [Fact]
-    public void DataTest()
+    [Theory]
+    [InlineData("Here is some data to encrypt!")]
+    public void SignAndVerifyHashByBytesTest(string data)
     {
-        var data = new byte[] { 1, 2, 3, 4, 5 };
         var (privateKey, publicKey) = RsaHelper.GenerateParameters();
-        var signature = RsaHelper.SignData(data, privateKey);
-        Assert.True(RsaHelper.VerifyData(data, signature, publicKey));
+        var dataBytes = data.GetUtf8Bytes().ToSha256();
+        var signature = dataBytes.SignHashByRsa(privateKey);
+        Assert.True(dataBytes.VerifyHashByRsa(signature, publicKey));
     }
 
 #if !NET48
+
     [Theory]
     [InlineData("Here is some data to encrypt!")]
-    public void OaepSha256Test(string original)
+    public void EncryptAndDecryptByBytesWithBytesKeyTest(string data)
     {
         var (privateKey, publicKey) = RsaHelper.GenerateKeys();
-        var encryptBytes = original.GetUtf8Bytes().EncryptByRsa(publicKey, RSAEncryptionPadding.OaepSHA256);
-        var decrypt = encryptBytes.DecryptByRsa(privateKey, RSAEncryptionPadding.OaepSHA256).GetStringByUtf8();
-        Assert.Equal(original, decrypt);
+        var encryptBytes = data.GetUtf8Bytes().EncryptByRsa(publicKey);
+        var decrypt = encryptBytes.DecryptByRsa(privateKey).GetStringByUtf8();
+        Assert.Equal(data, decrypt);
     }
 
     [Theory]
     [InlineData("Here is some data to encrypt!")]
-    public void OaepSha384Test(string original)
+    public void SignAndVerifyDataByBytesWithBytesKeyTest(string data)
     {
         var (privateKey, publicKey) = RsaHelper.GenerateKeys();
-        var encryptBytes = original.GetUtf8Bytes().EncryptByRsa(publicKey, RSAEncryptionPadding.OaepSHA384);
-        var decrypt = encryptBytes.DecryptByRsa(privateKey, RSAEncryptionPadding.OaepSHA384).GetStringByUtf8();
-        Assert.Equal(original, decrypt);
+        var dataBytes = data.GetUtf8Bytes();
+        var signature = dataBytes.SignDataByRsa(privateKey);
+        Assert.True(dataBytes.VerifyDataByRsa(signature, publicKey));
     }
 
     [Theory]
     [InlineData("Here is some data to encrypt!")]
-    public void OaepSha512Test(string original)
+    public void SignAndVerifyHashByBytesWithBytesKeyTest(string data)
     {
         var (privateKey, publicKey) = RsaHelper.GenerateKeys();
-        var encryptBytes = original.GetUtf8Bytes().EncryptByRsa(publicKey, RSAEncryptionPadding.OaepSHA512);
-        var decrypt = encryptBytes.DecryptByRsa(privateKey, RSAEncryptionPadding.OaepSHA512).GetStringByUtf8();
-        Assert.Equal(original, decrypt);
-    }
-
-    [Theory]
-    [InlineData("Here is some data to encrypt!")]
-    public void Pkcs1WithBytesKeyTest(string original)
-    {
-        var (privateKey, publicKey) = RsaHelper.GenerateKeys();
-        var encryptBytes = original.GetUtf8Bytes().EncryptByRsa(publicKey, RSAEncryptionPadding.Pkcs1);
-        var decrypt = encryptBytes.DecryptByRsa(privateKey, RSAEncryptionPadding.Pkcs1).GetStringByUtf8();
-        Assert.Equal(original, decrypt);
-    }
-
-    [Theory]
-    [InlineData("Here is some data to encrypt!")]
-    public void OaepSha1WithBytesKeyTest(string original)
-    {
-        var (privateKey, publicKey) = RsaHelper.GenerateKeys();
-        var encryptBytes = original.GetUtf8Bytes().EncryptByRsa(publicKey, RSAEncryptionPadding.OaepSHA1);
-        var decrypt = encryptBytes.DecryptByRsa(privateKey, RSAEncryptionPadding.OaepSHA1).GetStringByUtf8();
-        Assert.Equal(original, decrypt);
+        var dataBytes = data.GetUtf8Bytes().ToSha256();
+        var signature = dataBytes.SignHashByRsa(privateKey);
+        Assert.True(dataBytes.VerifyHashByRsa(signature, publicKey));
     }
 
 #endif
+
+    #endregion
+
+    #region ReadOnlySpan
+
+#if NET7_0_OR_GREATER
+
+    [Theory]
+    [InlineData("Here is some data to encrypt!")]
+    public void EncryptAndDecryptByReadOnlySpanTest(string data)
+    {
+        var (privateKey, publicKey) = RsaHelper.GenerateParameters();
+        ReadOnlySpan<byte> readOnlySpan = data.GetUtf8Bytes().AsSpan();
+        ReadOnlySpan<byte> encryptBytes = readOnlySpan.EncryptByRsa(publicKey).AsSpan();
+        var decrypt = encryptBytes.DecryptByRsa(privateKey).GetStringByUtf8();
+        Assert.Equal(data, decrypt);
+    }
+
+    [Theory]
+    [InlineData("Here is some data to encrypt!")]
+    public void SignAndVerifyDataByReadOnlySpanTest(string data)
+    {
+        var (privateKey, publicKey) = RsaHelper.GenerateParameters();
+        ReadOnlySpan<byte> readOnlySpan = data.GetUtf8Bytes().AsSpan();
+        var signature = readOnlySpan.SignDataByRsa(privateKey);
+        Assert.True(readOnlySpan.VerifyDataByRsa(signature, publicKey));
+    }
+
+    [Theory]
+    [InlineData("Here is some data to encrypt!")]
+    public void SignAndVerifyHashByReadOnlySpanTest(string data)
+    {
+        var (privateKey, publicKey) = RsaHelper.GenerateParameters();
+        ReadOnlySpan<byte> readOnlySpan = data.GetUtf8Bytes().ToSha256().AsSpan();
+        var signature = readOnlySpan.SignHashByRsa(privateKey);
+        Assert.True(readOnlySpan.VerifyHashByRsa(signature, publicKey));
+    }
+
+    [Theory]
+    [InlineData("Here is some data to encrypt!")]
+    public void EncryptAndDecryptByReadOnlySpanWithBytesKeyTest(string data)
+    {
+        var (privateKey, publicKey) = RsaHelper.GenerateKeys();
+        ReadOnlySpan<byte> readOnlySpan = data.GetUtf8Bytes().AsSpan();
+        ReadOnlySpan<byte> encryptBytes = readOnlySpan.EncryptByRsa(publicKey).AsSpan();
+        var decrypt = encryptBytes.DecryptByRsa(privateKey).GetStringByUtf8();
+        Assert.Equal(data, decrypt);
+    }
+
+    [Theory]
+    [InlineData("Here is some data to encrypt!")]
+    public void SignAndVerifyDataByReadOnlySpanWithBytesKeyTest(string data)
+    {
+        var (privateKey, publicKey) = RsaHelper.GenerateKeys();
+        ReadOnlySpan<byte> readOnlySpan = data.GetUtf8Bytes().AsSpan();
+        var signature = readOnlySpan.SignDataByRsa(privateKey);
+        Assert.True(readOnlySpan.VerifyDataByRsa(signature, publicKey));
+    }
+
+    [Theory]
+    [InlineData("Here is some data to encrypt!")]
+    public void SignAndVerifyHashByReadOnlySpanWithBytesKeyTest(string data)
+    {
+        var (privateKey, publicKey) = RsaHelper.GenerateKeys();
+        ReadOnlySpan<byte> readOnlySpan = data.GetUtf8Bytes().ToSha256().AsSpan();
+        var signature = readOnlySpan.SignHashByRsa(privateKey);
+        Assert.True(readOnlySpan.VerifyHashByRsa(signature, publicKey));
+    }
+#endif
+
+    #endregion
 }

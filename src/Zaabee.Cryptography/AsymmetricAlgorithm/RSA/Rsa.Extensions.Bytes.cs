@@ -14,14 +14,14 @@ public static partial class RsaExtensions
         RSAEncryptionPadding? rsaEncryptionPadding = null) =>
         RsaHelper.Decrypt(data, privateKey, rsaEncryptionPadding);
 
-    public static byte[] SignData(
+    public static byte[] SignDataByRsa(
         this byte[] data,
         RSAParameters privateKey,
         HashAlgorithmName? hashAlgorithmName = null,
         RSASignaturePadding? rsaEncryptionPadding = null) =>
         RsaHelper.SignData(data, privateKey, hashAlgorithmName, rsaEncryptionPadding);
 
-    public static bool VerifyData(
+    public static bool VerifyDataByRsa(
         this byte[] data,
         byte[] signature,
         RSAParameters publicKey,
@@ -29,14 +29,14 @@ public static partial class RsaExtensions
         RSASignaturePadding? rsaEncryptionPadding = null) =>
         RsaHelper.VerifyData(data, signature, publicKey, hashAlgorithmName, rsaEncryptionPadding);
 
-    public static byte[] SignHash(
+    public static byte[] SignHashByRsa(
         this byte[] data,
         RSAParameters privateKey,
         HashAlgorithmName? hashAlgorithmName = null,
         RSASignaturePadding? rsaEncryptionPadding = null) =>
         RsaHelper.SignHash(data, privateKey, hashAlgorithmName, rsaEncryptionPadding);
 
-    public static bool VerifyHash(
+    public static bool VerifyHashByRsa(
         this byte[] data,
         byte[] signature,
         RSAParameters publicKey,
@@ -57,14 +57,14 @@ public static partial class RsaExtensions
         RSAEncryptionPadding? rsaEncryptionPadding = null) =>
         RsaHelper.Decrypt(data, privateKey, rsaEncryptionPadding);
 
-    public static byte[] SignData(
+    public static byte[] SignDataByRsa(
         this byte[] data,
         byte[] privateKey,
         HashAlgorithmName? hashAlgorithmName = null,
         RSASignaturePadding? rsaEncryptionPadding = null) =>
         RsaHelper.SignData(data, privateKey, hashAlgorithmName, rsaEncryptionPadding);
 
-    public static bool VerifyData(
+    public static bool VerifyDataByRsa(
         this byte[] data,
         byte[] signature,
         byte[] publicKey,
@@ -72,14 +72,14 @@ public static partial class RsaExtensions
         RSASignaturePadding? rsaEncryptionPadding = null) =>
         RsaHelper.VerifyData(data, signature, publicKey, hashAlgorithmName, rsaEncryptionPadding);
 
-    public static byte[] SignHash(
+    public static byte[] SignHashByRsa(
         this byte[] data,
         byte[] privateKey,
         HashAlgorithmName? hashAlgorithmName = null,
         RSASignaturePadding? rsaEncryptionPadding = null) =>
         RsaHelper.SignHash(data, privateKey, hashAlgorithmName, rsaEncryptionPadding);
 
-    public static bool VerifyHash(
+    public static bool VerifyHashByRsa(
         this byte[] data,
         byte[] signature,
         byte[] publicKey,

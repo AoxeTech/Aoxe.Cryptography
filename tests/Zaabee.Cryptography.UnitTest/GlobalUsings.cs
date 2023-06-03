@@ -7,6 +7,7 @@ global using System.Linq;
 global using System.Threading.Tasks;
 global using Xunit;
 global using Zaabee.Cryptography.AsymmetricAlgorithm.DSA;
+global using Zaabee.Cryptography.AsymmetricAlgorithm.ECDSA;
 global using Zaabee.Cryptography.AsymmetricAlgorithm.RSA;
 global using Zaabee.Cryptography.SymmetricAlgorithm.AES;
 global using Zaabee.Cryptography.SymmetricAlgorithm.DES;
