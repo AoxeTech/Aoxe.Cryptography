@@ -26,8 +26,7 @@ public static partial class RsaHelper
         byte[] data,
         RSAParameters privateKey,
         HashAlgorithmName? hashAlgorithmName = null,
-        RSASignaturePadding? rsaEncryptionPadding = null
-    )
+        RSASignaturePadding? rsaEncryptionPadding = null)
     {
         using var rsa = System.Security.Cryptography.RSA.Create();
         rsa.ImportParameters(privateKey);
@@ -52,8 +51,7 @@ public static partial class RsaHelper
         byte[] data,
         RSAParameters privateKey,
         HashAlgorithmName? hashAlgorithmName = null,
-        RSASignaturePadding? rsaEncryptionPadding = null
-    )
+        RSASignaturePadding? rsaEncryptionPadding = null)
     {
         using var rsa = System.Security.Cryptography.RSA.Create();
         rsa.ImportParameters(privateKey);
@@ -75,6 +73,7 @@ public static partial class RsaHelper
     }
 
 #if !NETSTANDARD2_0
+
     public static byte[] Encrypt(
         byte[] data,
         byte[] publicKey,
@@ -95,59 +94,55 @@ public static partial class RsaHelper
         return rsa.Decrypt(data, rsaEncryptionPadding ?? CommonSettings.DefaultRsaEncryptionPadding);
     }
 
-#if !NET6_0
-
     public static byte[] SignData(
-        ReadOnlySpan<byte> data,
-        RSAParameters privateKey,
+        byte[] data,
+        byte[] privateKey,
         HashAlgorithmName? hashAlgorithmName = null,
-        RSASignaturePadding? rsaEncryptionPadding = null
-    )
+        RSASignaturePadding? rsaEncryptionPadding = null)
     {
         using var rsa = System.Security.Cryptography.RSA.Create();
-        rsa.ImportParameters(privateKey);
+        rsa.ImportRSAPrivateKey(privateKey, out _);
         return rsa.SignData(data, hashAlgorithmName ?? CommonSettings.DefaultHashAlgorithmName,
             rsaEncryptionPadding ?? CommonSettings.DefaultRsaSignaturePadding);
     }
 
     public static bool VerifyData(
-        ReadOnlySpan<byte> data,
+        byte[] data,
         byte[] signature,
-        RSAParameters publicKey,
+        byte[] publicKey,
         HashAlgorithmName? hashAlgorithmName = null,
         RSASignaturePadding? rsaEncryptionPadding = null)
     {
         using var rsa = System.Security.Cryptography.RSA.Create();
-        rsa.ImportParameters(publicKey);
+        rsa.ImportRSAPublicKey(publicKey, out _);
         return rsa.VerifyData(data, signature, hashAlgorithmName ?? CommonSettings.DefaultHashAlgorithmName,
             rsaEncryptionPadding ?? CommonSettings.DefaultRsaSignaturePadding);
     }
 
     public static byte[] SignHash(
-        ReadOnlySpan<byte> data,
-        RSAParameters privateKey,
+        byte[] data,
+        byte[] privateKey,
         HashAlgorithmName? hashAlgorithmName = null,
-        RSASignaturePadding? rsaEncryptionPadding = null
-    )
+        RSASignaturePadding? rsaEncryptionPadding = null)
     {
         using var rsa = System.Security.Cryptography.RSA.Create();
-        rsa.ImportParameters(privateKey);
+        rsa.ImportRSAPrivateKey(privateKey, out _);
         return rsa.SignHash(data, hashAlgorithmName ?? CommonSettings.DefaultHashAlgorithmName,
             rsaEncryptionPadding ?? CommonSettings.DefaultRsaSignaturePadding);
     }
 
     public static bool VerifyHash(
-        ReadOnlySpan<byte> data,
+        byte[] data,
         byte[] signature,
-        RSAParameters publicKey,
+        byte[] publicKey,
         HashAlgorithmName? hashAlgorithmName = null,
         RSASignaturePadding? rsaEncryptionPadding = null)
     {
         using var rsa = System.Security.Cryptography.RSA.Create();
-        rsa.ImportParameters(publicKey);
+        rsa.ImportRSAPublicKey(publicKey, out _);
         return rsa.VerifyHash(data, signature, hashAlgorithmName ?? CommonSettings.DefaultHashAlgorithmName,
             rsaEncryptionPadding ?? CommonSettings.DefaultRsaSignaturePadding);
     }
-#endif
+
 #endif
 }
