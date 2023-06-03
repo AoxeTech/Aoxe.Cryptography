@@ -41,14 +41,14 @@ public static partial class DsaHelper
     }
 
     public static bool VerifyData(
-        byte[] original,
+        byte[] data,
         byte[] signature,
         DSAParameters publicKey,
         HashAlgorithmName? hashAlgorithmName = null)
     {
         using var dsa = System.Security.Cryptography.DSA.Create();
         dsa.ImportParameters(publicKey);
-        return dsa.VerifyData(original, signature, hashAlgorithmName ?? CommonSettings.DefaultHashAlgorithmName);
+        return dsa.VerifyData(data, signature, hashAlgorithmName ?? CommonSettings.DefaultHashAlgorithmName);
     }
 #endif
 }

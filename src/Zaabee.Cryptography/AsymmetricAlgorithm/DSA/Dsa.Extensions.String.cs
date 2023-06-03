@@ -3,17 +3,17 @@ namespace Zaabee.Cryptography.AsymmetricAlgorithm.DSA;
 public static partial class DsaExtensions
 {
     public static byte[] CreateSignatureByDsa(
-        this string original,
+        this string rgbHash,
         DSAParameters privateKey,
         Encoding? encoding = null) =>
-        DsaHelper.CreateSignature(original, privateKey, encoding);
+        DsaHelper.CreateSignature(rgbHash, privateKey, encoding);
 
     public static bool VerifySignatureByDsa(
-        this string original,
+        this string rgbHash,
         byte[] signature,
         DSAParameters publicKey,
         Encoding? encoding = null) =>
-        DsaHelper.VerifySignature(original, signature, publicKey, encoding);
+        DsaHelper.VerifySignature(rgbHash, signature, publicKey, encoding);
 
 #if !NETSTANDARD2_0
     public static byte[] SignDataByDsa(

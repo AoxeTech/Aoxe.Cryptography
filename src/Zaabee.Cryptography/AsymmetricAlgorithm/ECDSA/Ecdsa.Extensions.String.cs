@@ -3,30 +3,30 @@ namespace Zaabee.Cryptography.AsymmetricAlgorithm.ECDSA;
 public static partial class EcdsaExtensions
 {
     public static byte[] SignDataByEcdsa(
-        this string original,
+        this string data,
         ECParameters privateKey,
         HashAlgorithmName? hashAlgorithmName = null,
         Encoding? encoding = null) =>
-        EcdsaHelper.SignData(original, privateKey, hashAlgorithmName, encoding);
+        EcdsaHelper.SignData(data, privateKey, hashAlgorithmName, encoding);
 
     public static bool VerifyDataByEcdsa(
-        this string original,
+        this string data,
         byte[] signature,
         ECParameters publicKey,
         HashAlgorithmName? hashAlgorithmName = null,
         Encoding? encoding = null) =>
-        EcdsaHelper.VerifyData(original, signature, publicKey, hashAlgorithmName, encoding);
+        EcdsaHelper.VerifyData(data, signature, publicKey, hashAlgorithmName, encoding);
 
     public static byte[] SignHashByEcdsa(
-        this string original,
+        this string hash,
         ECParameters privateKey,
         Encoding? encoding = null) =>
-        EcdsaHelper.SignHash(original, privateKey, encoding);
+        EcdsaHelper.SignHash(hash, privateKey, encoding);
 
     public static bool VerifyHashByEcdsa(
-        this string original,
+        this string hash,
         byte[] signature,
         ECParameters publicKey,
         Encoding? encoding = null) =>
-        EcdsaHelper.VerifyHash(original, signature, publicKey, encoding);
+        EcdsaHelper.VerifyHash(hash, signature, publicKey, encoding);
 }
