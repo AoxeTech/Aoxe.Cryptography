@@ -3,28 +3,28 @@ namespace Zaabee.Cryptography.AsymmetricAlgorithm.RSA;
 public static partial class RsaExtensions
 {
     public static byte[] EncryptByRsa(
-        this byte[] original,
+        this byte[] data,
         RSAParameters publicKey,
         RSAEncryptionPadding? rsaEncryptionPadding = null) =>
-        RsaHelper.Encrypt(original, publicKey, rsaEncryptionPadding);
+        RsaHelper.Encrypt(data, publicKey, rsaEncryptionPadding);
 
     public static byte[] DecryptByRsa(
-        this byte[] encryptBytes,
+        this byte[] data,
         RSAParameters privateKey,
         RSAEncryptionPadding? rsaEncryptionPadding = null) =>
-        RsaHelper.Decrypt(encryptBytes, privateKey, rsaEncryptionPadding);
+        RsaHelper.Decrypt(data, privateKey, rsaEncryptionPadding);
 
 #if !NETSTANDARD2_0
     public static byte[] EncryptByRsa(
-        this byte[] original,
+        this byte[] data,
         byte[] publicKey,
         RSAEncryptionPadding? rsaEncryptionPadding = null) =>
-        RsaHelper.Encrypt(original, publicKey, rsaEncryptionPadding);
+        RsaHelper.Encrypt(data, publicKey, rsaEncryptionPadding);
 
     public static byte[] DecryptByRsa(
-        this byte[] encryptBytes,
+        this byte[] data,
         byte[] privateKey,
         RSAEncryptionPadding? rsaEncryptionPadding = null) =>
-        RsaHelper.Decrypt(encryptBytes, privateKey, rsaEncryptionPadding);
+        RsaHelper.Decrypt(data, privateKey, rsaEncryptionPadding);
 #endif
 }

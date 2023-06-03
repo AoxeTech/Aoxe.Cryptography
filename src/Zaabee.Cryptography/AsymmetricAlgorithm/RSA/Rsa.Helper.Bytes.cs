@@ -3,23 +3,23 @@ namespace Zaabee.Cryptography.AsymmetricAlgorithm.RSA;
 public static partial class RsaHelper
 {
     public static byte[] Encrypt(
-        byte[] original,
+        byte[] data,
         RSAParameters publicKey,
         RSAEncryptionPadding? rsaEncryptionPadding = null)
     {
         using var rsa = System.Security.Cryptography.RSA.Create();
         rsa.ImportParameters(publicKey);
-        return rsa.Encrypt(original, rsaEncryptionPadding ?? CommonSettings.DefaultRsaEncryptionPadding);
+        return rsa.Encrypt(data, rsaEncryptionPadding ?? CommonSettings.DefaultRsaEncryptionPadding);
     }
 
     public static byte[] Decrypt(
-        byte[] encryptBytes,
+        byte[] data,
         RSAParameters privateKey,
         RSAEncryptionPadding? rsaEncryptionPadding = null)
     {
         using var rsa = System.Security.Cryptography.RSA.Create();
         rsa.ImportParameters(privateKey);
-        return rsa.Decrypt(encryptBytes, rsaEncryptionPadding ?? CommonSettings.DefaultRsaEncryptionPadding);
+        return rsa.Decrypt(data, rsaEncryptionPadding ?? CommonSettings.DefaultRsaEncryptionPadding);
     }
 
     public static byte[] SignData(
@@ -76,23 +76,23 @@ public static partial class RsaHelper
 
 #if !NETSTANDARD2_0
     public static byte[] Encrypt(
-        byte[] original,
+        byte[] data,
         byte[] publicKey,
         RSAEncryptionPadding? rsaEncryptionPadding = null)
     {
         using var rsa = System.Security.Cryptography.RSA.Create();
         rsa.ImportRSAPublicKey(publicKey, out _);
-        return rsa.Encrypt(original, rsaEncryptionPadding ?? CommonSettings.DefaultRsaEncryptionPadding);
+        return rsa.Encrypt(data, rsaEncryptionPadding ?? CommonSettings.DefaultRsaEncryptionPadding);
     }
 
     public static byte[] Decrypt(
-        byte[] encryptBytes,
+        byte[] data,
         byte[] privateKey,
         RSAEncryptionPadding? rsaEncryptionPadding = null)
     {
         using var rsa = System.Security.Cryptography.RSA.Create();
         rsa.ImportRSAPrivateKey(privateKey, out _);
-        return rsa.Decrypt(encryptBytes, rsaEncryptionPadding ?? CommonSettings.DefaultRsaEncryptionPadding);
+        return rsa.Decrypt(data, rsaEncryptionPadding ?? CommonSettings.DefaultRsaEncryptionPadding);
     }
 
 #if !NET6_0
