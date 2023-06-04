@@ -9,7 +9,8 @@ public static partial class DsaHelper
         using var dsa = System.Security.Cryptography.DSA.Create();
         dsa.ImportParameters(privateKey);
 #if NETSTANDARD2_0
-        return dsa.CreateSignature(rgbHash.ToSha1());
+        using var sha1 = SHA1.Create();
+        return dsa.CreateSignature(sha1.ComputeHash(rgbHash));
 #else
         return dsa.CreateSignature(rgbHash);
 #endif
@@ -23,7 +24,8 @@ public static partial class DsaHelper
         using var dsa = System.Security.Cryptography.DSA.Create();
         dsa.ImportParameters(publicKey);
 #if NETSTANDARD2_0
-        return dsa.VerifySignature(rgbHash.ToSha1(), signature);
+        using var sha1 = SHA1.Create();
+        return dsa.VerifySignature(sha1.ComputeHash(rgbHash), signature);
 #else
         return dsa.VerifySignature(rgbHash, signature);
 #endif

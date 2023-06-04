@@ -1,4 +1,4 @@
-namespace Zaabee.Cryptography;
+namespace Zaabee.Cryptography.Internals;
 
 internal static class CommonSettings
 {
