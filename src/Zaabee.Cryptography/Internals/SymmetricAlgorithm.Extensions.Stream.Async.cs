@@ -1,10 +1,10 @@
-namespace Zaabee.Cryptography;
+namespace Zaabee.Cryptography.Internals;
 
-public static partial class SymmetricAlgorithmExtensions
+internal static partial class SymmetricAlgorithmExtensions
 {
-    public static async Task EncryptAsync(
-        this System.Security.Cryptography.SymmetricAlgorithm symmetricAlgorithm,
-        Stream original,
+    internal static async Task EncryptAsync(
+        this Stream original,
+        System.Security.Cryptography.SymmetricAlgorithm symmetricAlgorithm,
         Stream encrypted,
         byte[]? key = null,
         byte[]? vector = null,
@@ -36,9 +36,9 @@ public static partial class SymmetricAlgorithmExtensions
         encrypted.TrySeek(0, SeekOrigin.Begin);
     }
 
-    public static async Task DecryptAsync(
-        this System.Security.Cryptography.SymmetricAlgorithm symmetricAlgorithm,
-        Stream encrypted,
+    internal static async Task DecryptAsync(
+        this Stream encrypted,
+        System.Security.Cryptography.SymmetricAlgorithm symmetricAlgorithm,
         Stream decrypted,
         byte[]? key = null,
         byte[]? vector = null,

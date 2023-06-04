@@ -25,7 +25,7 @@ public static partial class Rc2Helper
         CancellationToken cancellationToken = default)
     {
         using var rc2 = System.Security.Cryptography.RC2.Create();
-        await rc2.EncryptAsync(original, encrypted, key, vector, cipherMode, paddingMode, cancellationToken);
+        await original.EncryptAsync(rc2, encrypted, key, vector, cipherMode, paddingMode, cancellationToken);
     }
 
     public static async Task<MemoryStream> DecryptAsync(
@@ -51,6 +51,6 @@ public static partial class Rc2Helper
         CancellationToken cancellationToken = default)
     {
         using var rc2 = System.Security.Cryptography.RC2.Create();
-        await rc2.DecryptAsync(encrypted, decrypted, key, vector, cipherMode, paddingMode, cancellationToken);
+        await encrypted.DecryptAsync(rc2, decrypted, key, vector, cipherMode, paddingMode, cancellationToken);
     }
 }

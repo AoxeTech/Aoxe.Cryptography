@@ -6,7 +6,7 @@ public static partial class Md5Helper
     public static Task<byte[]> ComputeMd5Async(Stream inputStream)
     {
         using var md5 = System.Security.Cryptography.MD5.Create();
-        return md5.ToHashAsync(inputStream);
+        return inputStream.ToHashAsync(md5);
     }
 #endif
 }

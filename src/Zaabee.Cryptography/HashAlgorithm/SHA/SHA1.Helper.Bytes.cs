@@ -4,8 +4,8 @@ public static partial class ShaHelper
 {
     public static byte[] ComputeSha1(byte[] bytes)
     {
-        using var sha1 = System.Security.Cryptography.SHA1.Create();
-        return sha1.ToHash(bytes);
+        using var sha1 = SHA1.Create();
+        return bytes.ToHash(sha1);
     }
 
     public static byte[] ComputeSha1(
@@ -13,7 +13,7 @@ public static partial class ShaHelper
         int offset,
         int count)
     {
-        using var sha1 = System.Security.Cryptography.SHA1.Create();
-        return sha1.ToHash(bytes, offset, count);
+        using var sha1 = SHA1.Create();
+        return bytes.ToHash(sha1, offset, count);
     }
 }

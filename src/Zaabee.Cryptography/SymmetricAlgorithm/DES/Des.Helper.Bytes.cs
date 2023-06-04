@@ -10,7 +10,7 @@ public static partial class DesHelper
         PaddingMode paddingMode = CommonSettings.DefaultPaddingMode)
     {
         using var des = System.Security.Cryptography.DES.Create();
-        return des.Encrypt(original, key, vector, cipherMode, paddingMode);
+        return original.Encrypt(des, key, vector, cipherMode, paddingMode);
     }
 
     public static byte[] Decrypt(
@@ -21,6 +21,6 @@ public static partial class DesHelper
         PaddingMode paddingMode = CommonSettings.DefaultPaddingMode)
     {
         using var des = System.Security.Cryptography.DES.Create();
-        return des.Decrypt(encrypted, key, vector, cipherMode, paddingMode);
+        return encrypted.Decrypt(des, key, vector, cipherMode, paddingMode);
     }
 }

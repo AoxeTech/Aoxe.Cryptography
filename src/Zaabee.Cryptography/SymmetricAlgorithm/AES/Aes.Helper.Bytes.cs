@@ -10,7 +10,7 @@ public static partial class AesHelper
         PaddingMode paddingMode = CommonSettings.DefaultPaddingMode)
     {
         using var aes = Aes.Create();
-        return aes.Encrypt(original, key, vector, cipherMode, paddingMode);
+        return original.Encrypt(aes, key, vector, cipherMode, paddingMode);
     }
 
     public static byte[] Decrypt(
@@ -21,6 +21,6 @@ public static partial class AesHelper
         PaddingMode paddingMode = CommonSettings.DefaultPaddingMode)
     {
         using var aes = Aes.Create();
-        return aes.Decrypt(encrypted, key, vector, cipherMode, paddingMode);
+        return encrypted.Decrypt(aes, key, vector, cipherMode, paddingMode);
     }
 }

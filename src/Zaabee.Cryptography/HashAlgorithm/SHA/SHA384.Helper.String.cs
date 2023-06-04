@@ -6,7 +6,7 @@ public static partial class ShaHelper
         string str,
         Encoding? encoding = null)
     {
-        using var sha384 = System.Security.Cryptography.SHA384.Create();
-        return sha384.ToHashString(str, encoding);
+        using var sha384 = SHA384.Create();
+        return str.ToHashString(sha384, encoding);
     }
 }

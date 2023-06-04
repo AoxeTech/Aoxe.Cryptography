@@ -25,7 +25,7 @@ public static partial class AesHelper
         CancellationToken cancellationToken = default)
     {
         using var aes = Aes.Create();
-        await aes.EncryptAsync(original, encrypted, key, vector, cipherMode, paddingMode, cancellationToken);
+        await original.EncryptAsync(aes, encrypted, key, vector, cipherMode, paddingMode, cancellationToken);
     }
 
     public static async Task<MemoryStream> DecryptAsync(
@@ -51,6 +51,6 @@ public static partial class AesHelper
         CancellationToken cancellationToken = default)
     {
         using var aes = Aes.Create();
-        await aes.DecryptAsync(encrypted, decrypted, key, vector, cipherMode, paddingMode, cancellationToken);
+        await encrypted.DecryptAsync(aes, decrypted, key, vector, cipherMode, paddingMode, cancellationToken);
     }
 }

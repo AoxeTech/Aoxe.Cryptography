@@ -23,7 +23,7 @@ public static partial class Rc2Helper
         PaddingMode paddingMode = CommonSettings.DefaultPaddingMode)
     {
         using var rc2 = System.Security.Cryptography.RC2.Create();
-        rc2.Encrypt(original, encrypted, key, vector, cipherMode, paddingMode);
+        original.Encrypt(rc2, encrypted, key, vector, cipherMode, paddingMode);
     }
 
     public static MemoryStream Decrypt(
@@ -47,6 +47,6 @@ public static partial class Rc2Helper
         PaddingMode paddingMode = CommonSettings.DefaultPaddingMode)
     {
         using var rc2 = System.Security.Cryptography.RC2.Create();
-        rc2.Decrypt(encrypted, decrypted, key, vector, cipherMode, paddingMode);
+        encrypted.Decrypt(rc2, decrypted, key, vector, cipherMode, paddingMode);
     }
 }

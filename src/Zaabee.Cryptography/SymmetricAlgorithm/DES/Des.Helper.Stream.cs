@@ -23,7 +23,7 @@ public static partial class DesHelper
         PaddingMode paddingMode = CommonSettings.DefaultPaddingMode)
     {
         using var des = System.Security.Cryptography.DES.Create();
-        des.Encrypt(original, encrypted, key, vector, cipherMode, paddingMode);
+        original.Encrypt(des, encrypted, key, vector, cipherMode, paddingMode);
     }
 
     public static MemoryStream Decrypt(
@@ -47,6 +47,6 @@ public static partial class DesHelper
         PaddingMode paddingMode = CommonSettings.DefaultPaddingMode)
     {
         using var des = System.Security.Cryptography.DES.Create();
-        des.Decrypt(encrypted, decrypted, key, vector, cipherMode, paddingMode);
+        encrypted.Decrypt(des, decrypted, key, vector, cipherMode, paddingMode);
     }
 }

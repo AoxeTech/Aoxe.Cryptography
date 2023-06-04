@@ -7,6 +7,6 @@ public static partial class Md5Helper
         Encoding? encoding = null)
     {
         using var md5 = System.Security.Cryptography.MD5.Create();
-        return md5.ToHashString(str, encoding);
+        return str.ToHashString(md5, encoding);
     }
 }

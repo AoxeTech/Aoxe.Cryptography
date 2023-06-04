@@ -5,8 +5,8 @@ public static partial class ShaHelper
 #if !NETSTANDARD2_0
     public static Task<byte[]> ComputeSha1Async(Stream inputStream)
     {
-        using var sha1 = System.Security.Cryptography.SHA1.Create();
-        return sha1.ToHashAsync(inputStream);
+        using var sha1 = SHA1.Create();
+        return inputStream.ToHashAsync(sha1);
     }
 #endif
 }

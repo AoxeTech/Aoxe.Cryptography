@@ -1,10 +1,10 @@
-namespace Zaabee.Cryptography;
+namespace Zaabee.Cryptography.Internals;
 
-public static partial class SymmetricAlgorithmExtensions
+internal static partial class SymmetricAlgorithmExtensions
 {
-    public static byte[] Encrypt(
-        this System.Security.Cryptography.SymmetricAlgorithm symmetricAlgorithm,
-        byte[] original,
+    internal static byte[] Encrypt(
+        this byte[] original,
+        System.Security.Cryptography.SymmetricAlgorithm symmetricAlgorithm,
         byte[]? key = null,
         byte[]? vector = null,
         CipherMode cipherMode = CommonSettings.DefaultCipherMode,
@@ -27,9 +27,9 @@ public static partial class SymmetricAlgorithmExtensions
         return msEncrypt.ToArray();
     }
 
-    public static byte[] Decrypt(
-        this System.Security.Cryptography.SymmetricAlgorithm symmetricAlgorithm,
-        byte[] encrypted,
+    internal static byte[] Decrypt(
+        this byte[] encrypted,
+        System.Security.Cryptography.SymmetricAlgorithm symmetricAlgorithm,
         byte[]? key = null,
         byte[]? vector = null,
         CipherMode cipherMode = CommonSettings.DefaultCipherMode,

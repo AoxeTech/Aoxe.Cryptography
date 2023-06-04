@@ -1,20 +1,20 @@
-namespace Zaabee.Cryptography;
+namespace Zaabee.Cryptography.Internals;
 
-public static class SymmetricAlgorithmHelper
+internal static class SymmetricAlgorithmHelper
 {
-    public static byte[] GenerateKey(System.Security.Cryptography.SymmetricAlgorithm symmetricAlgorithm)
+    internal static byte[] GenerateKey(System.Security.Cryptography.SymmetricAlgorithm symmetricAlgorithm)
     {
         symmetricAlgorithm.GenerateKey();
         return symmetricAlgorithm.Key;
     }
 
-    public static byte[] GenerateVector(System.Security.Cryptography.SymmetricAlgorithm symmetricAlgorithm)
+    internal static byte[] GenerateVector(System.Security.Cryptography.SymmetricAlgorithm symmetricAlgorithm)
     {
         symmetricAlgorithm.GenerateIV();
         return symmetricAlgorithm.IV;
     }
 
-    public static (byte[] key, byte[] vector) GenerateKeyAndVector(
+    internal static (byte[] key, byte[] vector) GenerateKeyAndVector(
         System.Security.Cryptography.SymmetricAlgorithm symmetricAlgorithm)
     {
         symmetricAlgorithm.GenerateKey();

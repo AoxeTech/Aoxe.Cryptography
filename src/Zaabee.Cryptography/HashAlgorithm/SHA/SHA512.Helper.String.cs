@@ -6,7 +6,7 @@ public static partial class ShaHelper
         string str,
         Encoding? encoding = null)
     {
-        using var sha512 = System.Security.Cryptography.SHA512.Create();
-        return sha512.ToHashString(str, encoding);
+        using var sha512 = SHA512.Create();
+        return str.ToHashString(sha512, encoding);
     }
 }

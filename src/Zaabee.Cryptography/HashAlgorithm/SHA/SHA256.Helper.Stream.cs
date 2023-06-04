@@ -4,7 +4,7 @@ public static partial class ShaHelper
 {
     public static byte[] ComputeSha256(Stream inputStream)
     {
-        using var sha256 = System.Security.Cryptography.SHA256.Create();
-        return sha256.ToHash(inputStream);
+        using var sha256 = SHA256.Create();
+        return inputStream.ToHash(sha256);
     }
 }

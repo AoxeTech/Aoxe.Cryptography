@@ -10,7 +10,7 @@ public static partial class Rc2Helper
         PaddingMode paddingMode = CommonSettings.DefaultPaddingMode)
     {
         using var rc2 = System.Security.Cryptography.RC2.Create();
-        return rc2.Encrypt(original, key, vector, cipherMode, paddingMode);
+        return original.Encrypt(rc2, key, vector, cipherMode, paddingMode);
     }
 
     public static byte[] Decrypt(
@@ -21,6 +21,6 @@ public static partial class Rc2Helper
         PaddingMode paddingMode = CommonSettings.DefaultPaddingMode)
     {
         using var rc2 = System.Security.Cryptography.RC2.Create();
-        return rc2.Decrypt(encrypted, key, vector, cipherMode, paddingMode);
+        return encrypted.Decrypt(rc2, key, vector, cipherMode, paddingMode);
     }
 }

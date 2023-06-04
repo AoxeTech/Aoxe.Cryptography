@@ -1,10 +1,10 @@
-namespace Zaabee.Cryptography;
+namespace Zaabee.Cryptography.Internals;
 
-public static partial class SymmetricAlgorithmExtensions
+internal static partial class SymmetricAlgorithmExtensions
 {
-    public static void Encrypt(
-        this System.Security.Cryptography.SymmetricAlgorithm symmetricAlgorithm,
-        Stream original,
+    internal static void Encrypt(
+        this Stream original,
+        System.Security.Cryptography.SymmetricAlgorithm symmetricAlgorithm,
         Stream encrypted,
         byte[]? key = null,
         byte[]? vector = null,
@@ -35,9 +35,9 @@ public static partial class SymmetricAlgorithmExtensions
         encrypted.TrySeek(0, SeekOrigin.Begin);
     }
 
-    public static void Decrypt(
-        this System.Security.Cryptography.SymmetricAlgorithm symmetricAlgorithm,
-        Stream encrypted,
+    internal static void Decrypt(
+        this Stream encrypted,
+        System.Security.Cryptography.SymmetricAlgorithm symmetricAlgorithm,
         Stream decrypted,
         byte[]? key = null,
         byte[]? vector = null,

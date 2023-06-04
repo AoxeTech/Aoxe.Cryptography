@@ -23,7 +23,7 @@ public static partial class AesHelper
         PaddingMode paddingMode = CommonSettings.DefaultPaddingMode)
     {
         using var aes = Aes.Create();
-        aes.Encrypt(original, encrypted, key, vector, cipherMode, paddingMode);
+        original.Encrypt(aes, encrypted, key, vector, cipherMode, paddingMode);
     }
 
     public static MemoryStream Decrypt(
@@ -47,6 +47,6 @@ public static partial class AesHelper
         PaddingMode paddingMode = CommonSettings.DefaultPaddingMode)
     {
         using var aes = Aes.Create();
-        aes.Decrypt(encrypted, decrypted, key, vector, cipherMode, paddingMode);
+        encrypted.Decrypt(aes, decrypted, key, vector, cipherMode, paddingMode);
     }
 }

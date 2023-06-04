@@ -25,7 +25,7 @@ public static partial class TripleDesHelper
         CancellationToken cancellationToken = default)
     {
         using var tripleDes = System.Security.Cryptography.TripleDES.Create();
-        await tripleDes.EncryptAsync(original, encrypted, key, vector, cipherMode, paddingMode, cancellationToken);
+        await original.EncryptAsync(tripleDes, encrypted, key, vector, cipherMode, paddingMode, cancellationToken);
     }
 
     public static async Task<MemoryStream> DecryptAsync(
@@ -51,6 +51,6 @@ public static partial class TripleDesHelper
         CancellationToken cancellationToken = default)
     {
         using var tripleDes = System.Security.Cryptography.TripleDES.Create();
-        await tripleDes.DecryptAsync(encrypted, decrypted, key, vector, cipherMode, paddingMode, cancellationToken);
+        await encrypted.DecryptAsync(tripleDes, decrypted, key, vector, cipherMode, paddingMode, cancellationToken);
     }
 }
