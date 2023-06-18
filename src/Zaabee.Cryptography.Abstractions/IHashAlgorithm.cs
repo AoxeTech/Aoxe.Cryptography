@@ -2,12 +2,12 @@ namespace Zaabee.Cryptography.Abstractions;
 
 public interface IHashAlgorithm
 {
-    string ComputeHash(byte[] bytes);
-    string ComputeHash(string str, Encoding encoding);
-    string ComputeHash(Stream inputStream);
-    byte[] ComputeHashBytes(byte[] bytes);
-    byte[] ComputeHashBytes(string str, Encoding encoding);
-    byte[] ComputeHashBytes(Stream inputStream);
-    Task<string> ComputeHashAsync(Stream inputStream);
-    Task<byte[]> ComputeHashBytesAsync(Stream inputStream);
+    string ComputeHashString(byte[] bytes);
+    string ComputeHashString(string str, Encoding encoding);
+    string ComputeHashString(Stream inputStream);
+    byte[] ComputeHash(byte[] bytes);
+    byte[] ComputeHash(string str, Encoding encoding);
+    byte[] ComputeHash(Stream inputStream);
+    Task<string> ComputeHashStringAsync(Stream inputStream);
+    Task<byte[]> ComputeHashAsync(Stream inputStream);
 }

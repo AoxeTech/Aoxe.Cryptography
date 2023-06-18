@@ -3,7 +3,7 @@ namespace Zaabee.Cryptography.UnitTest;
 public class Sha1Test
 {
     [Theory]
-    [InlineData("apple", "D0BE2DC421BE4FCD0172E5AFCEEA3970E2F3D940")]
+    [InlineData("apple", "D0-BE-2D-C4-21-BE-4F-CD-01-72-E5-AF-CE-EA-39-70-E2-F3-D9-40")]
     public void Sha1StringTest(string str, string result)
     {
         Assert.Equal(str.ToSha1(), result);

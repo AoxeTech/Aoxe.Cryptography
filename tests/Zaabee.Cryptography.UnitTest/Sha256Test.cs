@@ -3,7 +3,8 @@ namespace Zaabee.Cryptography.UnitTest;
 public class Sha256Test
 {
     [Theory]
-    [InlineData("apple", "3A7BD3E2360A3D29EEA436FCFB7E44C735D117C42D1C1835420B6B9942DD4F1B")]
+    [InlineData("apple",
+        "3A-7B-D3-E2-36-0A-3D-29-EE-A4-36-FC-FB-7E-44-C7-35-D1-17-C4-2D-1C-18-35-42-0B-6B-99-42-DD-4F-1B")]
     public void Sha256StringTest(string str, string result)
     {
         Assert.Equal(str.ToSha256(), result);

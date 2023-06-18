@@ -4,7 +4,7 @@ public class Sha384Test
 {
     [Theory]
     [InlineData("apple",
-        "3D8786FCB588C93348756C6429717DC6C374A14F7029362281A3B21DC10250DDF0D0578052749822EB08BC0DC1E68B0F")]
+        "3D-87-86-FC-B5-88-C9-33-48-75-6C-64-29-71-7D-C6-C3-74-A1-4F-70-29-36-22-81-A3-B2-1D-C1-02-50-DD-F0-D0-57-80-52-74-98-22-EB-08-BC-0D-C1-E6-8B-0F")]
     public void Sha384StringTest(string str, string result)
     {
         Assert.Equal(str.ToSha384(), result);
