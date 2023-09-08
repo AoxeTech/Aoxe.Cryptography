@@ -28,4 +28,13 @@ public class AesAlgorithm : ISymmetricAlgorithm
 
     public Task<MemoryStream> DecryptAsync(Stream inputStream, byte[] key, byte[] iv) =>
         AesHelper.DecryptAsync(inputStream, key, iv, _cipherMode, _paddingMode);
+
+    public byte[] GenerateKey() =>
+        AesHelper.GenerateKey();
+
+    public byte[] GenerateVector() =>
+        AesHelper.GenerateVector();
+
+    public (byte[] key, byte[] vector) GenerateKeyAndVector() =>
+        AesHelper.GenerateKeyAndVector();
 }

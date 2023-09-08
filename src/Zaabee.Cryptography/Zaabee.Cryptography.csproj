@@ -17,10 +17,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Folder Include="SymmetricAlgorithm\"/>
-    </ItemGroup>
-
-    <ItemGroup>
         <ProjectReference Include="..\Zaabee.Cryptography.Abstractions\Zaabee.Cryptography.Abstractions.csproj"/>
     </ItemGroup>
 

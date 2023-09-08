@@ -28,4 +28,13 @@ public class TripleDesAlgorithm : ISymmetricAlgorithm
 
     public Task<MemoryStream> DecryptAsync(Stream inputStream, byte[] key, byte[] iv) =>
         TripleDesHelper.DecryptAsync(inputStream, key, iv, _cipherMode, _paddingMode);
+
+    public byte[] GenerateKey() =>
+        TripleDesHelper.GenerateKey();
+
+    public byte[] GenerateVector() =>
+        TripleDesHelper.GenerateVector();
+
+    public (byte[] key, byte[] vector) GenerateKeyAndVector() =>
+        TripleDesHelper.GenerateKeyAndVector();
 }

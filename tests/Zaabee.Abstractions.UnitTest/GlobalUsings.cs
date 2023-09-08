@@ -10,4 +10,8 @@ global using Zaabee.Cryptography.HashAlgorithm.Sha1;
 global using Zaabee.Cryptography.HashAlgorithm.Sha256;
 global using Zaabee.Cryptography.HashAlgorithm.Sha384;
 global using Zaabee.Cryptography.HashAlgorithm.Sha512;
+global using Zaabee.Cryptography.SymmetricAlgorithm.AES;
+global using Zaabee.Cryptography.SymmetricAlgorithm.DES;
+global using Zaabee.Cryptography.SymmetricAlgorithm.RC2;
+global using Zaabee.Cryptography.SymmetricAlgorithm.TripleDES;
 global using Zaabee.Extensions;

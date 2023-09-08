@@ -28,4 +28,13 @@ public class DesAlgorithm : ISymmetricAlgorithm
 
     public Task<MemoryStream> DecryptAsync(Stream inputStream, byte[] key, byte[] iv) =>
         DesHelper.DecryptAsync(inputStream, key, iv, _cipherMode, _paddingMode);
+
+    public byte[] GenerateKey() =>
+        DesHelper.GenerateKey();
+
+    public byte[] GenerateVector() =>
+        DesHelper.GenerateVector();
+
+    public (byte[] key, byte[] vector) GenerateKeyAndVector() =>
+        DesHelper.GenerateKeyAndVector();
 }
