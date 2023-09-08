@@ -2,7 +2,7 @@ namespace Zaabee.Cryptography.Internals;
 
 internal static partial class SymmetricAlgorithmExtensions
 {
-    internal static async Task EncryptAsync(
+    internal static async ValueTask EncryptAsync(
         this Stream original,
         System.Security.Cryptography.SymmetricAlgorithm symmetricAlgorithm,
         Stream encrypted,
@@ -36,7 +36,7 @@ internal static partial class SymmetricAlgorithmExtensions
         encrypted.TrySeek(0, SeekOrigin.Begin);
     }
 
-    internal static async Task DecryptAsync(
+    internal static async ValueTask DecryptAsync(
         this Stream encrypted,
         System.Security.Cryptography.SymmetricAlgorithm symmetricAlgorithm,
         Stream decrypted,

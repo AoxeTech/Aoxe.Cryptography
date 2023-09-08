@@ -2,7 +2,7 @@ namespace Zaabee.Cryptography.SymmetricAlgorithm.TripleDES;
 
 public static partial class TripleDesExtensions
 {
-    public static Task EncryptByTripleDesAsync(
+    public static ValueTask EncryptByTripleDesAsync(
         this Stream original,
         Stream encrypted,
         byte[] key,
@@ -11,7 +11,7 @@ public static partial class TripleDesExtensions
         PaddingMode paddingMode = PaddingMode.PKCS7) =>
         TripleDesHelper.EncryptAsync(original, encrypted, key, vector, cipherMode, paddingMode);
 
-    public static Task DecryptByTripleDesAsync(
+    public static ValueTask DecryptByTripleDesAsync(
         this Stream encrypted,
         Stream decrypted,
         byte[] key,
@@ -20,7 +20,7 @@ public static partial class TripleDesExtensions
         PaddingMode paddingMode = PaddingMode.PKCS7) =>
         TripleDesHelper.DecryptAsync(encrypted, decrypted, key, vector, cipherMode, paddingMode);
 
-    public static Task<MemoryStream> EncryptByTripleDesAsync(
+    public static ValueTask<MemoryStream> EncryptByTripleDesAsync(
         this Stream original,
         byte[] key,
         byte[] vector,
@@ -28,7 +28,7 @@ public static partial class TripleDesExtensions
         PaddingMode paddingMode = PaddingMode.PKCS7) =>
         TripleDesHelper.EncryptAsync(original, key, vector, cipherMode, paddingMode);
 
-    public static Task<MemoryStream> DecryptByTripleDesAsync(
+    public static ValueTask<MemoryStream> DecryptByTripleDesAsync(
         this Stream encrypted,
         byte[] key,
         byte[] vector,

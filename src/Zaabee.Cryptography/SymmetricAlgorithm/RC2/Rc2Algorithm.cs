@@ -17,7 +17,7 @@ public class Rc2Algorithm : ISymmetricAlgorithm
     public MemoryStream Encrypt(Stream inputStream, byte[] key, byte[] iv) =>
         Rc2Helper.Encrypt(inputStream, key, iv, _cipherMode, _paddingMode);
 
-    public Task<MemoryStream> EncryptAsync(Stream inputStream, byte[] key, byte[] iv) =>
+    public ValueTask<MemoryStream> EncryptAsync(Stream inputStream, byte[] key, byte[] iv) =>
         Rc2Helper.EncryptAsync(inputStream, key, iv, _cipherMode, _paddingMode);
 
     public byte[] Decrypt(byte[] bytes, byte[] key, byte[] iv) =>
@@ -26,7 +26,7 @@ public class Rc2Algorithm : ISymmetricAlgorithm
     public MemoryStream Decrypt(Stream inputStream, byte[] key, byte[] iv) =>
         Rc2Helper.Decrypt(inputStream, key, iv, _cipherMode, _paddingMode);
 
-    public Task<MemoryStream> DecryptAsync(Stream inputStream, byte[] key, byte[] iv) =>
+    public ValueTask<MemoryStream> DecryptAsync(Stream inputStream, byte[] key, byte[] iv) =>
         Rc2Helper.DecryptAsync(inputStream, key, iv, _cipherMode, _paddingMode);
 
     public byte[] GenerateKey() =>

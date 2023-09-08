@@ -17,7 +17,7 @@ public class DesAlgorithm : ISymmetricAlgorithm
     public MemoryStream Encrypt(Stream inputStream, byte[] key, byte[] iv) =>
         DesHelper.Encrypt(inputStream, key, iv, _cipherMode, _paddingMode);
 
-    public Task<MemoryStream> EncryptAsync(Stream inputStream, byte[] key, byte[] iv) =>
+    public ValueTask<MemoryStream> EncryptAsync(Stream inputStream, byte[] key, byte[] iv) =>
         DesHelper.EncryptAsync(inputStream, key, iv, _cipherMode, _paddingMode);
 
     public byte[] Decrypt(byte[] bytes, byte[] key, byte[] iv) =>
@@ -26,7 +26,7 @@ public class DesAlgorithm : ISymmetricAlgorithm
     public MemoryStream Decrypt(Stream inputStream, byte[] key, byte[] iv) =>
         DesHelper.Decrypt(inputStream, key, iv, _cipherMode, _paddingMode);
 
-    public Task<MemoryStream> DecryptAsync(Stream inputStream, byte[] key, byte[] iv) =>
+    public ValueTask<MemoryStream> DecryptAsync(Stream inputStream, byte[] key, byte[] iv) =>
         DesHelper.DecryptAsync(inputStream, key, iv, _cipherMode, _paddingMode);
 
     public byte[] GenerateKey() =>

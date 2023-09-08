@@ -3,7 +3,7 @@ namespace Zaabee.Cryptography.Internals;
 internal static partial class HashAlgorithmExtensions
 {
 #if !NETSTANDARD2_0
-    internal static async Task<byte[]> ToHashAsync(
+    internal static async ValueTask<byte[]> ToHashAsync(
         this Stream inputStream,
         System.Security.Cryptography.HashAlgorithm hashAlgorithm,
         CancellationToken cancellationToken = default)
@@ -13,7 +13,7 @@ internal static partial class HashAlgorithmExtensions
         return hashBytes;
     }
 
-    internal static async Task<string> ToHashStringAsync(
+    internal static async ValueTask<string> ToHashStringAsync(
         this Stream inputStream,
         System.Security.Cryptography.HashAlgorithm hashAlgorithm,
         CancellationToken cancellationToken = default)

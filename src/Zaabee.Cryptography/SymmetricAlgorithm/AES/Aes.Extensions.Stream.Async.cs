@@ -2,7 +2,7 @@ namespace Zaabee.Cryptography.SymmetricAlgorithm.AES;
 
 public static partial class AesExtensions
 {
-    public static Task EncryptByAesAsync(
+    public static ValueTask EncryptByAesAsync(
         this Stream original,
         Stream encrypted,
         byte[] key,
@@ -11,7 +11,7 @@ public static partial class AesExtensions
         PaddingMode paddingMode = PaddingMode.PKCS7) =>
         AesHelper.EncryptAsync(original, encrypted, key, vector, cipherMode, paddingMode);
 
-    public static Task DecryptByAesAsync(
+    public static ValueTask DecryptByAesAsync(
         this Stream encrypted,
         Stream decrypted,
         byte[] key,
@@ -20,7 +20,7 @@ public static partial class AesExtensions
         PaddingMode paddingMode = PaddingMode.PKCS7) =>
         AesHelper.DecryptAsync(encrypted, decrypted, key, vector, cipherMode, paddingMode);
 
-    public static Task<MemoryStream> EncryptByAesAsync(
+    public static ValueTask<MemoryStream> EncryptByAesAsync(
         this Stream original,
         byte[] key,
         byte[] vector,
@@ -28,7 +28,7 @@ public static partial class AesExtensions
         PaddingMode paddingMode = PaddingMode.PKCS7) =>
         AesHelper.EncryptAsync(original, key, vector, cipherMode, paddingMode);
 
-    public static Task<MemoryStream> DecryptByAesAsync(
+    public static ValueTask<MemoryStream> DecryptByAesAsync(
         this Stream encrypted,
         byte[] key,
         byte[] vector,

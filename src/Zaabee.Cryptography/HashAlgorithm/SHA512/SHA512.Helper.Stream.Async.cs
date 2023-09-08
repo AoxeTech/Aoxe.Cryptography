@@ -3,7 +3,7 @@ namespace Zaabee.Cryptography.HashAlgorithm.SHA512;
 public static partial class Sha512Helper
 {
 #if !NETSTANDARD2_0
-    public static Task<byte[]> ComputeHashAsync(
+    public static ValueTask<byte[]> ComputeHashAsync(
         Stream inputStream,
         CancellationToken cancellationToken = default)
     {
@@ -11,7 +11,7 @@ public static partial class Sha512Helper
         return inputStream.ToHashAsync(sha512, cancellationToken: cancellationToken);
     }
 
-    public static Task<string> ComputeHashStringAsync(
+    public static ValueTask<string> ComputeHashStringAsync(
         Stream inputStream,
         CancellationToken cancellationToken = default)
     {
