@@ -3,32 +3,32 @@ namespace Zaabee.Cryptography.HashAlgorithm.Sha512;
 public class Sha512Algorithm : IHashAlgorithm
 {
     public byte[] ComputeHash(byte[] bytes) =>
-        bytes.ToSha512();
+        Sha512Helper.ComputeHash(bytes);
 
     public byte[] ComputeHash(Stream inputStream) =>
-        inputStream.ToSha512();
+        Sha512Helper.ComputeHash(inputStream);
 
     public byte[] ComputeHash(string str) =>
-        str.ToSha512();
+        Sha512Helper.ComputeHash(str);
 
     public string ComputeHashString(byte[] bytes) =>
-        bytes.ToSha512String();
+        Sha512Helper.ComputeHashString(bytes);
 
     public string ComputeHashString(Stream inputStream) =>
-        inputStream.ToSha512String();
+        Sha512Helper.ComputeHashString(inputStream);
 
     public string ComputeHashString(string str) =>
-        str.ToSha512String();
+        Sha512Helper.ComputeHashString(str);
 
 #if !NETSTANDARD2_0
     public Task<byte[]> ComputeHashAsync(
         Stream inputStream,
         CancellationToken cancellationToken = default) =>
-        inputStream.ToSha512Async(cancellationToken);
+        Sha512Helper.ComputeHashAsync(inputStream, cancellationToken);
 
     public Task<string> ComputeHashStringAsync(
         Stream inputStream,
         CancellationToken cancellationToken = default) =>
-        inputStream.ToSha512StringAsync(cancellationToken);
+        Sha512Helper.ComputeHashStringAsync(inputStream, cancellationToken);
 #endif
 }

@@ -3,32 +3,32 @@ namespace Zaabee.Cryptography.HashAlgorithm.MD5;
 public class Md5Algorithm : IHashAlgorithm
 {
     public byte[] ComputeHash(byte[] bytes) =>
-        bytes.ToMd5();
+        Md5Helper.ComputeHash(bytes);
 
     public byte[] ComputeHash(Stream inputStream) =>
-        inputStream.ToMd5();
+        Md5Helper.ComputeHash(inputStream);
 
     public byte[] ComputeHash(string str) =>
-        str.ToMd5();
+        Md5Helper.ComputeHash(str);
 
     public string ComputeHashString(byte[] bytes) =>
-        bytes.ToMd5String();
+        Md5Helper.ComputeHashString(bytes);
 
     public string ComputeHashString(Stream inputStream) =>
-        inputStream.ToMd5String();
+        Md5Helper.ComputeHashString(inputStream);
 
     public string ComputeHashString(string str) =>
-        str.ToMd5String();
+        Md5Helper.ComputeHashString(str);
 
 #if !NETSTANDARD2_0
     public Task<byte[]> ComputeHashAsync(
         Stream inputStream,
         CancellationToken cancellationToken = default) =>
-        inputStream.ToMd5Async(cancellationToken);
+        Md5Helper.ComputeHashAsync(inputStream, cancellationToken);
 
     public Task<string> ComputeHashStringAsync(
         Stream inputStream,
         CancellationToken cancellationToken = default) =>
-        inputStream.ToMd5StringAsync(cancellationToken);
+        Md5Helper.ComputeHashStringAsync(inputStream, cancellationToken);
 #endif
 }

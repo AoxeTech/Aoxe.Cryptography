@@ -3,32 +3,32 @@ namespace Zaabee.Cryptography.HashAlgorithm.Sha256;
 public class Sha256Algorithm : IHashAlgorithm
 {
     public byte[] ComputeHash(byte[] bytes) =>
-        bytes.ToSha256();
+        Sha256Helper.ComputeHash(bytes);
 
     public byte[] ComputeHash(Stream inputStream) =>
-        inputStream.ToSha256();
+        Sha256Helper.ComputeHash(inputStream);
 
     public byte[] ComputeHash(string str) =>
-        str.ToSha256();
+        Sha256Helper.ComputeHash(str);
 
     public string ComputeHashString(byte[] bytes) =>
-        bytes.ToSha256String();
+        Sha256Helper.ComputeHashString(bytes);
 
     public string ComputeHashString(Stream inputStream) =>
-        inputStream.ToSha256String();
+        Sha256Helper.ComputeHashString(inputStream);
 
     public string ComputeHashString(string str) =>
-        str.ToSha256String();
+        Sha256Helper.ComputeHashString(str);
 
 #if !NETSTANDARD2_0
     public Task<byte[]> ComputeHashAsync(
         Stream inputStream,
         CancellationToken cancellationToken = default) =>
-        inputStream.ToSha256Async(cancellationToken);
+        Sha256Helper.ComputeHashAsync(inputStream, cancellationToken);
 
     public Task<string> ComputeHashStringAsync(
         Stream inputStream,
         CancellationToken cancellationToken = default) =>
-        inputStream.ToSha256StringAsync(cancellationToken);
+        Sha256Helper.ComputeHashStringAsync(inputStream, cancellationToken);
 #endif
 }
