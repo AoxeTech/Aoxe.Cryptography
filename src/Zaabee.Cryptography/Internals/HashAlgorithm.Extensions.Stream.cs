@@ -6,4 +6,9 @@ internal static partial class HashAlgorithmExtensions
         this Stream inputStream,
         System.Security.Cryptography.HashAlgorithm hashAlgorithm) =>
         hashAlgorithm.ComputeHash(inputStream);
+
+    internal static string ToHashString(
+        this Stream inputStream,
+        System.Security.Cryptography.HashAlgorithm hashAlgorithm) =>
+        hashAlgorithm.ComputeHash(inputStream).ToHexString();
 }

@@ -17,12 +17,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Zaabee.Extensions" Version="2023.1.2" />
+        <Folder Include="SymmetricAlgorithm\"/>
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="HashAlgorithm\" />
-        <Folder Include="SymmetricAlgorithm\" />
+        <ProjectReference Include="..\Zaabee.Cryptography.Abstractions\Zaabee.Cryptography.Abstractions.csproj"/>
     </ItemGroup>
 
 </Project>

@@ -8,5 +8,11 @@ internal static partial class HashAlgorithmExtensions
         System.Security.Cryptography.HashAlgorithm hashAlgorithm,
         CancellationToken cancellationToken = default) =>
         hashAlgorithm.ComputeHashAsync(inputStream, cancellationToken);
+
+    internal static async Task<string> ToHashStringAsync(
+        this Stream inputStream,
+        System.Security.Cryptography.HashAlgorithm hashAlgorithm,
+        CancellationToken cancellationToken = default) =>
+        (await hashAlgorithm.ComputeHashAsync(inputStream, cancellationToken)).ToHexString();
 #endif
 }

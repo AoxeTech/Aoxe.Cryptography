@@ -13,4 +13,16 @@ internal static partial class HashAlgorithmExtensions
         int offset,
         int count) =>
         hashAlgorithm.ComputeHash(buffer, offset, count);
+
+    internal static string ToHashString(
+        this byte[] buffer,
+        System.Security.Cryptography.HashAlgorithm hashAlgorithm) =>
+        hashAlgorithm.ComputeHash(buffer).ToHexString();
+
+    internal static string ToHashString(
+        this byte[] buffer,
+        System.Security.Cryptography.HashAlgorithm hashAlgorithm,
+        int offset,
+        int count) =>
+        hashAlgorithm.ComputeHash(buffer, offset, count).ToHexString();
 }
