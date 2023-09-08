@@ -10,7 +10,7 @@ public interface IHashAlgorithm
     string ComputeHashString(string str);
 
 #if !NETSTANDARD2_0
-    Task<byte[]> ComputeHashAsync(Stream inputStream, CancellationToken cancellationToken = default);
-    Task<string> ComputeHashStringAsync(Stream inputStream, CancellationToken cancellationToken = default);
+    ValueTask<byte[]> ComputeHashAsync(Stream inputStream, CancellationToken cancellationToken = default);
+    ValueTask<string> ComputeHashStringAsync(Stream inputStream, CancellationToken cancellationToken = default);
 #endif
 }

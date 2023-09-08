@@ -8,10 +8,10 @@ public interface IAsymmetricAlgorithmEncryption : IAsymmetricAlgorithm
 {
     byte[] Encrypt(byte[] bytes, byte[] publicKey);
     byte[] Encrypt(Stream inputStream, byte[] publicKey);
-    Task<byte[]> EncryptAsync(Stream inputStream, byte[] publicKey);
+    ValueTask<byte[]> EncryptAsync(Stream inputStream, byte[] publicKey);
     byte[] Decrypt(byte[] bytes, byte[] privateKey);
     byte[] Decrypt(Stream inputStream, byte[] privateKey);
-    Task<byte[]> DecryptAsync(Stream inputStream, byte[] privateKey);
+    ValueTask<byte[]> DecryptAsync(Stream inputStream, byte[] privateKey);
 }
 
 public interface IAsymmetricAlgorithmSignature : IAsymmetricAlgorithm
