@@ -5,12 +5,12 @@ Provide an easy way to use encryption algorithms. This package support the wraps
 - Symmetric Algorithm
   - AES
   - DES
-  - TripleDES
   - RC2
+  - TripleDES
 - Asymmetric Algorithm
-  - RSA
   - DSA
   - ECDSA
+  - RSA
 - Hash Algorithm
   - MD5
   - SHA1
@@ -20,30 +20,36 @@ Provide an easy way to use encryption algorithms. This package support the wraps
 
 ## Quick Start
 
+### Install Package
+
+```Shell
+PM> Install-Package Zaabee.Cryptography
+```
+
 ### MD5
 
 ```CSharp
 var apple = "apple";
 var md5String = apple.ToMd5String();
-var md5Bytes = apple.ToMd5Bytes();
+var md5Bytes = apple.ToMd5();
 ```
 
 ### SHA
 
 ```CSharp
 var apple = "apple";
-//D0-BE-2D-C4-21-BE-4F-CD-01-72-E5-AF-CE-EA-39-70-E2-F3-D9-40
+//D0BE2DC421BE4FCD0172E5AFCEEA3970E2F3D940
 var sha1String = apple.ToSha1String();
-var sha1Bytes = apple.ToSha1Bytes();
-//3A-7B-D3-E2-36-0A-3D-29-EE-A4-36-FC-FB-7E-44-C7-35-D1-17-C4-2D-1C-18-35-42-0B-6B-99-42-DD-4F-1B
+var sha1Bytes = apple.ToSha1();
+//3A7BD3E2360A3D29EEA436FCFB7E44C735D117C42D1C1835420B6B9942DD4F1B
 var sha256String = apple.ToSha256String();
-var sha256Bytes = apple.ToSha256Bytes();
-//3D-87-86-FC-B5-88-C9-33-48-75-6C-64-29-71-7D-C6-C3-74-A1-4F-70-29-36-22-81-A3-B2-1D-C1-02-50-DD-F0-D0-57-80-52-74-98-22-EB-08-BC-0D-C1-E6-8B-0F
+var sha256Bytes = apple.ToSha256();
+//3D8786FCB588C93348756C6429717DC6C374A14F7029362281A3B21DC10250DDF0D0578052749822EB08BC0DC1E68B0F
 var sha384String = apple.ToSha384String();
-var sha384Bytes = apple.ToSha384Bytes();
-//84-4D-87-79-10-3B-94-C1-8F-4A-A4-CC-0C-3B-44-74-05-85-80-A9-91-FB-A8-5D-3C-A6-98-A0-BC-9E-52-C5-94-0F-EB-7A-65-A3-A2-90-E1-7E-6B-23-EE-94-3E-CC-4F-73-E7-49-03-27-24-5B-4F-E5-D5-EF-B5-90-FE-B2
+var sha384Bytes = apple.ToSha384();
+//844D8779103B94C18F4AA4CC0C3B4474058580A991FBA85D3CA698A0BC9E52C5940FEB7A65A3A290E17E6B23EE943ECC4F73E7490327245B4FE5D5EFB590FEB2
 var sha512String = apple.ToSha512String();
-var sha512Bytes = apple.ToSha512Bytes();
+var sha512Bytes = apple.ToSha512();
 ```
 
 ### AES
@@ -53,9 +59,9 @@ var original = "Here is some data to encrypt!";
 var key = AesHelper.GenerateKey();
 var vector = AesHelper.GenerateVector();
 //Default cipher mode is CBC and padding mode is PKCS7.
-var encrypt = original.EncryptByAes(key, vector);
-// Also has an other method to encrypt bytes by AES.
-var decrypt = encrypt.DecryptToStringByAes(key, vector);
+var encrypt = original.EncryptByAes(key, vector); // Also you can use Helper like this: AesHelper.Decrypt(encrypt, key, vector);
+var decrypt = encrypt.DecryptByAes(key, vector); // Also you can use Helper like this: AesHelper.Decrypt(encrypt, key, vector);
+var decryptString = Encoding.UTF8.GetString(decrypt);
 ```
 
 ### RC2
@@ -65,9 +71,9 @@ var original = "Here is some data to encrypt!";
 var key = Rc2Helper.GenerateKey();
 var vector = Rc2Helper.GenerateVector();
 //Default cipher mode is CBC and padding mode is PKCS7.
-var encrypt = original.EncryptByRc2(key, vector);
-// Also has an other method to encrypt bytes by RC2.
-var decrypt = encrypt.DecryptToStringByRc2(key, vector);
+var encrypt = original.EncryptByRc2(key, vector); // Also you can use Helper like this: Rc2Helper.Decrypt(encrypt, key, vector);
+var decrypt = encrypt.DecryptByRc2(key, vector); // Also you can use Helper like this: Rc2Helper.Decrypt(encrypt, key, vector);
+var decryptString = Encoding.UTF8.GetString(decrypt);
 ```
 
 ### DES
@@ -77,9 +83,9 @@ var original = "Here is some data to encrypt!";
 var key = DesHelper.GenerateKey();
 var vector = DesHelper.GenerateVector();
 //Default cipher mode is CBC and padding mode is PKCS7.
-var encrypt = original.EncryptByDes(key, vector);
-// Also has an other method to encrypt bytes by DES.
-var decrypt = encrypt.DecryptToStringByDes(key, vector);
+var encrypt = original.EncryptByDes(key, vector); // Also you can use Helper like this: DesHelper.Decrypt(encrypt, key, vector);
+var decrypt = encrypt.DecryptByDes(key, vector); // Also you can use Helper like this: DesHelper.Decrypt(encrypt, key, vector);
+var decryptString = Encoding.UTF8.GetString(decrypt);
 ```
 
 ### TripleDES
@@ -89,9 +95,9 @@ var original = "Here is some data to encrypt!";
 var key = TripleDesHelper.GenerateKey();
 var vector = TripleDesHelper.GenerateVector();
 //Default cipher mode is CBC and padding mode is PKCS7.
-var encrypt = original.EncryptByTripleDes(key, vector);
-// Also has an other method to encrypt bytes by Triple DES.
-var decrypt = encrypt.DecryptToStringByTripleDes(key, vector);
+var encrypt = original.EncryptByTripleDes(key, vector); // Also you can use Helper like this: TripleDesHelper.Decrypt(encrypt, key, vector);
+var decrypt = encrypt.DecryptByTripleDes(key, vector); // Also you can use Helper like this: TripleDesHelper.Decrypt(encrypt, key, vector);
+var decryptString = Encoding.UTF8.GetString(decrypt);
 ```
 
 ### RSA
@@ -101,11 +107,11 @@ The default padding is OaepSHA256 and the default encoding is utf8.
 ```CSharp
 var original = "Here is some data to encrypt!";
 var (privateKey, publicKey) = RsaHelper.GenerateParameters();
-var encryptBytes = original.EncryptByRsa(publicKey);
-var decryptBytes = encryptBytes.DecryptByRsa(privateKey);
-var decrypt = RsaHelper.Encoding.GetString(decryptBytes);
-//True
-var result = original == decrypt;
+var originalBytes = Encoding.UTF8.GetBytes(original);
+var encryptBytes = originalBytes.EncryptByRsa(publicKey); // Also you can use Helper like this: RsaHelper.Encrypt(originalBytes, publicKey);
+var decryptBytes = encryptBytes.DecryptByRsa(privateKey); // Also you can use Helper like this: RsaHelper.Decrypt(encryptBytes, privateKey);
+var decrypt = Encoding.UTF8.GetString(decryptBytes);
+Assert.True(original, decrypt);
 ```
 
 ### ECDSA
@@ -114,9 +120,6 @@ The default encoding is utf8.
 
 ```CSharp
 var original = "Here is some data to encrypt!";
-```
-
-```CSharp
 //SignData
 var (privateKey, publicKey) = EcdsaHelper.GenerateParameters();
 var originalBytes = EcdsaHelper.Encoding.GetBytes(original);
