@@ -10,14 +10,4 @@ public static partial class EcdsaHelper
 
         return (privateKey, publicKey);
     }
-
-#if !NETSTANDARD2_0
-    public static (byte[] privateKey, byte[] publicKey) GenerateKeys()
-    {
-        using var ecDsa = ECDsa.Create();
-        var privateKey = ecDsa.ExportECPrivateKey();
-        var publicKey = ecDsa.ExportSubjectPublicKeyInfo();
-        return (privateKey, publicKey);
-    }
-#endif
 }
