@@ -3,8 +3,8 @@
     <PropertyGroup>
         <TargetFrameworks>netstandard2.0;net6.0;net7.0;net8.0</TargetFrameworks>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageVersion>2023.7.2</PackageVersion>
-        <Version>2023.7.2</Version>
+        <PackageVersion>2023.7.4</PackageVersion>
+        <Version>2023.7.4</Version>
         <Authors>Mutuduxf</Authors>
         <Company>Mutuduxf</Company>
         <PackageProjectUrl>https://github.com/PicoHex/Zaabee.Cryptography</PackageProjectUrl>
@@ -17,7 +17,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4"/>
         <PackageReference Include="Zaabee.Cryptography.Abstractions" Version="2023.3.0"/>
     </ItemGroup>
 
