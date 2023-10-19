@@ -22,6 +22,7 @@ public static partial class EcdsaExtensions
 
     public static bool VerifyHashByEcdsa(
         this byte[] hash,
-        byte[] signature, ECParameters publicKey) =>
+        byte[] signature,
+        ECParameters publicKey) =>
         EcdsaHelper.VerifyHash(hash, signature, publicKey);
 }
