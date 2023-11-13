@@ -3,6 +3,18 @@ namespace Zaabee.Abstractions.UnitTest;
 public class HashAlgorithmTest
 {
     [Theory]
+    [InlineData("apple", "6170706C65")]
+    public async Task NullAlgorithmTestAsync(string str, string result)
+    {
+        var nullAlgorithm = new NullHashAlgorithm();
+        ComputeHashTest(nullAlgorithm, str, result);
+        ComputeHashStringTest(nullAlgorithm, str, result);
+#if !NET48
+        await ComputeHashAsyncTest(nullAlgorithm, str, result);
+#endif
+    }
+
+    [Theory]
     [InlineData("apple", "1F3870BE274F6C49B3E31A0C6728957F")]
     public async Task Md5AlgorithmTestAsync(string str, string result)
     {
@@ -69,7 +81,7 @@ public class HashAlgorithmTest
     {
         var bytes = str.GetUtf8Bytes();
         var ms = new MemoryStream(bytes);
-        var hash = result.FromHexString();
+        var hash = result.FromHex();
         Assert.True(hashAlgorithm.ComputeHash(bytes).SequenceEqual(hash));
         Assert.True(hashAlgorithm.ComputeHash(ms).SequenceEqual(hash));
         Assert.True(hashAlgorithm.ComputeHash(str).SequenceEqual(hash));
@@ -91,7 +103,7 @@ public class HashAlgorithmTest
         var ms = new MemoryStream(bytes);
         var hashBytes = await hashAlgorithm.ComputeHashAsync(ms);
         var hashString = await hashAlgorithm.ComputeHashStringAsync(ms);
-        Assert.True(hashBytes.SequenceEqual(result.FromHexString()));
+        Assert.True(hashBytes.SequenceEqual(result.FromHex()));
         Assert.Equal(result, hashString);
     }
 #endif

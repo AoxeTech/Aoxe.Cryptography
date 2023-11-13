@@ -22,7 +22,7 @@ public class Sha384Test
     {
         var bytes = str.GetUtf8Bytes();
         var ms = new MemoryStream(bytes);
-        var hash = result.FromHexString();
+        var hash = result.FromHex();
         Assert.True(bytes.ToSha384().SequenceEqual(hash));
         Assert.True(bytes.ToSha384(0, bytes.Length).SequenceEqual(hash));
         Assert.True(ms.ToSha384().SequenceEqual(hash));
@@ -38,7 +38,7 @@ public class Sha384Test
         var memoryStream = new MemoryStream(str.GetUtf8Bytes());
 
         var sha384Bytes = await memoryStream.ToSha384Async();
-        Assert.True(sha384Bytes.SequenceEqual(result.FromHexString()));
+        Assert.True(sha384Bytes.SequenceEqual(result.FromHex()));
 
         var sha384String = await memoryStream.ToSha384StringAsync();
         Assert.Equal(result, sha384String);

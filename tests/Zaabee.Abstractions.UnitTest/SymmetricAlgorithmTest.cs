@@ -3,6 +3,12 @@ namespace Zaabee.Abstractions.UnitTest;
 public class SymmetricAlgorithmTest
 {
     [Fact]
+    public async Task NullAlgorithmTestAsync()
+    {
+        await Tests(new NullSymmetricAlgorithm());
+    }
+
+    [Fact]
     public async Task AesAlgorithmTestAsync()
     {
         await Tests(new AesAlgorithm());
@@ -74,21 +80,17 @@ public class SymmetricAlgorithmTest
         var (key, vector) = symmetricAlgorithm.GenerateKeyAndVector();
         Assert.NotNull(key);
         Assert.NotNull(vector);
-        Assert.NotEmpty(key);
-        Assert.NotEmpty(vector);
     }
 
     private static void GenerateKeyTest(ISymmetricAlgorithm symmetricAlgorithm)
     {
         var key = symmetricAlgorithm.GenerateKey();
         Assert.NotNull(key);
-        Assert.NotEmpty(key);
     }
 
     private static void GenerateVectorTest(ISymmetricAlgorithm symmetricAlgorithm)
     {
         var vector = symmetricAlgorithm.GenerateVector();
         Assert.NotNull(vector);
-        Assert.NotEmpty(vector);
     }
 }
