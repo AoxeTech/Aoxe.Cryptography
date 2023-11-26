@@ -7,7 +7,8 @@ public static partial class TripleDesHelper
         byte[] key,
         byte[] vector,
         CipherMode cipherMode = CommonSettings.DefaultCipherMode,
-        PaddingMode paddingMode = CommonSettings.DefaultPaddingMode)
+        PaddingMode paddingMode = CommonSettings.DefaultPaddingMode
+    )
     {
         using var tripleDes = System.Security.Cryptography.TripleDES.Create();
         return original.Encrypt(tripleDes, key, vector, cipherMode, paddingMode);
@@ -18,7 +19,8 @@ public static partial class TripleDesHelper
         byte[] key,
         byte[] vector,
         CipherMode cipherMode = CommonSettings.DefaultCipherMode,
-        PaddingMode paddingMode = CommonSettings.DefaultPaddingMode)
+        PaddingMode paddingMode = CommonSettings.DefaultPaddingMode
+    )
     {
         using var tripleDes = System.Security.Cryptography.TripleDES.Create();
         return encrypted.Decrypt(tripleDes, key, vector, cipherMode, paddingMode);

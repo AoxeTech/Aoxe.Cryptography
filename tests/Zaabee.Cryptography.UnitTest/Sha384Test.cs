@@ -3,8 +3,10 @@ namespace Zaabee.Cryptography.UnitTest;
 public class Sha384Test
 {
     [Theory]
-    [InlineData("apple",
-        "3D8786FCB588C93348756C6429717DC6C374A14F7029362281A3B21DC10250DDF0D0578052749822EB08BC0DC1E68B0F")]
+    [InlineData(
+        "apple",
+        "3D8786FCB588C93348756C6429717DC6C374A14F7029362281A3B21DC10250DDF0D0578052749822EB08BC0DC1E68B0F"
+    )]
     public void Sha384StringTest(string str, string result)
     {
         var bytes = str.GetUtf8Bytes();
@@ -16,8 +18,10 @@ public class Sha384Test
     }
 
     [Theory]
-    [InlineData("apple",
-        "3D8786FCB588C93348756C6429717DC6C374A14F7029362281A3B21DC10250DDF0D0578052749822EB08BC0DC1E68B0F")]
+    [InlineData(
+        "apple",
+        "3D8786FCB588C93348756C6429717DC6C374A14F7029362281A3B21DC10250DDF0D0578052749822EB08BC0DC1E68B0F"
+    )]
     public void Sha384BytesTest(string str, string result)
     {
         var bytes = str.GetUtf8Bytes();
@@ -31,8 +35,10 @@ public class Sha384Test
 
 #if !NET48
     [Theory]
-    [InlineData("apple",
-        "3D8786FCB588C93348756C6429717DC6C374A14F7029362281A3B21DC10250DDF0D0578052749822EB08BC0DC1E68B0F")]
+    [InlineData(
+        "apple",
+        "3D8786FCB588C93348756C6429717DC6C374A14F7029362281A3B21DC10250DDF0D0578052749822EB08BC0DC1E68B0F"
+    )]
     public async Task Sha384StreamAsyncTest(string str, string result)
     {
         var memoryStream = new MemoryStream(str.GetUtf8Bytes());

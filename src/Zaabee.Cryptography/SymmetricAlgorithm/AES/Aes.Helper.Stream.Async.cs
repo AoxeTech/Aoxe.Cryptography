@@ -8,10 +8,19 @@ public static partial class AesHelper
         byte[] vector,
         CipherMode cipherMode = CommonSettings.DefaultCipherMode,
         PaddingMode paddingMode = CommonSettings.DefaultPaddingMode,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var encrypted = new MemoryStream();
-        await EncryptAsync(original, encrypted, key, vector, cipherMode, paddingMode, cancellationToken);
+        await EncryptAsync(
+            original,
+            encrypted,
+            key,
+            vector,
+            cipherMode,
+            paddingMode,
+            cancellationToken
+        );
         return encrypted;
     }
 
@@ -22,10 +31,19 @@ public static partial class AesHelper
         byte[] vector,
         CipherMode cipherMode = CommonSettings.DefaultCipherMode,
         PaddingMode paddingMode = CommonSettings.DefaultPaddingMode,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         using var aes = Aes.Create();
-        await original.EncryptAsync(aes, encrypted, key, vector, cipherMode, paddingMode, cancellationToken);
+        await original.EncryptAsync(
+            aes,
+            encrypted,
+            key,
+            vector,
+            cipherMode,
+            paddingMode,
+            cancellationToken
+        );
     }
 
     public static async ValueTask<MemoryStream> DecryptAsync(
@@ -34,10 +52,19 @@ public static partial class AesHelper
         byte[] vector,
         CipherMode cipherMode = CommonSettings.DefaultCipherMode,
         PaddingMode paddingMode = CommonSettings.DefaultPaddingMode,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var decrypted = new MemoryStream();
-        await DecryptAsync(encrypted, decrypted, key, vector, cipherMode, paddingMode, cancellationToken);
+        await DecryptAsync(
+            encrypted,
+            decrypted,
+            key,
+            vector,
+            cipherMode,
+            paddingMode,
+            cancellationToken
+        );
         return decrypted;
     }
 
@@ -48,9 +75,18 @@ public static partial class AesHelper
         byte[] vector,
         CipherMode cipherMode = CommonSettings.DefaultCipherMode,
         PaddingMode paddingMode = CommonSettings.DefaultPaddingMode,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         using var aes = Aes.Create();
-        await encrypted.DecryptAsync(aes, decrypted, key, vector, cipherMode, paddingMode, cancellationToken);
+        await encrypted.DecryptAsync(
+            aes,
+            decrypted,
+            key,
+            vector,
+            cipherMode,
+            paddingMode,
+            cancellationToken
+        );
     }
 }

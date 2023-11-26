@@ -8,14 +8,18 @@ internal static partial class SymmetricAlgorithmExtensions
         byte[]? key = null,
         byte[]? vector = null,
         CipherMode cipherMode = CommonSettings.DefaultCipherMode,
-        PaddingMode paddingMode = CommonSettings.DefaultPaddingMode)
+        PaddingMode paddingMode = CommonSettings.DefaultPaddingMode
+    )
     {
         symmetricAlgorithm.Mode = cipherMode;
         symmetricAlgorithm.Padding = paddingMode;
         using var msEncrypt = new MemoryStream();
-        using (var encryptor = key is not null && vector is not null
-                   ? symmetricAlgorithm.CreateEncryptor(key, vector)
-                   : symmetricAlgorithm.CreateEncryptor())
+        using (
+            var encryptor =
+                key is not null && vector is not null
+                    ? symmetricAlgorithm.CreateEncryptor(key, vector)
+                    : symmetricAlgorithm.CreateEncryptor()
+        )
         using (var cryptoStream = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
         {
 #if NETSTANDARD2_0
@@ -33,14 +37,16 @@ internal static partial class SymmetricAlgorithmExtensions
         byte[]? key = null,
         byte[]? vector = null,
         CipherMode cipherMode = CommonSettings.DefaultCipherMode,
-        PaddingMode paddingMode = CommonSettings.DefaultPaddingMode)
+        PaddingMode paddingMode = CommonSettings.DefaultPaddingMode
+    )
     {
         symmetricAlgorithm.Mode = cipherMode;
         symmetricAlgorithm.Padding = paddingMode;
         using var msDecrypt = new MemoryStream(encrypted);
-        using var decryptor = key is not null && vector is not null
-            ? symmetricAlgorithm.CreateDecryptor(key, vector)
-            : symmetricAlgorithm.CreateDecryptor();
+        using var decryptor =
+            key is not null && vector is not null
+                ? symmetricAlgorithm.CreateDecryptor(key, vector)
+                : symmetricAlgorithm.CreateDecryptor();
         using var csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read);
         return csDecrypt.ReadToEnd();
     }

@@ -5,7 +5,10 @@ public class TripleDesAlgorithm : ISymmetricAlgorithm
     private readonly CipherMode _cipherMode;
     private readonly PaddingMode _paddingMode;
 
-    public TripleDesAlgorithm(PaddingMode paddingMode = PaddingMode.PKCS7, CipherMode cipherMode = CipherMode.CBC)
+    public TripleDesAlgorithm(
+        PaddingMode paddingMode = PaddingMode.PKCS7,
+        CipherMode cipherMode = CipherMode.CBC
+    )
     {
         _paddingMode = paddingMode;
         _cipherMode = cipherMode;
@@ -29,11 +32,9 @@ public class TripleDesAlgorithm : ISymmetricAlgorithm
     public ValueTask<MemoryStream> DecryptAsync(Stream inputStream, byte[] key, byte[] iv) =>
         TripleDesHelper.DecryptAsync(inputStream, key, iv, _cipherMode, _paddingMode);
 
-    public byte[] GenerateKey() =>
-        TripleDesHelper.GenerateKey();
+    public byte[] GenerateKey() => TripleDesHelper.GenerateKey();
 
-    public byte[] GenerateVector() =>
-        TripleDesHelper.GenerateVector();
+    public byte[] GenerateVector() => TripleDesHelper.GenerateVector();
 
     public (byte[] key, byte[] vector) GenerateKeyAndVector() =>
         TripleDesHelper.GenerateKeyAndVector();

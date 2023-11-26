@@ -7,7 +7,8 @@ public static partial class DesHelper
         byte[] key,
         byte[] vector,
         CipherMode cipherMode = CommonSettings.DefaultCipherMode,
-        PaddingMode paddingMode = CommonSettings.DefaultPaddingMode)
+        PaddingMode paddingMode = CommonSettings.DefaultPaddingMode
+    )
     {
         var encrypted = new MemoryStream();
         Encrypt(original, encrypted, key, vector, cipherMode, paddingMode);
@@ -20,7 +21,8 @@ public static partial class DesHelper
         byte[] key,
         byte[] vector,
         CipherMode cipherMode = CommonSettings.DefaultCipherMode,
-        PaddingMode paddingMode = CommonSettings.DefaultPaddingMode)
+        PaddingMode paddingMode = CommonSettings.DefaultPaddingMode
+    )
     {
         using var des = System.Security.Cryptography.DES.Create();
         original.Encrypt(des, encrypted, key, vector, cipherMode, paddingMode);
@@ -31,7 +33,8 @@ public static partial class DesHelper
         byte[] key,
         byte[] vector,
         CipherMode cipherMode = CommonSettings.DefaultCipherMode,
-        PaddingMode paddingMode = CommonSettings.DefaultPaddingMode)
+        PaddingMode paddingMode = CommonSettings.DefaultPaddingMode
+    )
     {
         var decrypted = new MemoryStream();
         Decrypt(encrypted, decrypted, key, vector, cipherMode, paddingMode);
@@ -44,7 +47,8 @@ public static partial class DesHelper
         byte[] key,
         byte[] vector,
         CipherMode cipherMode = CommonSettings.DefaultCipherMode,
-        PaddingMode paddingMode = CommonSettings.DefaultPaddingMode)
+        PaddingMode paddingMode = CommonSettings.DefaultPaddingMode
+    )
     {
         using var des = System.Security.Cryptography.DES.Create();
         encrypted.Decrypt(des, decrypted, key, vector, cipherMode, paddingMode);

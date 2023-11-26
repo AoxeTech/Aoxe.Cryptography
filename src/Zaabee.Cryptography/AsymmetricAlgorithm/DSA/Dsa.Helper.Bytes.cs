@@ -2,9 +2,7 @@ namespace Zaabee.Cryptography.AsymmetricAlgorithm.DSA;
 
 public static partial class DsaHelper
 {
-    public static byte[] CreateSignature(
-        byte[] rgbHash,
-        DSAParameters privateKey)
+    public static byte[] CreateSignature(byte[] rgbHash, DSAParameters privateKey)
     {
         using var dsa = System.Security.Cryptography.DSA.Create();
         dsa.ImportParameters(privateKey);
@@ -16,10 +14,7 @@ public static partial class DsaHelper
 #endif
     }
 
-    public static bool VerifySignature(
-        byte[] rgbHash,
-        byte[] signature,
-        DSAParameters publicKey)
+    public static bool VerifySignature(byte[] rgbHash, byte[] signature, DSAParameters publicKey)
     {
         using var dsa = System.Security.Cryptography.DSA.Create();
         dsa.ImportParameters(publicKey);
@@ -35,7 +30,8 @@ public static partial class DsaHelper
     public static byte[] SignData(
         byte[] data,
         DSAParameters privateKey,
-        HashAlgorithmName? hashAlgorithmName = null)
+        HashAlgorithmName? hashAlgorithmName = null
+    )
     {
         using var dsa = System.Security.Cryptography.DSA.Create();
         dsa.ImportParameters(privateKey);
@@ -46,11 +42,16 @@ public static partial class DsaHelper
         byte[] data,
         byte[] signature,
         DSAParameters publicKey,
-        HashAlgorithmName? hashAlgorithmName = null)
+        HashAlgorithmName? hashAlgorithmName = null
+    )
     {
         using var dsa = System.Security.Cryptography.DSA.Create();
         dsa.ImportParameters(publicKey);
-        return dsa.VerifyData(data, signature, hashAlgorithmName ?? CommonSettings.DefaultHashAlgorithmName);
+        return dsa.VerifyData(
+            data,
+            signature,
+            hashAlgorithmName ?? CommonSettings.DefaultHashAlgorithmName
+        );
     }
 #endif
 }

@@ -5,7 +5,10 @@ public class AesAlgorithm : ISymmetricAlgorithm
     private readonly CipherMode _cipherMode;
     private readonly PaddingMode _paddingMode;
 
-    public AesAlgorithm(PaddingMode paddingMode = PaddingMode.PKCS7, CipherMode cipherMode = CipherMode.CBC)
+    public AesAlgorithm(
+        PaddingMode paddingMode = PaddingMode.PKCS7,
+        CipherMode cipherMode = CipherMode.CBC
+    )
     {
         _paddingMode = paddingMode;
         _cipherMode = cipherMode;
@@ -29,12 +32,9 @@ public class AesAlgorithm : ISymmetricAlgorithm
     public ValueTask<MemoryStream> DecryptAsync(Stream inputStream, byte[] key, byte[] iv) =>
         AesHelper.DecryptAsync(inputStream, key, iv, _cipherMode, _paddingMode);
 
-    public byte[] GenerateKey() =>
-        AesHelper.GenerateKey();
+    public byte[] GenerateKey() => AesHelper.GenerateKey();
 
-    public byte[] GenerateVector() =>
-        AesHelper.GenerateVector();
+    public byte[] GenerateVector() => AesHelper.GenerateVector();
 
-    public (byte[] key, byte[] vector) GenerateKeyAndVector() =>
-        AesHelper.GenerateKeyAndVector();
+    public (byte[] key, byte[] vector) GenerateKeyAndVector() => AesHelper.GenerateKeyAndVector();
 }

@@ -5,7 +5,10 @@ public class DesAlgorithm : ISymmetricAlgorithm
     private readonly CipherMode _cipherMode;
     private readonly PaddingMode _paddingMode;
 
-    public DesAlgorithm(PaddingMode paddingMode = PaddingMode.PKCS7, CipherMode cipherMode = CipherMode.CBC)
+    public DesAlgorithm(
+        PaddingMode paddingMode = PaddingMode.PKCS7,
+        CipherMode cipherMode = CipherMode.CBC
+    )
     {
         _paddingMode = paddingMode;
         _cipherMode = cipherMode;
@@ -29,12 +32,9 @@ public class DesAlgorithm : ISymmetricAlgorithm
     public ValueTask<MemoryStream> DecryptAsync(Stream inputStream, byte[] key, byte[] iv) =>
         DesHelper.DecryptAsync(inputStream, key, iv, _cipherMode, _paddingMode);
 
-    public byte[] GenerateKey() =>
-        DesHelper.GenerateKey();
+    public byte[] GenerateKey() => DesHelper.GenerateKey();
 
-    public byte[] GenerateVector() =>
-        DesHelper.GenerateVector();
+    public byte[] GenerateVector() => DesHelper.GenerateVector();
 
-    public (byte[] key, byte[] vector) GenerateKeyAndVector() =>
-        DesHelper.GenerateKeyAndVector();
+    public (byte[] key, byte[] vector) GenerateKeyAndVector() => DesHelper.GenerateKeyAndVector();
 }

@@ -10,13 +10,17 @@ internal static partial class SymmetricAlgorithmExtensions
         byte[]? vector = null,
         CipherMode cipherMode = CommonSettings.DefaultCipherMode,
         PaddingMode paddingMode = CommonSettings.DefaultPaddingMode,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         symmetricAlgorithm.Mode = cipherMode;
         symmetricAlgorithm.Padding = paddingMode;
-        using (var encryptor = key is not null && vector is not null
-                   ? symmetricAlgorithm.CreateEncryptor(key, vector)
-                   : symmetricAlgorithm.CreateEncryptor())
+        using (
+            var encryptor =
+                key is not null && vector is not null
+                    ? symmetricAlgorithm.CreateEncryptor(key, vector)
+                    : symmetricAlgorithm.CreateEncryptor()
+        )
         {
 #if NETSTANDARD2_0
             var ms = new MemoryStream();
@@ -28,7 +32,14 @@ internal static partial class SymmetricAlgorithmExtensions
                 await ms.CopyToAsync(encrypted, 81920, cancellationToken);
             }
 #else
-            await using (var cryptoStream = new CryptoStream(encrypted, encryptor, CryptoStreamMode.Write, true))
+            await using (
+                var cryptoStream = new CryptoStream(
+                    encrypted,
+                    encryptor,
+                    CryptoStreamMode.Write,
+                    true
+                )
+            )
                 await original.CopyToAsync(cryptoStream, cancellationToken);
 #endif
         }
@@ -44,13 +55,17 @@ internal static partial class SymmetricAlgorithmExtensions
         byte[]? vector = null,
         CipherMode cipherMode = CommonSettings.DefaultCipherMode,
         PaddingMode paddingMode = CommonSettings.DefaultPaddingMode,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         symmetricAlgorithm.Mode = cipherMode;
         symmetricAlgorithm.Padding = paddingMode;
-        using (var decryptor = key is not null && vector is not null
-                   ? symmetricAlgorithm.CreateDecryptor(key, vector)
-                   : symmetricAlgorithm.CreateDecryptor())
+        using (
+            var decryptor =
+                key is not null && vector is not null
+                    ? symmetricAlgorithm.CreateDecryptor(key, vector)
+                    : symmetricAlgorithm.CreateDecryptor()
+        )
         {
 #if NETSTANDARD2_0
             var ms = new MemoryStream();
@@ -59,7 +74,9 @@ internal static partial class SymmetricAlgorithmExtensions
             using (var csDecrypt = new CryptoStream(ms, decryptor, CryptoStreamMode.Read))
                 await csDecrypt.CopyToAsync(decrypted, 81920, cancellationToken);
 #else
-            await using (var csDecrypt = new CryptoStream(encrypted, decryptor, CryptoStreamMode.Read, true))
+            await using (
+                var csDecrypt = new CryptoStream(encrypted, decryptor, CryptoStreamMode.Read, true)
+            )
                 await csDecrypt.CopyToAsync(decrypted, cancellationToken);
 #endif
         }
