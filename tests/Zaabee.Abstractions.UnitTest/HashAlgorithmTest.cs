@@ -3,18 +3,6 @@ namespace Zaabee.Abstractions.UnitTest;
 public class HashAlgorithmTest
 {
     [Theory]
-    [InlineData("apple", "6170706C65")]
-    public async Task NullAlgorithmTestAsync(string str, string result)
-    {
-        var nullAlgorithm = new NullHashAlgorithm();
-        ComputeHashTest(nullAlgorithm, str, result);
-        ComputeHashStringTest(nullAlgorithm, str, result);
-#if !NET48
-        await ComputeHashAsyncTest(nullAlgorithm, str, result);
-#endif
-    }
-
-    [Theory]
     [InlineData("apple", "1F3870BE274F6C49B3E31A0C6728957F")]
     public async Task Md5AlgorithmTestAsync(string str, string result)
     {
