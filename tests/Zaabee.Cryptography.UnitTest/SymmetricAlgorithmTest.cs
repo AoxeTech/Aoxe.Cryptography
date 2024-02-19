@@ -1,4 +1,4 @@
-namespace Zaabee.Abstractions.UnitTest;
+namespace Zaabee.Cryptography.UnitTest;
 
 public class SymmetricAlgorithmTest
 {
