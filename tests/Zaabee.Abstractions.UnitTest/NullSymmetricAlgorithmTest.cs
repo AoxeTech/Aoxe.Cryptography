@@ -43,7 +43,7 @@ public class NullSymmetricAlgorithmTest
             Assert.NotNull(encryptedStream);
             encryptedStream.Position = 0;
             var encryptedData = new byte[originalData.Length];
-            encryptedStream.Read(encryptedData, 0, encryptedData.Length);
+            _ = encryptedStream.Read(encryptedData, 0, encryptedData.Length);
             for (var i = 0; i < originalData.Length; i++)
             {
                 Assert.Equal(originalData[i], encryptedData[i]);
@@ -70,7 +70,7 @@ public class NullSymmetricAlgorithmTest
             Assert.NotNull(encryptedStream);
             encryptedStream.Position = 0;
             var encryptedData = new byte[originalData.Length];
-            encryptedStream.Read(encryptedData, 0, encryptedData.Length);
+            _ = encryptedStream.Read(encryptedData, 0, encryptedData.Length);
             for (var i = 0; i < originalData.Length; i++)
             {
                 Assert.Equal(originalData[i], encryptedData[i]);
@@ -162,7 +162,7 @@ public class NullSymmetricAlgorithmTest
             Assert.NotNull(encryptedStream);
             encryptedStream.Position = 0;
             var encryptedData = new byte[originalData.Length];
-            encryptedStream.Read(encryptedData, 0, encryptedData.Length);
+            _ = encryptedStream.Read(encryptedData, 0, encryptedData.Length);
             for (var i = 0; i < originalData.Length; i++)
             {
                 Assert.Equal(originalData[i], encryptedData[i]);
@@ -189,7 +189,7 @@ public class NullSymmetricAlgorithmTest
             Assert.NotNull(encryptedStream);
             encryptedStream.Position = 0;
             var encryptedData = new byte[originalData.Length];
-            encryptedStream.Read(encryptedData, 0, encryptedData.Length);
+            _ = encryptedStream.Read(encryptedData, 0, encryptedData.Length);
             for (var i = 0; i < originalData.Length; i++)
             {
                 Assert.Equal(originalData[i], encryptedData[i]);
