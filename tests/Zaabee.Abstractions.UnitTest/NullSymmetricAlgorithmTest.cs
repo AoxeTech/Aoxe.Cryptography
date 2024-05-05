@@ -7,15 +7,15 @@ public class NullSymmetricAlgorithmTest
     {
         var encryption = new NullSymmetricAlgorithm();
 
-        // Arrange  
+        // Arrange
         var originalData = new byte[] { 1, 2, 3, 4 };
         var key = new byte[] { };
         var iv = new byte[] { };
 
-        // Act  
+        // Act
         var encryptedData = encryption.Encrypt(originalData, key, iv);
 
-        // Assert  
+        // Assert
         Assert.NotNull(encryptedData);
         Assert.Equal(originalData.Length, encryptedData.Length);
         for (var i = 0; i < originalData.Length; i++)
@@ -29,17 +29,17 @@ public class NullSymmetricAlgorithmTest
     {
         var encryption = new NullSymmetricAlgorithm();
 
-        // Arrange  
+        // Arrange
         var originalData = new byte[] { 1, 2, 3, 4 };
         using (var inputStream = new MemoryStream(originalData))
         {
             var key = new byte[] { };
             var iv = new byte[] { };
 
-            // Act  
+            // Act
             var encryptedStream = encryption.Encrypt(inputStream, key, iv);
 
-            // Assert  
+            // Assert
             Assert.NotNull(encryptedStream);
             encryptedStream.Position = 0;
             var encryptedData = new byte[originalData.Length];
@@ -56,17 +56,17 @@ public class NullSymmetricAlgorithmTest
     {
         var encryption = new NullSymmetricAlgorithm();
 
-        // Arrange  
+        // Arrange
         var originalData = new byte[] { 1, 2, 3, 4 };
         using (var inputStream = new MemoryStream(originalData))
         {
             var key = new byte[] { };
             var iv = new byte[] { };
 
-            // Act  
+            // Act
             var encryptedStream = await encryption.EncryptAsync(inputStream, key, iv);
 
-            // Assert  
+            // Assert
             Assert.NotNull(encryptedStream);
             encryptedStream.Position = 0;
             var encryptedData = new byte[originalData.Length];
@@ -78,17 +78,17 @@ public class NullSymmetricAlgorithmTest
         }
     }
 
-    // Add similar tests for Decrypt methods...  
+    // Add similar tests for Decrypt methods...
 
     [Fact]
     public void GenerateKey_ShouldReturnEmptyArray()
     {
         var encryption = new NullSymmetricAlgorithm();
 
-        // Act  
+        // Act
         var key = encryption.GenerateKey();
 
-        // Assert  
+        // Assert
         Assert.NotNull(key);
         Assert.Empty(key);
     }
@@ -98,10 +98,10 @@ public class NullSymmetricAlgorithmTest
     {
         var encryption = new NullSymmetricAlgorithm();
 
-        // Act  
+        // Act
         var vector = encryption.GenerateVector();
 
-        // Assert  
+        // Assert
         Assert.NotNull(vector);
         Assert.Empty(vector);
     }
@@ -111,10 +111,10 @@ public class NullSymmetricAlgorithmTest
     {
         var encryption = new NullSymmetricAlgorithm();
 
-        // Act  
+        // Act
         var (key, vector) = encryption.GenerateKeyAndVector();
 
-        // Assert  
+        // Assert
         Assert.NotNull(key);
         Assert.Empty(key);
         Assert.NotNull(vector);
@@ -126,15 +126,15 @@ public class NullSymmetricAlgorithmTest
     {
         var encryption = new NullSymmetricAlgorithm();
 
-        // Arrange  
+        // Arrange
         var originalData = new byte[] { 1, 2, 3, 4 };
         var key = new byte[] { };
         var iv = new byte[] { };
 
-        // Act  
+        // Act
         var decryptedData = encryption.Decrypt(originalData, key, iv);
 
-        // Assert  
+        // Assert
         Assert.NotNull(decryptedData);
         Assert.Equal(originalData.Length, decryptedData.Length);
         for (var i = 0; i < originalData.Length; i++)
@@ -148,17 +148,17 @@ public class NullSymmetricAlgorithmTest
     {
         var encryption = new NullSymmetricAlgorithm();
 
-        // Arrange  
+        // Arrange
         var originalData = new byte[] { 1, 2, 3, 4 };
         using (var inputStream = new MemoryStream(originalData))
         {
             var key = new byte[] { };
             var iv = new byte[] { };
 
-            // Act  
+            // Act
             var encryptedStream = encryption.Decrypt(inputStream, key, iv);
 
-            // Assert  
+            // Assert
             Assert.NotNull(encryptedStream);
             encryptedStream.Position = 0;
             var encryptedData = new byte[originalData.Length];
@@ -175,17 +175,17 @@ public class NullSymmetricAlgorithmTest
     {
         var encryption = new NullSymmetricAlgorithm();
 
-        // Arrange  
+        // Arrange
         var originalData = new byte[] { 1, 2, 3, 4 };
         using (var inputStream = new MemoryStream(originalData))
         {
             var key = new byte[] { };
             var iv = new byte[] { };
 
-            // Act  
+            // Act
             var encryptedStream = await encryption.DecryptAsync(inputStream, key, iv);
 
-            // Assert  
+            // Assert
             Assert.NotNull(encryptedStream);
             encryptedStream.Position = 0;
             var encryptedData = new byte[originalData.Length];
