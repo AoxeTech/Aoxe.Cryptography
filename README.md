@@ -1,4 +1,4 @@
-# Zaabee.Cryptography
+# Aoxe.Cryptography
 
 Provide an easy way to use encryption algorithms. This package support the wraps and extension methods of AES/MD5/SHA/RSA/DSA/ECDSA/DES/TripleDES
 
@@ -23,7 +23,7 @@ Provide an easy way to use encryption algorithms. This package support the wraps
 ### Install Package
 
 ```Shell
-PM> Install-Package Zaabee.Cryptography
+PM> Install-Package Aoxe.Cryptography
 ```
 
 ### MD5
