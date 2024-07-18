@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aoxe.Cryptography.UnitTest"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aoxe.Cryptography.Abstractions", "src\Aoxe.Cryptography.Abstractions\Aoxe.Cryptography.Abstractions.csproj", "{C07B5B88-B991-47BA-BF8E-A47AA016BB3C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aoxe.Abstractions.UnitTest", "tests\Aoxe.Abstractions.UnitTest\Aoxe.Abstractions.UnitTest.csproj", "{405334C8-EEB8-472A-BC8F-D5CBC16420E2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aoxe.Cryptography.Abstractions.UnitTest", "tests\Aoxe.Cryptography.Abstractions.UnitTest\Aoxe.Cryptography.Abstractions.UnitTest.csproj", "{405334C8-EEB8-472A-BC8F-D5CBC16420E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

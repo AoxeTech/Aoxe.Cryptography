@@ -1,4 +1,4 @@
-namespace Aoxe.Abstractions.UnitTest;
+namespace Aoxe.Cryptography.Abstractions.UnitTest;
 
 public class NullSymmetricAlgorithmTest
 {
