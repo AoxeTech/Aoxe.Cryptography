@@ -1,30 +1,30 @@
 # Aoxe.Cryptography
 
-English | [简体中文](README-zh_CN.md)
+[English](README.md) | 简体中文
 
 ---
 
-Provide an easy way to use encryption algorithms. This package support the wraps and extension methods of AES/MD5/SHA/RSA/DSA/ECDSA/DES/TripleDES
+提供使用加密算法的简便方法。此软件包支持 AES/MD5/SHA/RSA/DSA/ECDSA/DES/TripleDES 的封装和扩展方法
 
-- Symmetric Algorithm
+- 对称算法
   - AES
   - DES
   - RC2
   - TripleDES
-- Asymmetric Algorithm
+- 非对称算法
   - DSA
   - ECDSA
   - RSA
-- Hash Algorithm
+- 哈希算法
   - MD5
   - SHA1
   - SHA256
   - SHA384
   - SHA512
 
-## 1. Quick Start
+## 1. 快速入门
 
-### 1.1. Install Package
+### 1.1. 安装
 
 ```Shell
 PM> Install-Package Aoxe.Cryptography
@@ -106,7 +106,7 @@ var decryptString = Encoding.UTF8.GetString(decrypt);
 
 ### 1.8. RSA
 
-The default padding is OaepSHA256 and the default encoding is utf8.
+默认填充为 OaepSHA256，默认编码为 utf8
 
 ```CSharp
 var original = "Here is some data to encrypt!";
@@ -120,7 +120,7 @@ Assert.True(original, decrypt);
 
 ### 1.9. ECDSA
 
-The default encoding is utf8.
+默认编码为 utf8
 
 ```CSharp
 var original = "Here is some data to encrypt!";
@@ -143,7 +143,7 @@ var result = originalBytes.VerifyHashByEcdsa(signBytes, publicKey);
 
 ### 1.10. DSA
 
-The default encoding is utf8.
+默认编码为 utf8
 
 ```CSharp
 var (privateKey, publicKey) = DsaHelper.GenerateParameters();
