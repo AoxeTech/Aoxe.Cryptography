@@ -2,12 +2,13 @@
   
     <PropertyGroup>
         <TargetFrameworks>netstandard2.0;net6.0;net8.0;net9.0</TargetFrameworks>
-        <PackageVersion>2024.1.2</PackageVersion>
-        <Version>2024.1.2</Version>
+        <PackageVersion>2024.1.4</PackageVersion>
+        <Version>2024.1.4</Version>
         <Description>The helpers and extension methods of AES/MD5/SHA/RSA/RC2/ECDSA/DSA/DES/TripleDES.</Description>
         <PackageTags>Aoxe;Cryptographic;AES;MD5;SHA;RSA;RC2;ECDSA;DSA;DES;TripleDES</PackageTags>
         <PackageProjectUrl>https://github.com/AoxeTech</PackageProjectUrl>
         <RepositoryUrl>https://github.com/AoxeTech/Aoxe.Cryptography</RepositoryUrl>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <LangVersion>latest</LangVersion>
         <Nullable>enable</Nullable>
@@ -27,7 +28,11 @@
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Aoxe.Cryptography.Abstractions" Version="2024.1.2" />
+        <PackageReference Include="Aoxe.Cryptography.Abstractions" Version="2024.2.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="../../README.md" Pack="true" PackagePath="\"/>
     </ItemGroup>
 
 </Project>

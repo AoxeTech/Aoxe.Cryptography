@@ -22,3 +22,6 @@ global using Aoxe.Cryptography.SymmetricAlgorithm.RC2;
 global using Aoxe.Cryptography.SymmetricAlgorithm.TripleDES;
 global using Aoxe.Extensions;
 global using Xunit;
+#if NET8_0_OR_GREATER
+global using Aoxe.Cryptography.HashAlgorithm.SHA3_256;
+#endif
