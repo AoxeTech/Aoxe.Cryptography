@@ -29,3 +29,7 @@ global using Aoxe.Cryptography.HashAlgorithm.SHA3_512;
 global using Aoxe.Cryptography.HashAlgorithm.Shake128;
 global using Aoxe.Cryptography.HashAlgorithm.Shake256;
 #endif
+#if NET9_0_OR_GREATER
+global using Aoxe.Cryptography.HashAlgorithm.Kmac128;
+global using Aoxe.Cryptography.HashAlgorithm.Kmac256;
+#endif
