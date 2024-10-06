@@ -3,7 +3,7 @@ namespace Aoxe.Cryptography.UnitTest;
 public class Sha256Test
 {
     [Theory]
-    [InlineData("apple", "3A7BD3E2360A3D29EEA436FCFB7E44C735D117C42D1C1835420B6B9942DD4F1B")]
+    [InlineData("aoxe", "8B7F4C4B5E13F4546D9ACF863A78542C3EC599E533531A6F081B7EBD8120F288")]
     public void Sha256StringTest(string str, string result)
     {
         var bytes = str.GetUtf8Bytes();
@@ -15,7 +15,7 @@ public class Sha256Test
     }
 
     [Theory]
-    [InlineData("apple", "3A7BD3E2360A3D29EEA436FCFB7E44C735D117C42D1C1835420B6B9942DD4F1B")]
+    [InlineData("aoxe", "8B7F4C4B5E13F4546D9ACF863A78542C3EC599E533531A6F081B7EBD8120F288")]
     public void Sha256BytesTest(string str, string result)
     {
         var bytes = str.GetUtf8Bytes();
@@ -29,7 +29,7 @@ public class Sha256Test
 
 #if !NET48
     [Theory]
-    [InlineData("apple", "3A7BD3E2360A3D29EEA436FCFB7E44C735D117C42D1C1835420B6B9942DD4F1B")]
+    [InlineData("aoxe", "8B7F4C4B5E13F4546D9ACF863A78542C3EC599E533531A6F081B7EBD8120F288")]
     public async Task Sha256StreamAsyncTest(string str, string result)
     {
         var memoryStream = new MemoryStream(str.GetUtf8Bytes());

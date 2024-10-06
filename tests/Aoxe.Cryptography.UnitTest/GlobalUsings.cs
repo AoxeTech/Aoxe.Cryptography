@@ -24,4 +24,6 @@ global using Aoxe.Extensions;
 global using Xunit;
 #if NET8_0_OR_GREATER
 global using Aoxe.Cryptography.HashAlgorithm.SHA3_256;
+global using Aoxe.Cryptography.HashAlgorithm.SHA3_384;
+global using Aoxe.Cryptography.HashAlgorithm.SHA3_512;
 #endif

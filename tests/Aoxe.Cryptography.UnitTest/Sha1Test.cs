@@ -3,7 +3,7 @@ namespace Aoxe.Cryptography.UnitTest;
 public class Sha1Test
 {
     [Theory]
-    [InlineData("apple", "D0BE2DC421BE4FCD0172E5AFCEEA3970E2F3D940")]
+    [InlineData("aoxe", "B769BA21C57A0611FD0E6DDC4D9F9A5BE0DEEE9D")]
     public void Sha1StringTest(string str, string result)
     {
         var bytes = str.GetUtf8Bytes();
@@ -15,7 +15,7 @@ public class Sha1Test
     }
 
     [Theory]
-    [InlineData("apple", "D0BE2DC421BE4FCD0172E5AFCEEA3970E2F3D940")]
+    [InlineData("aoxe", "B769BA21C57A0611FD0E6DDC4D9F9A5BE0DEEE9D")]
     public void Sha1BytesTest(string str, string result)
     {
         var bytes = str.GetUtf8Bytes();
@@ -29,7 +29,7 @@ public class Sha1Test
 
 #if !NET48
     [Theory]
-    [InlineData("apple", "D0BE2DC421BE4FCD0172E5AFCEEA3970E2F3D940")]
+    [InlineData("aoxe", "B769BA21C57A0611FD0E6DDC4D9F9A5BE0DEEE9D")]
     public async Task Sha1StreamAsyncTest(string str, string result)
     {
         var memoryStream = new MemoryStream(str.GetUtf8Bytes());

@@ -3,7 +3,7 @@ namespace Aoxe.Cryptography.UnitTest;
 public class Md5Test
 {
     [Theory]
-    [InlineData("apple", "1F3870BE274F6C49B3E31A0C6728957F")]
+    [InlineData("aoxe", "53F07A4188C9B00265EDE3CE81D64801")]
     public void Md5StringTest(string str, string result)
     {
         var bytes = str.GetUtf8Bytes();
@@ -15,7 +15,7 @@ public class Md5Test
     }
 
     [Theory]
-    [InlineData("apple", "1F3870BE274F6C49B3E31A0C6728957F")]
+    [InlineData("aoxe", "53F07A4188C9B00265EDE3CE81D64801")]
     public void Md5BytesTest(string str, string result)
     {
         var bytes = str.GetUtf8Bytes();
@@ -29,7 +29,7 @@ public class Md5Test
 
 #if !NET48
     [Theory]
-    [InlineData("apple", "1F3870BE274F6C49B3E31A0C6728957F")]
+    [InlineData("aoxe", "53F07A4188C9B00265EDE3CE81D64801")]
     public async Task Md5StreamAsyncTest(string str, string result)
     {
         var memoryStream = new MemoryStream(str.GetUtf8Bytes());

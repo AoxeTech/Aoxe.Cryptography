@@ -4,7 +4,7 @@ namespace Aoxe.Cryptography.UnitTest;
 public class Sha3_256Test
 {
     [Theory]
-    [InlineData("apple", "3A7BD3E2360A3D29EEA436FCFB7E44C735D117C42D1C1835420B6B9942DD4F1B")]
+    [InlineData("aoxe", "A8E39DE774FD3D4A69EDF97E99FA8B6566DD1457F9ABA25E4FCAADD63678C37B")]
     public void Sha3_256StringTest(string str, string result)
     {
         var bytes = str.GetUtf8Bytes();
@@ -16,7 +16,7 @@ public class Sha3_256Test
     }
 
     [Theory]
-    [InlineData("apple", "3A7BD3E2360A3D29EEA436FCFB7E44C735D117C42D1C1835420B6B9942DD4F1B")]
+    [InlineData("aoxe", "A8E39DE774FD3D4A69EDF97E99FA8B6566DD1457F9ABA25E4FCAADD63678C37B")]
     public void Sha3_256BytesTest(string str, string result)
     {
         var bytes = str.GetUtf8Bytes();
@@ -29,7 +29,7 @@ public class Sha3_256Test
     }
 
     [Theory]
-    [InlineData("apple", "3A7BD3E2360A3D29EEA436FCFB7E44C735D117C42D1C1835420B6B9942DD4F1B")]
+    [InlineData("aoxe", "A8E39DE774FD3D4A69EDF97E99FA8B6566DD1457F9ABA25E4FCAADD63678C37B")]
     public async Task Sha3_256StreamAsyncTest(string str, string result)
     {
         var memoryStream = new MemoryStream(str.GetUtf8Bytes());
