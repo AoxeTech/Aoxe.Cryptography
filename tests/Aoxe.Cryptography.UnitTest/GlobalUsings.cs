@@ -26,4 +26,6 @@ global using Xunit;
 global using Aoxe.Cryptography.HashAlgorithm.SHA3_256;
 global using Aoxe.Cryptography.HashAlgorithm.SHA3_384;
 global using Aoxe.Cryptography.HashAlgorithm.SHA3_512;
+global using Aoxe.Cryptography.HashAlgorithm.Shake128;
+global using Aoxe.Cryptography.HashAlgorithm.Shake256;
 #endif
