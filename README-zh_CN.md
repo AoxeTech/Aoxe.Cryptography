@@ -21,6 +21,13 @@
   - SHA256
   - SHA384
   - SHA512
+  - SHA3-256
+  - SHA3-384
+  - SHA3-512
+  - SHAKE128
+  - SHAKE256
+  - KMAC128
+  - KMAC256
 
 ## 1. 快速入门
 
