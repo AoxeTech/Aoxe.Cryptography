@@ -1,0 +1,10 @@
+﻿<Solution>
+  <Folder Name="/src/">
+    <Project Path="src\Aoxe.Cryptography.Abstractions\Aoxe.Cryptography.Abstractions.csproj" Type="Classic C#" />
+    <Project Path="src\Aoxe.Cryptography\Aoxe.Cryptography.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests\Aoxe.Cryptography.Abstractions.UnitTest\Aoxe.Cryptography.Abstractions.UnitTest.csproj" Type="Classic C#" />
+    <Project Path="tests\Aoxe.Cryptography.UnitTest\Aoxe.Cryptography.UnitTest.csproj" Type="Classic C#" />
+  </Folder>
+</Solution>
