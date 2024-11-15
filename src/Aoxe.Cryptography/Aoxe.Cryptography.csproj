@@ -2,8 +2,8 @@
   
     <PropertyGroup>
         <TargetFrameworks>netstandard2.0;net8.0;net9.0</TargetFrameworks>
-        <PackageVersion>2024.4.0</PackageVersion>
-        <Version>2024.4.0</Version>
+        <PackageVersion>2025.1.0</PackageVersion>
+        <Version>2025.1.0</Version>
         <Description>The helpers and extension methods of AES/MD5/SHA/SHA2/SHA3/RSA/RC2/ECDSA/DSA/DES/TripleDES.</Description>
         <PackageTags>Aoxe;Cryptographic;AES;MD5;SHA;SHA2;SHA3;KMAC;SHAKE;RSA;RC2;ECDSA;DSA;DES;TripleDES</PackageTags>
         <PackageProjectUrl>https://github.com/AoxeTech</PackageProjectUrl>
@@ -28,7 +28,7 @@
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Aoxe.Cryptography.Abstractions" Version="2024.3.0" />
+        <PackageReference Include="Aoxe.Cryptography.Abstractions" Version="2025.1.4" />
     </ItemGroup>
 
     <ItemGroup>

@@ -2,7 +2,6 @@ namespace Aoxe.Cryptography.HashAlgorithm.SHA512;
 
 public static partial class Sha512Helper
 {
-#if !NETSTANDARD2_0
     public static ValueTask<byte[]> ComputeHashAsync(
         Stream inputStream,
         CancellationToken cancellationToken = default
@@ -20,5 +19,4 @@ public static partial class Sha512Helper
         using var sha512 = System.Security.Cryptography.SHA512.Create();
         return inputStream.ToHashStringAsync(sha512, cancellationToken: cancellationToken);
     }
-#endif
 }

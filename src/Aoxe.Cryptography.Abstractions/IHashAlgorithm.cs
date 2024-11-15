@@ -9,7 +9,6 @@ public interface IHashAlgorithm
     string ComputeHashString(Stream inputStream);
     string ComputeHashString(string str);
 
-#if !NETSTANDARD2_0
     ValueTask<byte[]> ComputeHashAsync(
         Stream inputStream,
         CancellationToken cancellationToken = default
@@ -18,5 +17,4 @@ public interface IHashAlgorithm
         Stream inputStream,
         CancellationToken cancellationToken = default
     );
-#endif
 }

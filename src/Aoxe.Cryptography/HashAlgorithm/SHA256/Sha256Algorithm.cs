@@ -15,7 +15,6 @@ public class Sha256Algorithm : IHashAlgorithm
 
     public string ComputeHashString(string str) => Sha256Helper.ComputeHashString(str);
 
-#if !NETSTANDARD2_0
     public ValueTask<byte[]> ComputeHashAsync(
         Stream inputStream,
         CancellationToken cancellationToken = default
@@ -25,5 +24,4 @@ public class Sha256Algorithm : IHashAlgorithm
         Stream inputStream,
         CancellationToken cancellationToken = default
     ) => Sha256Helper.ComputeHashStringAsync(inputStream, cancellationToken);
-#endif
 }

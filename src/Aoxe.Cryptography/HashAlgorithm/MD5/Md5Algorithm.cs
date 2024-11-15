@@ -14,7 +14,6 @@ public class Md5Algorithm : IHashAlgorithm
 
     public string ComputeHashString(string str) => Md5Helper.ComputeHashString(str);
 
-#if !NETSTANDARD2_0
     public ValueTask<byte[]> ComputeHashAsync(
         Stream inputStream,
         CancellationToken cancellationToken = default
@@ -24,5 +23,4 @@ public class Md5Algorithm : IHashAlgorithm
         Stream inputStream,
         CancellationToken cancellationToken = default
     ) => Md5Helper.ComputeHashStringAsync(inputStream, cancellationToken);
-#endif
 }

@@ -2,7 +2,6 @@ namespace Aoxe.Cryptography.HashAlgorithm.MD5;
 
 public static partial class Md5Helper
 {
-#if !NETSTANDARD2_0
     public static ValueTask<byte[]> ComputeHashAsync(
         Stream inputStream,
         CancellationToken cancellationToken = default
@@ -20,5 +19,4 @@ public static partial class Md5Helper
         using var md5 = System.Security.Cryptography.MD5.Create();
         return inputStream.ToHashStringAsync(md5, cancellationToken);
     }
-#endif
 }

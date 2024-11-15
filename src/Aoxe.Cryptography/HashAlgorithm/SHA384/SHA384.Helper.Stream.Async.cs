@@ -2,7 +2,6 @@ namespace Aoxe.Cryptography.HashAlgorithm.SHA384;
 
 public static partial class Sha384Helper
 {
-#if !NETSTANDARD2_0
     public static ValueTask<byte[]> ComputeHashAsync(
         Stream inputStream,
         CancellationToken cancellationToken = default
@@ -20,5 +19,4 @@ public static partial class Sha384Helper
         using var sha384 = System.Security.Cryptography.SHA384.Create();
         return inputStream.ToHashStringAsync(sha384, cancellationToken: cancellationToken);
     }
-#endif
 }

@@ -2,7 +2,6 @@ namespace Aoxe.Cryptography.HashAlgorithm.SHA512;
 
 public static partial class Sha512Extensions
 {
-#if !NETSTANDARD2_0
     public static ValueTask<byte[]> ToSha512Async(
         this Stream inputStream,
         CancellationToken cancellationToken = default
@@ -12,5 +11,4 @@ public static partial class Sha512Extensions
         this Stream inputStream,
         CancellationToken cancellationToken = default
     ) => Sha512Helper.ComputeHashStringAsync(inputStream, cancellationToken);
-#endif
 }
