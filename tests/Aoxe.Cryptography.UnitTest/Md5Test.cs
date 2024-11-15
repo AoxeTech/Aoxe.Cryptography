@@ -27,7 +27,6 @@ public class Md5Test
         Assert.True(str.ToMd5().SequenceEqual(hash));
     }
 
-#if !NET48
     [Theory]
     [InlineData("aoxe", "53F07A4188C9B00265EDE3CE81D64801")]
     public async Task Md5StreamAsyncTest(string str, string result)
@@ -40,5 +39,4 @@ public class Md5Test
         var md5String = await memoryStream.ToMd5StringAsync();
         Assert.Equal(result, md5String);
     }
-#endif
 }

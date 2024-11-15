@@ -11,7 +11,6 @@ public class HashAlgorithmTest
         ComputeHashStringTest(md5Algorithm, str, result);
     }
 
-#if !NET48
     [Theory]
     [InlineData("aoxe", "53F07A4188C9B00265EDE3CE81D64801")]
     public async Task Md5AlgorithmTestAsync(string str, string result)
@@ -19,7 +18,6 @@ public class HashAlgorithmTest
         var md5Algorithm = new Md5Algorithm();
         await ComputeHashAsyncTest(md5Algorithm, str, result);
     }
-#endif
 
     [Theory]
     [InlineData("aoxe", "B769BA21C57A0611FD0E6DDC4D9F9A5BE0DEEE9D")]
@@ -30,7 +28,6 @@ public class HashAlgorithmTest
         ComputeHashStringTest(sha1Algorithm, str, result);
     }
 
-#if !NET48
     [Theory]
     [InlineData("aoxe", "B769BA21C57A0611FD0E6DDC4D9F9A5BE0DEEE9D")]
     public async Task Sha1AlgorithmTestAsync(string str, string result)
@@ -38,7 +35,6 @@ public class HashAlgorithmTest
         var sha1Algorithm = new Sha1Algorithm();
         await ComputeHashAsyncTest(sha1Algorithm, str, result);
     }
-#endif
 
     [Theory]
     [InlineData("aoxe", "8B7F4C4B5E13F4546D9ACF863A78542C3EC599E533531A6F081B7EBD8120F288")]
@@ -49,7 +45,6 @@ public class HashAlgorithmTest
         ComputeHashStringTest(sha256Algorithm, str, result);
     }
 
-#if !NET48
     [Theory]
     [InlineData("aoxe", "8B7F4C4B5E13F4546D9ACF863A78542C3EC599E533531A6F081B7EBD8120F288")]
     public async Task Sha256AlgorithmTestAsync(string str, string result)
@@ -57,7 +52,6 @@ public class HashAlgorithmTest
         var sha256Algorithm = new Sha256Algorithm();
         await ComputeHashAsyncTest(sha256Algorithm, str, result);
     }
-#endif
 
     [Theory]
     [InlineData(
@@ -71,7 +65,6 @@ public class HashAlgorithmTest
         ComputeHashStringTest(sha384Algorithm, str, result);
     }
 
-#if !NET48
     [Theory]
     [InlineData(
         "aoxe",
@@ -82,7 +75,6 @@ public class HashAlgorithmTest
         var sha384Algorithm = new Sha384Algorithm();
         await ComputeHashAsyncTest(sha384Algorithm, str, result);
     }
-#endif
 
     [Theory]
     [InlineData(
@@ -96,7 +88,6 @@ public class HashAlgorithmTest
         ComputeHashStringTest(sha512Algorithm, str, result);
     }
 
-#if !NET48
     [Theory]
     [InlineData(
         "aoxe",
@@ -107,7 +98,6 @@ public class HashAlgorithmTest
         var sha512Algorithm = new Sha512Algorithm();
         await ComputeHashAsyncTest(sha512Algorithm, str, result);
     }
-#endif
 
 #if NET8_0_OR_GREATER
 
@@ -198,7 +188,6 @@ public class HashAlgorithmTest
         Assert.Equal(result, hashAlgorithm.ComputeHashString(str));
     }
 
-#if !NET48
     private static async Task ComputeHashAsyncTest(
         IHashAlgorithm hashAlgorithm,
         string str,
@@ -212,5 +201,4 @@ public class HashAlgorithmTest
         Assert.True(hashBytes.SequenceEqual(result.FromHex()));
         Assert.Equal(result, hashString);
     }
-#endif
 }

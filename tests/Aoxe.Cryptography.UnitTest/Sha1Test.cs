@@ -27,7 +27,6 @@ public class Sha1Test
         Assert.True(str.ToSha1().SequenceEqual(hash));
     }
 
-#if !NET48
     [Theory]
     [InlineData("aoxe", "B769BA21C57A0611FD0E6DDC4D9F9A5BE0DEEE9D")]
     public async Task Sha1StreamAsyncTest(string str, string result)
@@ -40,5 +39,4 @@ public class Sha1Test
         var sha1String = await memoryStream.ToSha1StringAsync();
         Assert.Equal(result, sha1String);
     }
-#endif
 }

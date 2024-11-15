@@ -35,7 +35,6 @@ public class Sha512Test
         Assert.True(str.ToSha512().SequenceEqual(hash));
     }
 
-#if !NET48
     [Theory]
     [InlineData(
         "aoxe",
@@ -51,5 +50,4 @@ public class Sha512Test
         var sha512String = await memoryStream.ToSha512StringAsync();
         Assert.Equal(result, sha512String);
     }
-#endif
 }

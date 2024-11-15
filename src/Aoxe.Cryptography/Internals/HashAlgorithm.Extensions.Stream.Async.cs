@@ -33,12 +33,6 @@ internal static partial class HashAlgorithmExtensions
         CancellationToken cancellationToken = default
     )
     {
-        if (hashAlgorithm == null)
-            throw new ArgumentNullException(nameof(hashAlgorithm));
-
-        if (inputStream == null)
-            throw new ArgumentNullException(nameof(inputStream));
-
         if (inputStream.CanSeek)
             inputStream.Seek(0, SeekOrigin.Begin);
 

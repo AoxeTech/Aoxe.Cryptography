@@ -27,7 +27,6 @@ public class Sha256Test
         Assert.True(str.ToSha256().SequenceEqual(hash));
     }
 
-#if !NET48
     [Theory]
     [InlineData("aoxe", "8B7F4C4B5E13F4546D9ACF863A78542C3EC599E533531A6F081B7EBD8120F288")]
     public async Task Sha256StreamAsyncTest(string str, string result)
@@ -40,5 +39,4 @@ public class Sha256Test
         var sha256String = await memoryStream.ToSha256StringAsync();
         Assert.Equal(result, sha256String);
     }
-#endif
 }

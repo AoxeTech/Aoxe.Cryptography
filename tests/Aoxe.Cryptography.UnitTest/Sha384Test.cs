@@ -33,7 +33,6 @@ public class Sha384Test
         Assert.True(str.ToSha384().SequenceEqual(hash));
     }
 
-#if !NET48
     [Theory]
     [InlineData(
         "aoxe",
@@ -49,5 +48,4 @@ public class Sha384Test
         var sha384String = await memoryStream.ToSha384StringAsync();
         Assert.Equal(result, sha384String);
     }
-#endif
 }
