@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.002.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6A7A10CB-34B7-42DE-81A6-17200BF2FBC7}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0ABD90BA-FF26-4A56-AFBA-0F2A3353B938}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aoxe.Cryptography", "src\Aoxe.Cryptography\Aoxe.Cryptography.csproj", "{26999D77-BC58-4F47-9F62-C7290686C319}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aoxe.Cryptography", "src\Aoxe.Cryptography\Aoxe.Cryptography.csproj", "{117575EF-3750-415D-B31B-1B137C3DD903}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aoxe.Cryptography.Abstractions", "src\Aoxe.Cryptography.Abstractions\Aoxe.Cryptography.Abstractions.csproj", "{8D70F222-D57D-4F76-8049-2685F4594977}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aoxe.Cryptography.Abstractions", "src\Aoxe.Cryptography.Abstractions\Aoxe.Cryptography.Abstractions.csproj", "{4FF5D4EE-5F85-4DAF-9F25-3D847E1ED640}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{8780EBB3-633D-4194-85FA-B678D9AD5922}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{34C67672-45EE-4027-AE0C-DA1AB15D727A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aoxe.Cryptography.Abstractions.UnitTest", "tests\Aoxe.Cryptography.Abstractions.UnitTest\Aoxe.Cryptography.Abstractions.UnitTest.csproj", "{38A951F7-B7EA-4F86-92BA-D5502583CC8A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aoxe.Cryptography.Abstractions.UnitTest", "tests\Aoxe.Cryptography.Abstractions.UnitTest\Aoxe.Cryptography.Abstractions.UnitTest.csproj", "{B4D3230F-DED0-4BFC-8733-E4DFEDFCD7A5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aoxe.Cryptography.UnitTest", "tests\Aoxe.Cryptography.UnitTest\Aoxe.Cryptography.UnitTest.csproj", "{53A3C882-7258-4046-BFA2-17D877614A22}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aoxe.Cryptography.UnitTest", "tests\Aoxe.Cryptography.UnitTest\Aoxe.Cryptography.UnitTest.csproj", "{9F1684FA-09B0-4C56-ABFC-8D3BD53EC464}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,33 +21,33 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{26999D77-BC58-4F47-9F62-C7290686C319}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{26999D77-BC58-4F47-9F62-C7290686C319}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{26999D77-BC58-4F47-9F62-C7290686C319}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{26999D77-BC58-4F47-9F62-C7290686C319}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8D70F222-D57D-4F76-8049-2685F4594977}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8D70F222-D57D-4F76-8049-2685F4594977}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8D70F222-D57D-4F76-8049-2685F4594977}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8D70F222-D57D-4F76-8049-2685F4594977}.Release|Any CPU.Build.0 = Release|Any CPU
-		{38A951F7-B7EA-4F86-92BA-D5502583CC8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{38A951F7-B7EA-4F86-92BA-D5502583CC8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{38A951F7-B7EA-4F86-92BA-D5502583CC8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{38A951F7-B7EA-4F86-92BA-D5502583CC8A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{53A3C882-7258-4046-BFA2-17D877614A22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{53A3C882-7258-4046-BFA2-17D877614A22}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{53A3C882-7258-4046-BFA2-17D877614A22}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{53A3C882-7258-4046-BFA2-17D877614A22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{117575EF-3750-415D-B31B-1B137C3DD903}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{117575EF-3750-415D-B31B-1B137C3DD903}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{117575EF-3750-415D-B31B-1B137C3DD903}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{117575EF-3750-415D-B31B-1B137C3DD903}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FF5D4EE-5F85-4DAF-9F25-3D847E1ED640}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FF5D4EE-5F85-4DAF-9F25-3D847E1ED640}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FF5D4EE-5F85-4DAF-9F25-3D847E1ED640}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FF5D4EE-5F85-4DAF-9F25-3D847E1ED640}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4D3230F-DED0-4BFC-8733-E4DFEDFCD7A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4D3230F-DED0-4BFC-8733-E4DFEDFCD7A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4D3230F-DED0-4BFC-8733-E4DFEDFCD7A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4D3230F-DED0-4BFC-8733-E4DFEDFCD7A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F1684FA-09B0-4C56-ABFC-8D3BD53EC464}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F1684FA-09B0-4C56-ABFC-8D3BD53EC464}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F1684FA-09B0-4C56-ABFC-8D3BD53EC464}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F1684FA-09B0-4C56-ABFC-8D3BD53EC464}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{26999D77-BC58-4F47-9F62-C7290686C319} = {6A7A10CB-34B7-42DE-81A6-17200BF2FBC7}
-		{8D70F222-D57D-4F76-8049-2685F4594977} = {6A7A10CB-34B7-42DE-81A6-17200BF2FBC7}
-		{38A951F7-B7EA-4F86-92BA-D5502583CC8A} = {8780EBB3-633D-4194-85FA-B678D9AD5922}
-		{53A3C882-7258-4046-BFA2-17D877614A22} = {8780EBB3-633D-4194-85FA-B678D9AD5922}
+		{117575EF-3750-415D-B31B-1B137C3DD903} = {0ABD90BA-FF26-4A56-AFBA-0F2A3353B938}
+		{4FF5D4EE-5F85-4DAF-9F25-3D847E1ED640} = {0ABD90BA-FF26-4A56-AFBA-0F2A3353B938}
+		{B4D3230F-DED0-4BFC-8733-E4DFEDFCD7A5} = {34C67672-45EE-4027-AE0C-DA1AB15D727A}
+		{9F1684FA-09B0-4C56-ABFC-8D3BD53EC464} = {34C67672-45EE-4027-AE0C-DA1AB15D727A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {846E3566-338D-4903-BB23-A6770E0E7194}
+		SolutionGuid = {06D82B8C-161F-41CB-9773-598F530ED0FF}
 	EndGlobalSection
 EndGlobal
