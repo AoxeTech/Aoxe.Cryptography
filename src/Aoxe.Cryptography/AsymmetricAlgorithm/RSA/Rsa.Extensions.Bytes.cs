@@ -44,7 +44,6 @@ public static partial class RsaExtensions
         RSASignaturePadding? rsaEncryptionPadding = null
     ) => RsaHelper.VerifyHash(data, signature, publicKey, hashAlgorithmName, rsaEncryptionPadding);
 
-#if !NETSTANDARD2_0
     public static byte[] EncryptByRsa(
         this byte[] data,
         byte[] publicKey,
@@ -86,5 +85,4 @@ public static partial class RsaExtensions
         HashAlgorithmName? hashAlgorithmName = null,
         RSASignaturePadding? rsaEncryptionPadding = null
     ) => RsaHelper.VerifyHash(data, signature, publicKey, hashAlgorithmName, rsaEncryptionPadding);
-#endif
 }

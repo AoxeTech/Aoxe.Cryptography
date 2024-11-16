@@ -98,8 +98,6 @@ public static partial class RsaHelper
         );
     }
 
-#if !NETSTANDARD2_0
-
     public static byte[] Encrypt(
         byte[] data,
         byte[] publicKey,
@@ -107,7 +105,11 @@ public static partial class RsaHelper
     )
     {
         using var rsa = System.Security.Cryptography.RSA.Create();
+#if NETSTANDARD2_0
+        rsa.ImportParameters(publicKey.DeserializeFromXmlBytes());
+#else
         rsa.ImportRSAPublicKey(publicKey, out _);
+#endif
         return rsa.Encrypt(
             data,
             rsaEncryptionPadding ?? CommonSettings.DefaultRsaEncryptionPadding
@@ -121,7 +123,11 @@ public static partial class RsaHelper
     )
     {
         using var rsa = System.Security.Cryptography.RSA.Create();
+#if NETSTANDARD2_0
+        rsa.ImportParameters(privateKey.DeserializeFromXmlBytes());
+#else
         rsa.ImportRSAPrivateKey(privateKey, out _);
+#endif
         return rsa.Decrypt(
             data,
             rsaEncryptionPadding ?? CommonSettings.DefaultRsaEncryptionPadding
@@ -136,7 +142,11 @@ public static partial class RsaHelper
     )
     {
         using var rsa = System.Security.Cryptography.RSA.Create();
+#if NETSTANDARD2_0
+        rsa.ImportParameters(privateKey.DeserializeFromXmlBytes());
+#else
         rsa.ImportRSAPrivateKey(privateKey, out _);
+#endif
         return rsa.SignData(
             data,
             hashAlgorithmName ?? CommonSettings.DefaultHashAlgorithmName,
@@ -153,7 +163,11 @@ public static partial class RsaHelper
     )
     {
         using var rsa = System.Security.Cryptography.RSA.Create();
+#if NETSTANDARD2_0
+        rsa.ImportParameters(publicKey.DeserializeFromXmlBytes());
+#else
         rsa.ImportRSAPublicKey(publicKey, out _);
+#endif
         return rsa.VerifyData(
             data,
             signature,
@@ -170,7 +184,11 @@ public static partial class RsaHelper
     )
     {
         using var rsa = System.Security.Cryptography.RSA.Create();
+#if NETSTANDARD2_0
+        rsa.ImportParameters(privateKey.DeserializeFromXmlBytes());
+#else
         rsa.ImportRSAPrivateKey(privateKey, out _);
+#endif
         return rsa.SignHash(
             data,
             hashAlgorithmName ?? CommonSettings.DefaultHashAlgorithmName,
@@ -187,7 +205,11 @@ public static partial class RsaHelper
     )
     {
         using var rsa = System.Security.Cryptography.RSA.Create();
+#if NETSTANDARD2_0
+        rsa.ImportParameters(publicKey.DeserializeFromXmlBytes());
+#else
         rsa.ImportRSAPublicKey(publicKey, out _);
+#endif
         return rsa.VerifyHash(
             data,
             signature,
@@ -195,6 +217,4 @@ public static partial class RsaHelper
             rsaEncryptionPadding ?? CommonSettings.DefaultRsaSignaturePadding
         );
     }
-
-#endif
 }

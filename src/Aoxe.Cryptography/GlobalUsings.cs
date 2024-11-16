@@ -4,6 +4,7 @@ global using System.Security.Cryptography;
 global using System.Text;
 global using System.Threading;
 global using System.Threading.Tasks;
+global using System.Xml.Serialization;
 global using Aoxe.Cryptography.Abstractions;
 global using Aoxe.Cryptography.HashAlgorithm.SHA1;
 global using Aoxe.Cryptography.HashAlgorithm.SHA256;

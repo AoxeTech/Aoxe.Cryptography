@@ -2,8 +2,8 @@
   
     <PropertyGroup>
         <TargetFrameworks>netstandard2.0;net8.0;net9.0</TargetFrameworks>
-        <PackageVersion>2025.1.0</PackageVersion>
-        <Version>2025.1.0</Version>
+        <PackageVersion>2025.3.0</PackageVersion>
+        <Version>2025.3.0</Version>
         <Description>The helpers and extension methods of AES/MD5/SHA/SHA2/SHA3/RSA/RC2/ECDSA/DSA/DES/TripleDES.</Description>
         <PackageTags>Aoxe;Cryptographic;AES;MD5;SHA;SHA2;SHA3;KMAC;SHAKE;RSA;RC2;ECDSA;DSA;DES;TripleDES</PackageTags>
         <PackageProjectUrl>https://github.com/AoxeTech</PackageProjectUrl>

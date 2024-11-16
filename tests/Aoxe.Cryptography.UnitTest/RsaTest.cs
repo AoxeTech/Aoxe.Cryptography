@@ -34,8 +34,6 @@ public class RsaTest
         Assert.True(dataBytes.VerifyHashByRsa(signature, publicKey));
     }
 
-#if !NET48
-
     [Theory]
     [InlineData("Here is some data to encrypt!")]
     public void EncryptAndDecryptByBytesWithBytesKeyTest(string data)
@@ -66,13 +64,11 @@ public class RsaTest
         Assert.True(dataBytes.VerifyHashByRsa(signature, publicKey));
     }
 
-#endif
-
     #endregion
 
     #region ReadOnlySpan
 
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
 
     [Theory]
     [InlineData("Here is some data to encrypt!")]
