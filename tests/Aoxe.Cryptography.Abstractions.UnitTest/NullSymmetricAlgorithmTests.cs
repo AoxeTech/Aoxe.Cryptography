@@ -1,6 +1,6 @@
 namespace Aoxe.Cryptography.Abstractions.UnitTest;
 
-public class NullSymmetricAlgorithmTest
+public class NullSymmetricAlgorithmTests
 {
     [Fact]
     public void Encrypt_ByteArray_ShouldReturnClone()

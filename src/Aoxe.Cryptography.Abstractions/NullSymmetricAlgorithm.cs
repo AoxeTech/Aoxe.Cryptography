@@ -18,10 +18,9 @@ public class NullSymmetricAlgorithm : ISymmetricAlgorithm
     public async ValueTask<MemoryStream> DecryptAsync(Stream inputStream, byte[] key, byte[] iv) =>
         await inputStream.ToMemoryStreamAsync();
 
-    public byte[] GenerateKey() => Array.Empty<byte>();
+    public byte[] GenerateKey() => [];
 
-    public byte[] GenerateVector() => Array.Empty<byte>();
+    public byte[] GenerateVector() => [];
 
-    public (byte[] key, byte[] vector) GenerateKeyAndVector() =>
-        (Array.Empty<byte>(), Array.Empty<byte>());
+    public (byte[] key, byte[] vector) GenerateKeyAndVector() => ([], []);
 }
