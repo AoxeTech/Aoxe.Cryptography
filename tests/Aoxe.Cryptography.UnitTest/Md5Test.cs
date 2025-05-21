@@ -20,7 +20,7 @@ public class Md5Test
     {
         var bytes = str.GetUtf8Bytes();
         var ms = new MemoryStream(bytes);
-        var hash = result.FromHex();
+        var hash = result.FromHexToBytes();
         Assert.True(bytes.ToMd5().SequenceEqual(hash));
         Assert.True(bytes.ToMd5(0, bytes.Length).SequenceEqual(hash));
         Assert.True(ms.ToMd5().SequenceEqual(hash));
@@ -34,7 +34,7 @@ public class Md5Test
         var memoryStream = new MemoryStream(str.GetUtf8Bytes());
 
         var md5Bytes = await memoryStream.ToMd5Async();
-        Assert.True(md5Bytes.SequenceEqual(result.FromHex()));
+        Assert.True(md5Bytes.SequenceEqual(result.FromHexToBytes()));
 
         var md5String = await memoryStream.ToMd5StringAsync();
         Assert.Equal(result, md5String);

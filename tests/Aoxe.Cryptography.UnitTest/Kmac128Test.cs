@@ -334,7 +334,7 @@ public class Kmac128Test
         var bytes = source.GetUtf8Bytes();
         var keyBytes = key.GetUtf8Bytes();
         var customizationBytes = customization.GetUtf8Bytes();
-        var hash = result.FromHex();
+        var hash = result.FromHexToBytes();
 
         Assert.True(
             bytes.ToKmac128(keyBytes, outputLength, customizationBytes).SequenceEqual(hash)
@@ -361,7 +361,7 @@ public class Kmac128Test
         var keyBytes = key.GetUtf8Bytes();
         var customizationBytes = customization.GetUtf8Bytes();
         var readOnlySpan = new ReadOnlySpan<byte>(bytes);
-        var hash = result.FromHex();
+        var hash = result.FromHexToBytes();
 
         Assert.True(
             readOnlySpan.ToKmac128(keyBytes, outputLength, customizationBytes).SequenceEqual(hash)
@@ -388,7 +388,7 @@ public class Kmac128Test
         var keyBytes = key.GetUtf8Bytes();
         var customizationBytes = customization.GetUtf8Bytes();
         var ms = new MemoryStream(bytes);
-        var hash = result.FromHex();
+        var hash = result.FromHexToBytes();
 
         Assert.True(ms.ToKmac128(keyBytes, outputLength, customizationBytes).SequenceEqual(hash));
     }
@@ -411,7 +411,7 @@ public class Kmac128Test
     {
         var keyBytes = key.GetUtf8Bytes();
         var customizationBytes = customization.GetUtf8Bytes();
-        var hash = result.FromHex();
+        var hash = result.FromHexToBytes();
 
         Assert.True(
             source.ToKmac128(keyBytes, outputLength, customizationBytes).SequenceEqual(hash)
@@ -439,7 +439,7 @@ public class Kmac128Test
         var keySpan = new ReadOnlySpan<byte>(keyBytes);
         var customizationBytes = customization.GetUtf8Bytes();
         var readOnlySpan = new ReadOnlySpan<byte>(bytes);
-        var hash = result.FromHex();
+        var hash = result.FromHexToBytes();
 
         Assert.True(
             readOnlySpan.ToKmac128(keySpan, outputLength, customizationBytes).SequenceEqual(hash)
@@ -467,7 +467,7 @@ public class Kmac128Test
         var keySpan = new ReadOnlySpan<byte>(keyBytes);
         var customizationBytes = customization.GetUtf8Bytes();
         var ms = new MemoryStream(bytes);
-        var hash = result.FromHex();
+        var hash = result.FromHexToBytes();
 
         Assert.True(ms.ToKmac128(keySpan, outputLength, customizationBytes).SequenceEqual(hash));
     }
@@ -489,7 +489,7 @@ public class Kmac128Test
 
         readOnlySpan.ToKmac128(keyBytes, readOnlySpanResultWitBytesKey);
 
-        var hash = result.FromHex();
+        var hash = result.FromHexToBytes();
 
         Assert.Equal(readOnlySpanResultWitBytesKey.ToArray(), hash);
     }
@@ -510,7 +510,7 @@ public class Kmac128Test
 
         ms.ToKmac128(keyBytes, msResultWitBytesKey);
 
-        var hash = result.FromHex();
+        var hash = result.FromHexToBytes();
 
         Assert.Equal(msResultWitBytesKey.ToArray(), hash);
     }
@@ -527,7 +527,7 @@ public class Kmac128Test
         var stringResultWitBytesKey = new Span<byte>(new byte[32]);
         source.ToKmac128(keyBytes, stringResultWitBytesKey);
 
-        var hash = result.FromHex();
+        var hash = result.FromHexToBytes();
 
         Assert.Equal(stringResultWitBytesKey.ToArray(), hash);
     }
@@ -550,7 +550,7 @@ public class Kmac128Test
 
         readOnlySpan.ToKmac128(keySpan, readOnlySpanResultBySpanKey);
 
-        var hash = result.FromHex();
+        var hash = result.FromHexToBytes();
 
         Assert.Equal(readOnlySpanResultBySpanKey.ToArray(), hash);
     }
@@ -572,7 +572,7 @@ public class Kmac128Test
         var msResultBySpanKey = new Span<byte>(new byte[32]);
         ms.ToKmac128(keySpan, msResultBySpanKey);
 
-        var hash = result.FromHex();
+        var hash = result.FromHexToBytes();
 
         Assert.Equal(msResultBySpanKey.ToArray(), hash);
     }
@@ -592,7 +592,7 @@ public class Kmac128Test
 
         source.ToKmac128(keySpan, stringResultBySpanKey);
 
-        var hash = result.FromHex();
+        var hash = result.FromHexToBytes();
 
         Assert.Equal(stringResultBySpanKey.ToArray(), hash);
     }

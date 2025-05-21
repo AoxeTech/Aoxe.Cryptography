@@ -20,7 +20,7 @@ public class Sha256Test
     {
         var bytes = str.GetUtf8Bytes();
         var ms = new MemoryStream(bytes);
-        var hash = result.FromHex();
+        var hash = result.FromHexToBytes();
         Assert.True(bytes.ToSha256().SequenceEqual(hash));
         Assert.True(bytes.ToSha256(0, bytes.Length).SequenceEqual(hash));
         Assert.True(ms.ToSha256().SequenceEqual(hash));
@@ -34,7 +34,7 @@ public class Sha256Test
         var memoryStream = new MemoryStream(str.GetUtf8Bytes());
 
         var sha256Bytes = await memoryStream.ToSha256Async();
-        Assert.True(sha256Bytes.SequenceEqual(result.FromHex()));
+        Assert.True(sha256Bytes.SequenceEqual(result.FromHexToBytes()));
 
         var sha256String = await memoryStream.ToSha256StringAsync();
         Assert.Equal(result, sha256String);

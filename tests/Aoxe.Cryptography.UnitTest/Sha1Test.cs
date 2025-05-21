@@ -20,7 +20,7 @@ public class Sha1Test
     {
         var bytes = str.GetUtf8Bytes();
         var ms = new MemoryStream(bytes);
-        var hash = result.FromHex();
+        var hash = result.FromHexToBytes();
         Assert.True(bytes.ToSha1().SequenceEqual(hash));
         Assert.True(bytes.ToSha1(0, bytes.Length).SequenceEqual(hash));
         Assert.True(ms.ToSha1().SequenceEqual(hash));
@@ -34,7 +34,7 @@ public class Sha1Test
         var memoryStream = new MemoryStream(str.GetUtf8Bytes());
 
         var sha1Bytes = await memoryStream.ToSha1Async();
-        Assert.True(sha1Bytes.SequenceEqual(result.FromHex()));
+        Assert.True(sha1Bytes.SequenceEqual(result.FromHexToBytes()));
 
         var sha1String = await memoryStream.ToSha1StringAsync();
         Assert.Equal(result, sha1String);

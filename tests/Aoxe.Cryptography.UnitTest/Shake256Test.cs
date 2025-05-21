@@ -50,7 +50,7 @@ public class Shake256Test
         var bytes = str.GetUtf8Bytes();
         var readOnlySpan = new ReadOnlySpan<byte>(bytes);
         var ms = new MemoryStream(bytes);
-        var hash = result.FromHex();
+        var hash = result.FromHexToBytes();
         Assert.True(bytes.ToShake256(outputLength).SequenceEqual(hash));
         Assert.True(readOnlySpan.ToShake256(outputLength).SequenceEqual(hash));
         Assert.True(ms.ToShake256(outputLength).SequenceEqual(hash));

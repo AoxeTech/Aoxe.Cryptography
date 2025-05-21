@@ -28,7 +28,7 @@ public class Sha512Test
     {
         var bytes = str.GetUtf8Bytes();
         var ms = new MemoryStream(bytes);
-        var hash = result.FromHex();
+        var hash = result.FromHexToBytes();
         Assert.True(bytes.ToSha512().SequenceEqual(hash));
         Assert.True(bytes.ToSha512(0, bytes.Length).SequenceEqual(hash));
         Assert.True(ms.ToSha512().SequenceEqual(hash));
@@ -45,7 +45,7 @@ public class Sha512Test
         var memoryStream = new MemoryStream(str.GetUtf8Bytes());
 
         var sha512Bytes = await memoryStream.ToSha512Async();
-        Assert.True(sha512Bytes.SequenceEqual(result.FromHex()));
+        Assert.True(sha512Bytes.SequenceEqual(result.FromHexToBytes()));
 
         var sha512String = await memoryStream.ToSha512StringAsync();
         Assert.Equal(result, sha512String);

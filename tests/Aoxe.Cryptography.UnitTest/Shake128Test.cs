@@ -38,7 +38,7 @@ public class Shake128Test
         var bytes = str.GetUtf8Bytes();
         var readOnlySpan = new ReadOnlySpan<byte>(bytes);
         var ms = new MemoryStream(bytes);
-        var hash = result.FromHex();
+        var hash = result.FromHexToBytes();
         Assert.True(bytes.ToShake128(outputLength).SequenceEqual(hash));
         Assert.True(readOnlySpan.ToShake128(outputLength).SequenceEqual(hash));
         Assert.True(ms.ToShake128(outputLength).SequenceEqual(hash));

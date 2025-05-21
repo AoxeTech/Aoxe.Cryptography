@@ -169,7 +169,7 @@ public class HashAlgorithmTest
     {
         var bytes = str.GetUtf8Bytes();
         var ms = new MemoryStream(bytes);
-        var hash = result.FromHex();
+        var hash = result.FromHexToBytes();
         Assert.True(hashAlgorithm.ComputeHash(bytes).SequenceEqual(hash));
         Assert.True(hashAlgorithm.ComputeHash(ms).SequenceEqual(hash));
         Assert.True(hashAlgorithm.ComputeHash(str).SequenceEqual(hash));
@@ -198,7 +198,7 @@ public class HashAlgorithmTest
         var ms = new MemoryStream(bytes);
         var hashBytes = await hashAlgorithm.ComputeHashAsync(ms);
         var hashString = await hashAlgorithm.ComputeHashStringAsync(ms);
-        Assert.True(hashBytes.SequenceEqual(result.FromHex()));
+        Assert.True(hashBytes.SequenceEqual(result.FromHexToBytes()));
         Assert.Equal(result, hashString);
     }
 }

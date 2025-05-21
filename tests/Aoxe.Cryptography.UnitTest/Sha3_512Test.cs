@@ -27,7 +27,7 @@ public class Sha3_512Test
     {
         var bytes = str.GetUtf8Bytes();
         var ms = new MemoryStream(bytes);
-        var hash = result.FromHex();
+        var hash = result.FromHexToBytes();
         Assert.True(bytes.ToSha3_512().SequenceEqual(hash));
         Assert.True(bytes.ToSha3_512(0, bytes.Length).SequenceEqual(hash));
         Assert.True(ms.ToSha3_512().SequenceEqual(hash));
@@ -44,7 +44,7 @@ public class Sha3_512Test
         var memoryStream = new MemoryStream(str.GetUtf8Bytes());
 
         var sha3_512Bytes = await memoryStream.ToSha3_512Async();
-        Assert.True(sha3_512Bytes.SequenceEqual(result.FromHex()));
+        Assert.True(sha3_512Bytes.SequenceEqual(result.FromHexToBytes()));
 
         var sha3_512String = await memoryStream.ToSha3_512StringAsync();
         Assert.Equal(result, sha3_512String);
